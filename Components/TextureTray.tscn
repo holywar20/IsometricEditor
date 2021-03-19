@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Components/TextureTray.gd" type="Script" id=1]
+[ext_resource path="res://Textures/blank.png" type="Texture" id=2]
+[ext_resource path="res://Textures/checker.png" type="Texture" id=3]
+[ext_resource path="res://Textures/pixeldirt.png" type="Texture" id=4]
+[ext_resource path="res://Textures/pixelgrass.png" type="Texture" id=5]
+[ext_resource path="res://Textures/stripes.png" type="Texture" id=6]
+[ext_resource path="res://Textures/speckle.png" type="Texture" id=7]
+[ext_resource path="res://Components/PreviewButton.gd" type="Script" id=8]
+
+[node name="TextureTray" type="PanelContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+script = ExtResource( 1 )
+texture_list = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
+
+[node name="PreviewButton" type="Button" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 71.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 8 )
+
+[node name="TextureChoosePopup" type="PopupPanel" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 71.0
+margin_bottom = 71.0
+
+[node name="TextureHBox" type="HBoxContainer" parent="TextureChoosePopup"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 60.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="PreviewButton" to="." method="_on_PreviewButton_pressed"]
+[connection signal="popup_hide" from="TextureChoosePopup" to="." method="_on_TextureChoosePopup_popup_hide"]
