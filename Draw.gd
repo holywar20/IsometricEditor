@@ -76,7 +76,6 @@ enum FACING {
 	LEFT , DOWN , RIGHT, UP
 }
 var directionVectors = [Vector2.LEFT, Vector2.DOWN, Vector2.RIGHT, Vector2.UP]
-
 var facing_vectors = [Vector2.LEFT, Vector2.DOWN, Vector2.RIGHT, Vector2.UP]
 
 func _ready():
@@ -409,16 +408,12 @@ func drawRamp( row , heightStep ):
 
 func drawEvenBox( row , heightStep ):
 	for step in range(heightStep):
-		print(step)
-		print(tile_radius * 2 * step)
 		var offset = Vector2(tile_radius * 2 * step, tile_radius * 2 * row)
 		var shrink_amount = Vector2(0, float( tile_radius / heightStep ) ) * step
 		
 		var shorterFaces = fullFaceUvs
 		shorterFaces[0] += Vector2(0, float(step * ( 1 / 4 ) ) )
 		shorterFaces[1] += Vector2(0, float(step * ( 1 / 4 ) ) )
-		print(float( 1 / 4 ) )
-		print(shorterFaces)
 		
 		# Draws Left Face 
 		var left_points = generate_left_face(tile_radius, offset, shrink_amount.y)

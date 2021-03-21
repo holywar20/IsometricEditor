@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Workspace.gd" type="Script" id=1]
 [ext_resource path="res://Components/TextureTray.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Draw.gd" type="Script" id=3]
 [ext_resource path="res://Textures/blank.png" type="Texture" id=4]
+[ext_resource path="res://SingleTextureContainer/SingleTextureContainer.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("MainVBox/ScrollContainer/WorkingAtlas/RenderingSurface")
@@ -12,6 +13,9 @@ viewport_path = NodePath("MainVBox/ScrollContainer/WorkingAtlas/RenderingSurface
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TexturePanel" type="PanelContainer" parent="."]
 margin_right = 92.0
@@ -140,8 +144,161 @@ filters = PoolStringArray( "*.png ; PNG Images" )
 current_dir = "/"
 current_path = "/"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainVBox"]
+[node name="GridScroll" type="ScrollContainer" parent="MainVBox"]
 margin_top = 38.0
+margin_right = 1725.0
+margin_bottom = 1080.0
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="MainVBox/GridScroll"]
+margin_right = 1520.0
+margin_bottom = 608.0
+columns = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 250.0
+margin_bottom = 200.0
+myType = 1
+
+[node name="Panel2" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 254.0
+margin_right = 504.0
+margin_bottom = 200.0
+
+[node name="Panel3" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 508.0
+margin_right = 758.0
+margin_bottom = 200.0
+direction = 1
+
+[node name="Panel4" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 762.0
+margin_right = 1012.0
+margin_bottom = 200.0
+direction = 2
+
+[node name="Panel5" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1016.0
+margin_right = 1266.0
+margin_bottom = 200.0
+direction = 3
+
+[node name="Panel6" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1270.0
+margin_right = 1520.0
+margin_bottom = 200.0
+myType = 0
+direction = 3
+
+[node name="Panel7" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 204.0
+margin_right = 250.0
+margin_bottom = 404.0
+myType = 3
+
+[node name="Panel8" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 254.0
+margin_top = 204.0
+margin_right = 504.0
+margin_bottom = 404.0
+myType = 3
+direction = 1
+
+[node name="Panel9" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 508.0
+margin_top = 204.0
+margin_right = 758.0
+margin_bottom = 404.0
+myType = 3
+direction = 2
+
+[node name="Panel10" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 762.0
+margin_top = 204.0
+margin_right = 1012.0
+margin_bottom = 404.0
+myType = 3
+direction = 3
+
+[node name="Panel11" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1016.0
+margin_top = 204.0
+margin_right = 1266.0
+margin_bottom = 404.0
+direction = 3
+
+[node name="Panel12" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1270.0
+margin_top = 204.0
+margin_right = 1520.0
+margin_bottom = 404.0
+direction = 3
+
+[node name="Panel13" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 408.0
+margin_right = 250.0
+margin_bottom = 608.0
+direction = 3
+
+[node name="Panel14" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 254.0
+margin_top = 408.0
+margin_right = 504.0
+margin_bottom = 608.0
+direction = 3
+
+[node name="Panel15" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 508.0
+margin_top = 408.0
+margin_right = 758.0
+margin_bottom = 608.0
+direction = 3
+
+[node name="Panel16" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 762.0
+margin_top = 408.0
+margin_right = 1012.0
+margin_bottom = 608.0
+direction = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainVBox"]
+visible = false
+margin_top = 561.0
 margin_right = 1725.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
@@ -149,7 +306,7 @@ size_flags_vertical = 3
 
 [node name="WorkingAtlas" type="TextureRect" parent="MainVBox/ScrollContainer"]
 margin_right = 1725.0
-margin_bottom = 1042.0
+margin_bottom = 519.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource( 1 )

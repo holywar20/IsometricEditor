@@ -32,6 +32,9 @@ func _ready():
 	texture_trays.right.preview_button.preview_texture = drawing_node.right_texture
 
 
+func updateAll():
+	pass
+
 # UI Signals
 func _on_ExportButton_pressed():
 	save_dialog.current_dir = remembered_save_directory
