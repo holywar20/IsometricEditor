@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://SingleTextureContainer/SingleTextureContainer.gd" type="Script" id=1]
 [ext_resource path="res://SingleTextureContainer/Panel.gd" type="Script" id=2]
+[ext_resource path="res://UIAssetts/minus_h.png" type="Texture" id=3]
+[ext_resource path="res://UIAssetts/minus_d.png" type="Texture" id=4]
+[ext_resource path="res://UIAssetts/minus_a.png" type="Texture" id=5]
+[ext_resource path="res://UIAssetts/minus_n.png" type="Texture" id=6]
 
-[node name="Panel" type="Panel"]
+[node name="Panel" type="Panel" groups=[
+"TILE_PANELS",
+]]
 self_modulate = Color( 0.298039, 0.298039, 0.298039, 1 )
 anchor_right = 0.104
 anchor_bottom = 0.185
@@ -11,6 +17,65 @@ margin_right = 50.32
 margin_bottom = 0.200012
 rect_min_size = Vector2( 280, 200 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_right = 280.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SizeDisplay" type="Label" parent="HBox"]
+margin_top = 13.0
+margin_right = 35.0
+margin_bottom = 27.0
+text = "72 px"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="HBox"]
+margin_left = 39.0
+margin_right = 236.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TitleDisplay" type="Label" parent="HBox/VBox"]
+margin_top = 4.0
+margin_right = 197.0
+margin_bottom = 18.0
+text = "Even Incline"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FacingDisplay" type="Label" parent="HBox/VBox"]
+margin_top = 22.0
+margin_right = 197.0
+margin_bottom = 36.0
+text = "Left"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeleteButton" type="TextureButton" parent="HBox"]
+margin_left = 240.0
+margin_right = 280.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -29,41 +94,4 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="TitleDisplay" type="Label" parent="."]
-anchor_left = 0.4
-anchor_right = 1.0
-anchor_bottom = 0.1
-margin_left = -7.62939e-06
-margin_right = 3.99998
-margin_bottom = -1.90735e-06
-text = "Even Incline"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FacingDisplay" type="Label" parent="."]
-anchor_left = 0.4
-anchor_right = 1.0
-anchor_bottom = 0.1
-margin_left = -7.62939e-06
-margin_top = 20.0
-margin_right = 3.99998
-margin_bottom = 20.0
-text = "Left"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SizeDisplay" type="Label" parent="."]
-margin_right = 94.0
-margin_bottom = 20.0
-text = "72 px"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[connection signal="pressed" from="HBox/DeleteButton" to="." method="_on_DeleteButton_pressed"]

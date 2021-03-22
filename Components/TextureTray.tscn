@@ -10,8 +10,8 @@
 [ext_resource path="res://Components/PreviewButton.gd" type="Script" id=8]
 
 [node name="TextureTray" type="PanelContainer"]
-margin_right = 32.0
-margin_bottom = 32.0
+margin_right = 140.0
+margin_bottom = 177.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -24,11 +24,11 @@ texture_list = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResour
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 78.0
-margin_bottom = 165.0
+margin_right = 133.0
+margin_bottom = 170.0
 
 [node name="Label" type="Label" parent="VBox"]
-margin_right = 71.0
+margin_right = 126.0
 margin_bottom = 14.0
 text = "TOP"
 align = 1
@@ -38,14 +38,14 @@ __meta__ = {
 
 [node name="PreviewButton" type="Button" parent="VBox"]
 margin_top = 18.0
-margin_right = 71.0
+margin_right = 126.0
 margin_bottom = 82.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 8 )
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="VBox"]
 margin_top = 86.0
-margin_right = 71.0
+margin_right = 126.0
 margin_bottom = 106.0
 color = Color( 1, 1, 1, 1 )
 
@@ -63,7 +63,7 @@ size_flags_vertical = 3
 
 [node name="CheckBox" type="CheckBox" parent="VBox"]
 margin_top = 110.0
-margin_right = 71.0
+margin_right = 126.0
 margin_bottom = 134.0
 text = "Visible"
 __meta__ = {
@@ -72,7 +72,7 @@ __meta__ = {
 
 [node name="Button" type="Button" parent="VBox"]
 margin_top = 138.0
-margin_right = 71.0
+margin_right = 126.0
 margin_bottom = 158.0
 text = "LOAD"
 [connection signal="pressed" from="VBox/PreviewButton" to="." method="_on_PreviewButton_pressed"]

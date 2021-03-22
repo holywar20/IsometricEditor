@@ -1,4 +1,4 @@
 extends VBoxContainer
 
-func setupScene()
-
+func setupScene():
+	pass

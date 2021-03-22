@@ -4,9 +4,9 @@ class_name PolygonPanel
 
 onready var drawPanel = $Panel
 
-onready var titleDisplay : Label = $TitleDisplay
-onready var sizeDisplay : Label = $SizeDisplay
-onready var facingDisplay : Label = $FacingDisplay 
+onready var titleDisplay : Label = $HBox/VBox/TitleDisplay
+onready var sizeDisplay : Label = $HBox/SizeDisplay
+onready var facingDisplay : Label = $HBox/VBox/FacingDisplay 
 
 enum TEXTURE_TYPES {
 	NONE , BOX , EVEN_INCLINE , DIAMOND_INCLINE, FLAT_TOP_CORNER, FLAT_BASE_CORNER 
@@ -178,7 +178,6 @@ func changeTextureType():
 	pass
 
 func drawTextures():
-	print( myType )
 	match myType:
 		TEXTURE_TYPES.NONE:
 			faceData = DEFAULT_FACING_DATA.duplicate( true ) 
@@ -451,3 +450,7 @@ func generateFlatTopCornerFace( shrinkAmount, direction ):
 	
 	faceData[DRAWING_FACES.TOP].points = topFace
 	faceData[DRAWING_FACES.TOP].uvs = fullFaceUvs
+
+
+func _on_DeleteButton_pressed():
+	queue_free()

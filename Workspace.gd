@@ -7,24 +7,20 @@ var remembered_save_directory = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 onready var drawing_node = $MainVBox/ScrollContainer/WorkingAtlas/RenderingSurface/Draw
 onready var atlas = $MainVBox/ScrollContainer/WorkingAtlas
 onready var scrollbox = $MainVBox/ScrollContainer
+onready var gridContainer = $MainVBox/GridScroll/GridContainer
 
-onready var texture_trays = {
-	"top" : $TexturePanel/VBoxContainer/TopTextureTray, 
-	"left" : $TexturePanel/VBoxContainer/LeftTextureTray, 
-	"right" : $TexturePanel/VBoxContainer/RightTextureTray
-}
-
-onready var color_pickers = {
-	"top" : $SettingsPanel/VBoxContainer/TopColorPicker, 
-	"left" : $SettingsPanel/VBoxContainer/LeftColorPicker, 
-	"right" : $SettingsPanel/VBoxContainer/RightColorPicker
+onready var globalTextureTrays = {
+	"top" : $VBox/Global/GlobalColor/Top, 
+	"left" : $VBox/Global/GlobalColor/Right, 
+	"right" : $VBox/Global/GlobalColor/Right
 }
 
 onready var save_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog
 onready var load_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/LoadDialog
 
 func _ready():
-	pass
+	for key in globalTextureTrays:
+		globalTextureTrays[key].setupScene()
 	#color_pickers.top.color = drawing_node.top_tint
 	#color_pickers.left.color = drawing_node.left_tint
 	#color_pickers.right.color = drawing_node.right_tint
@@ -95,6 +91,7 @@ func _on_AnyLoadButton_pressed(which):
 	load_dialog.popup_centered()
 
 func _on_LoadDialog_file_selected(path):
+	"""
 	var file = File.new()
 	file.open(path, File.READ)
 	var bytebin = file.get_buffer(file.get_len())
@@ -109,28 +106,26 @@ func _on_LoadDialog_file_selected(path):
 			img.resize(256, 256, Image.INTERPOLATE_CUBIC)
 		var new_texture = ImageTexture.new()
 		new_texture.create_from_image(img)
-		texture_trays[load_key].texture_list.append(new_texture)
+		[load_key].texture_list.append(new_texture)
 		for tray in texture_trays.values():
 			tray.add_thumbnail(new_texture)
 		texture_trays[load_key]._on_choice_made(new_texture)
 	load_key = ""
 	remembered_load_directory = path.get_base_dir()
+	"""
 
 
 func _on_BevelCheck_toggled(button_pressed):
 	drawing_node.bevel_top = button_pressed
 	drawing_node.update()
 
-
 func _on_GranuleSlider_value_changed(value):
 	drawing_node.granules = value
 	drawing_node.update()
 
-
 func _on_WarpSlider_value_changed(value):
 	drawing_node.warp = value
 	drawing_node.update()
-
 
 func _on_OutlineCheckBox_toggled(button_pressed):
 	drawing_node.outline_shadow = button_pressed
