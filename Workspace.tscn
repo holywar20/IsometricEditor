@@ -178,7 +178,7 @@ anchor_bottom = 0.0
 margin_left = 508.0
 margin_right = 758.0
 margin_bottom = 200.0
-direction = 1
+direction = 3
 
 [node name="Panel4" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -186,7 +186,7 @@ anchor_bottom = 0.0
 margin_left = 762.0
 margin_right = 1012.0
 margin_bottom = 200.0
-direction = 2
+direction = 1
 
 [node name="Panel5" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -194,7 +194,7 @@ anchor_bottom = 0.0
 margin_left = 1016.0
 margin_right = 1266.0
 margin_bottom = 200.0
-direction = 3
+direction = 2
 
 [node name="Panel6" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -250,6 +250,7 @@ margin_left = 1016.0
 margin_top = 204.0
 margin_right = 1266.0
 margin_bottom = 404.0
+myType = 0
 direction = 3
 
 [node name="Panel12" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
@@ -259,6 +260,7 @@ margin_left = 1270.0
 margin_top = 204.0
 margin_right = 1520.0
 margin_bottom = 404.0
+myType = 0
 direction = 3
 
 [node name="Panel13" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
@@ -267,6 +269,7 @@ anchor_bottom = 0.0
 margin_top = 408.0
 margin_right = 250.0
 margin_bottom = 608.0
+myType = 4
 direction = 3
 
 [node name="Panel14" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
@@ -276,7 +279,7 @@ margin_left = 254.0
 margin_top = 408.0
 margin_right = 504.0
 margin_bottom = 608.0
-direction = 3
+myType = 4
 
 [node name="Panel15" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -285,7 +288,8 @@ margin_left = 508.0
 margin_top = 408.0
 margin_right = 758.0
 margin_bottom = 608.0
-direction = 3
+myType = 4
+direction = 2
 
 [node name="Panel16" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -294,7 +298,8 @@ margin_left = 762.0
 margin_top = 408.0
 margin_right = 1012.0
 margin_bottom = 608.0
-direction = 3
+myType = 4
+direction = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainVBox"]
 visible = false

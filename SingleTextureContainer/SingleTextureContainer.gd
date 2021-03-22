@@ -1,5 +1,6 @@
 tool
 extends Panel
+class_name PolygonPanel
 
 onready var drawPanel = $Panel
 
@@ -44,32 +45,72 @@ var cornerFaceUvs = PoolVector2Array([
 	
 ])
 
-var rampFaceUVs  = [
-	# LEFT RAMP
-	PoolVector2Array([
-		Vector2(0, 0) , Vector2(1, 1) , Vector2(1, 1) , Vector2(0, 1)
-	]),
-	# DOWN RAMP
-	PoolVector2Array([
-		Vector2(0, 0) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)
-	]),
-	# Right Ramp 
-	PoolVector2Array([
-		Vector2(0, 0) , Vector2( 1, 0 ), Vector2( 1 , 1), Vector2(0 , 1)
-	]),
-	# UP RAMP
-	PoolVector2Array([
-		Vector2(0, 1) , Vector2(1, 0) , Vector2(1, 1) , Vector2(0, 1)
-	])
-]
+# Use full UVs for all top
+var rampFaceUVs = {
+	DIRECTION.LEFT : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 1) , Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 1) , Vector2(1, 1) , Vector2(0, 1)])
+	},
+	DIRECTION.RIGHT : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0) , Vector2(1, 1) , Vector2(0, 1)])
+	}, 
+	DIRECTION.DOWN : {
+		DRAWING_FACES.RIGHT : PoolVector2Array( [Vector2(0, 0) , Vector2( 1, 0 ), Vector2( 1 , 1), Vector2(0 , 1) ] ),
+		DRAWING_FACES.LEFT : PoolVector2Array( [Vector2(0, 0) , Vector2( 1, 0 ), Vector2( 1 , 1), Vector2(0 , 1) ] )
+	},
+	DIRECTION.UP : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 1) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)])
+	}
+}
+
+var diamondInclineFaceUVs = {
+	DIRECTION.LEFT : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 1) , Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 1) , Vector2(1, 1) , Vector2(0, 1)])
+	},
+	DIRECTION.RIGHT : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0) , Vector2(1, 1) , Vector2(0, 1)])
+	}, 
+	DIRECTION.DOWN : {
+		DRAWING_FACES.RIGHT : PoolVector2Array( [Vector2(0, 0) , Vector2( 1, 0 ), Vector2( 1 , 1), Vector2(0 , 1) ] ),
+		DRAWING_FACES.LEFT : PoolVector2Array( [Vector2(0, 0) , Vector2( 1, 0 ), Vector2( 1 , 1), Vector2(0 , 1) ] )
+	},
+	DIRECTION.UP : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 1) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)])
+	}
+}
+
+var flatTopFaceUVs = {
+	DIRECTION.LEFT : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 1) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0) , Vector2(1, 1) , Vector2(0, 1)])
+	},
+	DIRECTION.RIGHT : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0) , Vector2(1, 1) , Vector2(0, 1)])
+	}, 
+	DIRECTION.DOWN : {
+		DRAWING_FACES.RIGHT : PoolVector2Array( [Vector2(0, 0) , Vector2( 1, 0 ), Vector2( 1 , 1), Vector2(0 , 1) ] ),
+		DRAWING_FACES.LEFT : PoolVector2Array( [Vector2(0, 0) , Vector2( 1, 0 ), Vector2( 1 , 1), Vector2(0 , 1) ] )
+	},
+	DIRECTION.UP : {
+		DRAWING_FACES.RIGHT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)]),
+		DRAWING_FACES.LEFT : PoolVector2Array([Vector2(0, 0) , Vector2(1, 0), Vector2(1, 1) , Vector2(0, 1)])
+	}
+}
+
 enum DIRECTION {
-	LEFT , RIGHT, UP, DOWN 
+	LEFT , DOWN , RIGHT, UP
 }
 const DIR_VECTORS = {
 	DIRECTION.LEFT : Vector2.LEFT,
-	DIRECTION.RIGHT : Vector2.RIGHT, 
-	DIRECTION.UP : Vector2.UP,
-	DIRECTION.DOWN : Vector2.DOWN
+	DIRECTION.DOWN : Vector2.DOWN, 
+	DIRECTION.RIGHT : Vector2.RIGHT,
+	DIRECTION.UP : Vector2.UP
 }
 const DIR_DISPLAY = {
 	DIRECTION.LEFT : "Left" , 
@@ -146,15 +187,17 @@ func drawTextures():
 			generateRightFace( 0 )
 			generateTopFace( 0 )
 		TEXTURE_TYPES.EVEN_INCLINE:
-			generateLeftFaceRamp( 0 ,  DIR_VECTORS[direction] )
-			generateRightFaceRamp( 0 , DIR_VECTORS[direction] )
-			generateTopFaceRamp( 0 , DIR_VECTORS[direction] )
+			generateLeftFaceRamp( 0 , direction )
+			generateRightFaceRamp( 0 , direction )
+			generateTopFaceRamp( 0 , direction )
 		TEXTURE_TYPES.DIAMOND_INCLINE:
-			generateLeftCornerFace( 0 , DIR_VECTORS[direction] )
-			generateRightCornerFace( 0 , DIR_VECTORS[direction] )
-			generateTopCornerFace( 0 , DIR_VECTORS[direction] )
+			generateLeftCornerFace( 0 , direction )
+			generateRightCornerFace( 0 , direction )
+			generateTopCornerFace( 0 , direction )
 		TEXTURE_TYPES.FLAT_TOP_CORNER:
-			pass
+			generateFlatTopCornerFace( 0 , direction )
+			generateFlatTopLeftCornerFace( 0 , direction )
+			generateFlatTopRightCornerFace(0 , direction )
 		TEXTURE_TYPES.FLAT_BASE_CORNER:
 			pass 
 	
@@ -197,76 +240,76 @@ func generateTopFace( shrinkAmount ):
 # Generate Ramp
 func generateLeftFaceRamp( shrinkAmount , direction ):
 	var leftFace = PoolVector2Array()
-	if direction == Vector2.LEFT:
+	if direction == DIRECTION.LEFT:
 		leftFace.append(Vector2(0, tileRadius / 2) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
-	if direction == Vector2.DOWN:
+	if direction == DIRECTION.DOWN:
 		leftFace.append(Vector2(0, tileRadius * 1.5) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
-	if direction == Vector2.RIGHT:
+	if direction == DIRECTION.RIGHT:
 		leftFace.append(Vector2(0, tileRadius * 1.5) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
-	if direction == Vector2.UP:
+	if direction == DIRECTION.UP:
 		leftFace.append(Vector2(0, tileRadius / 2) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
 	
 	faceData[DRAWING_FACES.LEFT].points = leftFace
-	faceData[DRAWING_FACES.LEFT].uvs = fullFaceUvs
+	faceData[DRAWING_FACES.LEFT].uvs = rampFaceUVs[direction][DRAWING_FACES.LEFT]
 
 func generateRightFaceRamp( shrinkAmount , direction ):
 	
 	var rightFace = PoolVector2Array()
-	if direction == Vector2.LEFT:
+	if direction == DIRECTION.LEFT:
 		rightFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius * 2, 1.5 * tileRadius) + offset)
-	if direction == Vector2.DOWN:
+	if direction == DIRECTION.DOWN:
 		rightFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius * 2, 1.5 * tileRadius) + offset)
-	if direction == Vector2.RIGHT:
+	if direction == DIRECTION.RIGHT:
 		rightFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius * 2, 1.5 * tileRadius) + offset)
-	if direction == Vector2.UP:
+	if direction == DIRECTION.UP:
 		rightFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius * 2, 1.5 * tileRadius) + offset)
 	
 	faceData[DRAWING_FACES.RIGHT].points = rightFace
-	faceData[DRAWING_FACES.RIGHT].uvs = fullFaceUvs
+	faceData[DRAWING_FACES.RIGHT].uvs = rampFaceUVs[direction][DRAWING_FACES.RIGHT]
 	
 func generateTopFaceRamp( shrinkAmount , direction ):
 	
 	var topFace = PoolVector2Array()
-	if direction == Vector2.LEFT:
+	if direction == DIRECTION.LEFT:
 		topFace.append(Vector2(tileRadius, 0) + offset)
 		topFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
 		topFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		topFace.append(Vector2(0, tileRadius / 2) + offset)
-	if direction == Vector2.DOWN:
+	if direction == DIRECTION.DOWN:
 		topFace.append(Vector2(tileRadius, 0) + offset)
 		topFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
 		topFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		topFace.append(Vector2(0, tileRadius * 1.5) + offset)
-	if direction == Vector2.RIGHT:
+	if direction == DIRECTION.RIGHT:
 		topFace.append(Vector2(tileRadius, tileRadius) + offset)
 		topFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
 		topFace.append(Vector2(tileRadius, tileRadius) + offset)
 		topFace.append(Vector2(0, tileRadius * 1.5) + offset)
-	if direction == Vector2.UP:
+	if direction == DIRECTION.UP:
 		topFace.append(Vector2(tileRadius, tileRadius) + offset)
 		topFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
 		topFace.append(Vector2(tileRadius, tileRadius) + offset)
@@ -279,22 +322,22 @@ func generateTopFaceRamp( shrinkAmount , direction ):
 func generateTopCornerFace( shrinkAmount , direction ):
 	var topFace = PoolVector2Array()
 	
-	if direction == Vector2.LEFT:
+	if direction == DIRECTION.LEFT:
 		topFace.append(Vector2(tileRadius, tileRadius) + offset)
 		topFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
 		topFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		topFace.append(Vector2(0, tileRadius / 2) + offset)
-	if direction == Vector2.DOWN:
+	if direction == DIRECTION.DOWN:
 		topFace.append(Vector2(tileRadius, 0) + offset)
 		topFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
 		topFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		topFace.append(Vector2(0, tileRadius * 1.5) + offset)
-	if direction == Vector2.RIGHT:
+	if direction == DIRECTION.RIGHT:
 		topFace.append(Vector2(tileRadius, tileRadius) + offset)
 		topFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
 		topFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		topFace.append(Vector2(0, tileRadius * 1.5) + offset)
-	if direction == Vector2.UP:
+	if direction == DIRECTION.UP:
 		topFace.append(Vector2(tileRadius, tileRadius) + offset)
 		topFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
 		topFace.append(Vector2(tileRadius, tileRadius) + offset)
@@ -305,32 +348,106 @@ func generateTopCornerFace( shrinkAmount , direction ):
 
 func generateLeftCornerFace( shrinkAmount, direction ):
 	var leftFace = PoolVector2Array()
-	if direction == Vector2.LEFT:
+	if direction == DIRECTION.LEFT:
 		leftFace.append(Vector2(0, tileRadius / 2) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
-	if direction == Vector2.UP:
+	if direction == DIRECTION.UP:
 		leftFace.append(Vector2(0, tileRadius * 1.5) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius) + offset)
 		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
 	
 	faceData[DRAWING_FACES.LEFT].points = leftFace
-	faceData[DRAWING_FACES.LEFT].uvs = fullFaceUvs
+	faceData[DRAWING_FACES.LEFT].uvs =  diamondInclineFaceUVs[direction][DRAWING_FACES.LEFT]
 
 func generateRightCornerFace( shrinkAmount, direction ):
 	var rightFace  = PoolVector2Array()
-	if direction == Vector2.RIGHT:
+	
+	if direction == DIRECTION.RIGHT:
 		rightFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius * 2, 1.5 * tileRadius) + offset)
-	if direction == Vector2.UP:
+	if direction == DIRECTION.UP:
 		rightFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius) + offset)
 		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
 		rightFace.append(Vector2(tileRadius * 2, 1.5 * tileRadius) + offset)
 	
 	faceData[DRAWING_FACES.RIGHT].points = rightFace
-	faceData[DRAWING_FACES.RIGHT].uvs = fullFaceUvs
+	faceData[DRAWING_FACES.RIGHT].uvs = diamondInclineFaceUVs[direction][DRAWING_FACES.RIGHT]
+
+func generateFlatTopLeftCornerFace( shrinkAmount, direction ):
+	var leftFace = PoolVector2Array()
+	
+	if direction == DIRECTION.LEFT:
+		leftFace.append(Vector2(0, tileRadius / 2) + offset)
+		leftFace.append(Vector2(tileRadius, tileRadius) + offset)
+		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
+		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
+	if direction == DIRECTION.DOWN:
+		leftFace.append(Vector2(0, tileRadius / 2) + offset)
+		leftFace.append(Vector2(tileRadius, tileRadius) + offset)
+		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
+		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
+	if direction == DIRECTION.RIGHT:
+		leftFace.append(Vector2(0, tileRadius * 1.5) + offset)
+		leftFace.append(Vector2(tileRadius, tileRadius) + offset)
+		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
+		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
+	if direction == DIRECTION.UP:
+		leftFace.append(Vector2(0, tileRadius / 2) + offset)
+		leftFace.append(Vector2(tileRadius, tileRadius) + offset)
+		leftFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
+		leftFace.append(Vector2(0, 1.5 * tileRadius) + offset)
+	
+	faceData[DRAWING_FACES.LEFT].points = leftFace
+	faceData[DRAWING_FACES.LEFT].uvs = flatTopFaceUVs[direction][DRAWING_FACES.LEFT]
+	
+func generateFlatTopRightCornerFace( shrinkAmount, direction ):
+	var rightFace = PoolVector2Array()
+
+	if direction == DIRECTION.LEFT:
+		rightFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
+		rightFace.append(Vector2(tileRadius, tileRadius) + offset)
+		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
+		rightFace.append(Vector2(tileRadius * 2, 1.5 * tileRadius) + offset)
+	else:
+		rightFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
+		rightFace.append(Vector2(tileRadius, tileRadius) + offset)
+		rightFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
+		rightFace.append(Vector2(tileRadius * 2, 1.5 * tileRadius) + offset)
+	
+	faceData[DRAWING_FACES.RIGHT].points = rightFace
+	faceData[DRAWING_FACES.RIGHT].uvs = flatTopFaceUVs[direction][DRAWING_FACES.RIGHT]
+
+
+
+func generateFlatTopCornerFace( shrinkAmount, direction ):
+	var topFace = PoolVector2Array()
+
+	if direction == DIRECTION.LEFT:
+		topFace.append(Vector2(tileRadius, 0) + offset)
+		topFace.append(Vector2(tileRadius * 2, tileRadius * 1.5) + offset)
+		topFace.append(Vector2(tileRadius, tileRadius) + offset)
+		topFace.append(Vector2(0, tileRadius / 2) + offset)
+	if direction == DIRECTION.DOWN:
+		topFace.append(Vector2(tileRadius, 0) + offset)
+		topFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
+		topFace.append(Vector2(tileRadius, tileRadius * 2) + offset)
+		topFace.append(Vector2(0, tileRadius / 2) + offset)
+	if direction == DIRECTION.RIGHT:
+		topFace.append(Vector2(tileRadius, 0) + offset)
+		topFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
+		topFace.append(Vector2(tileRadius, tileRadius) + offset)
+		topFace.append(Vector2(0, tileRadius * 1.5) + offset)
+	if direction == DIRECTION.UP:
+		topFace.append(Vector2(tileRadius, tileRadius / 2) + offset)
+		topFace.append(Vector2(tileRadius * 2, tileRadius / 2) + offset)
+		topFace.append(Vector2(tileRadius, tileRadius) + offset)
+		topFace.append(Vector2(0, tileRadius / 2) + offset)
+	
+	faceData[DRAWING_FACES.TOP].points = topFace
+	faceData[DRAWING_FACES.TOP].uvs = fullFaceUvs
