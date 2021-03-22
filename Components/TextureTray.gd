@@ -9,9 +9,9 @@ export(Array, Texture) var texture_list
 var Previewer = preload("res://Components/PreviewButton.gd")
 var is_expanded = false
 
-onready var preview_button = get_node("PreviewButton")
-onready var chooser_popup = get_node("TextureChoosePopup")
-onready var chooser_hbox = get_node("TextureChoosePopup/TextureHBox")
+onready var preview_button = $VBox/PreviewButton
+onready var chooser_popup = $VBox/TextureChoosePopup
+onready var chooser_hbox = $VBox/TextureChoosePopup/TextureHBox
 
 func _ready():
 	preview_button.preview_texture = texture_list[0]

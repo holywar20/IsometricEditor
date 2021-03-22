@@ -13,24 +13,47 @@
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 texture_list = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 
-[node name="PreviewButton" type="Button" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
+margin_right = 78.0
+margin_bottom = 165.0
+
+[node name="Label" type="Label" parent="VBox"]
 margin_right = 71.0
-margin_bottom = 71.0
+margin_bottom = 14.0
+text = "TOP"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreviewButton" type="Button" parent="VBox"]
+margin_top = 18.0
+margin_right = 71.0
+margin_bottom = 82.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 8 )
 
-[node name="TextureChoosePopup" type="PopupPanel" parent="."]
-margin_left = 7.0
-margin_top = 7.0
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBox"]
+margin_top = 86.0
 margin_right = 71.0
-margin_bottom = 71.0
+margin_bottom = 106.0
+color = Color( 1, 1, 1, 1 )
 
-[node name="TextureHBox" type="HBoxContainer" parent="TextureChoosePopup"]
+[node name="TextureChoosePopup" type="PopupPanel" parent="VBox"]
+margin_right = 64.0
+margin_bottom = 64.0
+
+[node name="TextureHBox" type="HBoxContainer" parent="VBox/TextureChoosePopup"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 60.0
@@ -38,5 +61,19 @@ margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="PreviewButton" to="." method="_on_PreviewButton_pressed"]
-[connection signal="popup_hide" from="TextureChoosePopup" to="." method="_on_TextureChoosePopup_popup_hide"]
+[node name="CheckBox" type="CheckBox" parent="VBox"]
+margin_top = 110.0
+margin_right = 71.0
+margin_bottom = 134.0
+text = "Visible"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="VBox"]
+margin_top = 138.0
+margin_right = 71.0
+margin_bottom = 158.0
+text = "LOAD"
+[connection signal="pressed" from="VBox/PreviewButton" to="." method="_on_PreviewButton_pressed"]
+[connection signal="popup_hide" from="VBox/TextureChoosePopup" to="." method="_on_TextureChoosePopup_popup_hide"]

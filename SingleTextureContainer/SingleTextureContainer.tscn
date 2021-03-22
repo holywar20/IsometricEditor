@@ -9,7 +9,7 @@ anchor_right = 0.104
 anchor_bottom = 0.185
 margin_right = 50.32
 margin_bottom = 0.200012
-rect_min_size = Vector2( 250, 200 )
+rect_min_size = Vector2( 280, 200 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -20,9 +20,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -180.0
+margin_left = -200.0
 margin_top = -160.0
-margin_right = -1.52588e-05
 margin_bottom = -1.52588e-05
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -38,7 +37,7 @@ anchor_bottom = 0.1
 margin_left = -7.62939e-06
 margin_right = 3.99998
 margin_bottom = -1.90735e-06
-text = "Flat top Corner"
+text = "Even Incline"
 align = 1
 valign = 1
 __meta__ = {
@@ -46,7 +45,6 @@ __meta__ = {
 }
 
 [node name="FacingDisplay" type="Label" parent="."]
-visible = false
 anchor_left = 0.4
 anchor_right = 1.0
 anchor_bottom = 0.1
@@ -64,7 +62,7 @@ __meta__ = {
 [node name="SizeDisplay" type="Label" parent="."]
 margin_right = 94.0
 margin_bottom = 20.0
-text = "Size"
+text = "72 px"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false

@@ -17,104 +17,92 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TexturePanel" type="PanelContainer" parent="."]
-margin_right = 92.0
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 400.0
 margin_bottom = 1080.0
+rect_min_size = Vector2( 400, 0 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TexturePanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 85.0
-margin_bottom = 1073.0
-alignment = 1
+[node name="Global" type="VBoxContainer" parent="VBox"]
+margin_right = 400.0
+margin_bottom = 190.0
 
-[node name="TopTexLabel" type="Label" parent="TexturePanel/VBoxContainer"]
-margin_top = 313.0
-margin_right = 78.0
-margin_bottom = 327.0
-text = "Top Face"
+[node name="Label" type="Label" parent="VBox/Global"]
+margin_right = 400.0
+margin_bottom = 14.0
+text = "Global Controls"
+align = 1
+valign = 1
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Global"]
+margin_top = 18.0
+margin_right = 400.0
+margin_bottom = 190.0
+
+[node name="Top" parent="VBox/Global/HBox" instance=ExtResource( 2 )]
+margin_right = 130.0
+margin_bottom = 172.0
+
+[node name="Left" parent="VBox/Global/HBox" instance=ExtResource( 2 )]
+margin_left = 134.0
+margin_right = 265.0
+margin_bottom = 172.0
+
+[node name="Right" parent="VBox/Global/HBox" instance=ExtResource( 2 )]
+margin_left = 269.0
+margin_right = 400.0
+margin_bottom = 172.0
+
+[node name="Current" type="VBoxContainer" parent="VBox"]
+margin_top = 194.0
+margin_right = 400.0
+margin_bottom = 384.0
+
+[node name="RightTexLabel" type="Label" parent="VBox/Current"]
+margin_right = 400.0
+margin_bottom = 14.0
+text = "Current Texture"
 align = 1
 
-[node name="TopTextureTray" parent="TexturePanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 331.0
-margin_right = 78.0
-margin_bottom = 409.0
+[node name="HBox2" type="HBoxContainer" parent="VBox/Current"]
+margin_top = 18.0
+margin_right = 400.0
+margin_bottom = 190.0
 
-[node name="TopLoadButton" type="Button" parent="TexturePanel/VBoxContainer"]
-margin_top = 413.0
-margin_right = 78.0
-margin_bottom = 433.0
-text = "LOAD"
+[node name="Top" parent="VBox/Current/HBox2" instance=ExtResource( 2 )]
+margin_right = 130.0
+margin_bottom = 172.0
 
-[node name="HSeparatorTL" type="HSeparator" parent="TexturePanel/VBoxContainer"]
-margin_top = 437.0
-margin_right = 78.0
-margin_bottom = 469.0
-rect_min_size = Vector2( 0, 32 )
+[node name="Left" parent="VBox/Current/HBox2" instance=ExtResource( 2 )]
+margin_left = 134.0
+margin_right = 265.0
+margin_bottom = 172.0
 
-[node name="LeftTexLabel" type="Label" parent="TexturePanel/VBoxContainer"]
-margin_top = 473.0
-margin_right = 78.0
-margin_bottom = 487.0
-text = "Left Face"
-align = 1
-
-[node name="LeftTextureTray" parent="TexturePanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 491.0
-margin_right = 78.0
-margin_bottom = 569.0
-
-[node name="LeftLoadButton" type="Button" parent="TexturePanel/VBoxContainer"]
-margin_top = 573.0
-margin_right = 78.0
-margin_bottom = 593.0
-text = "LOAD"
-
-[node name="HSeparatorLR" type="HSeparator" parent="TexturePanel/VBoxContainer"]
-margin_top = 597.0
-margin_right = 78.0
-margin_bottom = 629.0
-rect_min_size = Vector2( 0, 32 )
-
-[node name="RightTexLabel" type="Label" parent="TexturePanel/VBoxContainer"]
-margin_top = 633.0
-margin_right = 78.0
-margin_bottom = 647.0
-text = "Right Face"
-align = 1
-
-[node name="RightTextureTray" parent="TexturePanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 651.0
-margin_right = 78.0
-margin_bottom = 729.0
-
-[node name="RightLoadButton" type="Button" parent="TexturePanel/VBoxContainer"]
-margin_top = 733.0
-margin_right = 78.0
-margin_bottom = 753.0
-text = "LOAD"
+[node name="Right" parent="VBox/Current/HBox2" instance=ExtResource( 2 )]
+margin_left = 269.0
+margin_right = 400.0
+margin_bottom = 172.0
 
 [node name="MainVBox" type="VBoxContainer" parent="."]
-margin_left = 96.0
+margin_left = 404.0
 margin_right = 1821.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ControlPanel" type="PanelContainer" parent="MainVBox"]
-margin_right = 1725.0
+margin_right = 1417.0
 margin_bottom = 34.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainVBox/ControlPanel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1718.0
+margin_right = 1410.0
 margin_bottom = 27.0
 alignment = 1
 
 [node name="ExportButton" type="Button" parent="MainVBox/ControlPanel/HBoxContainer"]
-margin_left = 809.0
-margin_right = 902.0
+margin_left = 655.0
+margin_right = 748.0
 margin_bottom = 20.0
 text = "EXPORT PNG"
 
@@ -146,14 +134,16 @@ current_path = "/"
 
 [node name="GridScroll" type="ScrollContainer" parent="MainVBox"]
 margin_top = 38.0
-margin_right = 1725.0
+margin_right = 1417.0
 margin_bottom = 1080.0
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="MainVBox/GridScroll"]
-margin_right = 1520.0
-margin_bottom = 608.0
-columns = 6
+margin_right = 1440.0
+margin_bottom = 830.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -161,143 +151,143 @@ __meta__ = {
 [node name="Panel" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 250.0
+margin_right = 280.0
 margin_bottom = 200.0
 myType = 1
 
 [node name="Panel2" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 254.0
-margin_right = 504.0
+margin_left = 290.0
+margin_right = 570.0
 margin_bottom = 200.0
 
 [node name="Panel3" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 508.0
-margin_right = 758.0
+margin_left = 580.0
+margin_right = 860.0
 margin_bottom = 200.0
 direction = 3
 
 [node name="Panel4" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 762.0
-margin_right = 1012.0
+margin_left = 870.0
+margin_right = 1150.0
 margin_bottom = 200.0
 direction = 1
 
 [node name="Panel5" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1016.0
-margin_right = 1266.0
+margin_left = 1160.0
+margin_right = 1440.0
 margin_bottom = 200.0
 direction = 2
 
 [node name="Panel6" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1270.0
-margin_right = 1520.0
-margin_bottom = 200.0
+margin_top = 210.0
+margin_right = 280.0
+margin_bottom = 410.0
 myType = 0
 direction = 3
 
 [node name="Panel7" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 204.0
-margin_right = 250.0
-margin_bottom = 404.0
+margin_left = 290.0
+margin_top = 210.0
+margin_right = 570.0
+margin_bottom = 410.0
 myType = 3
 
 [node name="Panel8" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 254.0
-margin_top = 204.0
-margin_right = 504.0
-margin_bottom = 404.0
+margin_left = 580.0
+margin_top = 210.0
+margin_right = 860.0
+margin_bottom = 410.0
 myType = 3
 direction = 1
 
 [node name="Panel9" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 508.0
-margin_top = 204.0
-margin_right = 758.0
-margin_bottom = 404.0
+margin_left = 870.0
+margin_top = 210.0
+margin_right = 1150.0
+margin_bottom = 410.0
 myType = 3
 direction = 2
 
 [node name="Panel10" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 762.0
-margin_top = 204.0
-margin_right = 1012.0
-margin_bottom = 404.0
+margin_left = 1160.0
+margin_top = 210.0
+margin_right = 1440.0
+margin_bottom = 410.0
 myType = 3
 direction = 3
 
 [node name="Panel11" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1016.0
-margin_top = 204.0
-margin_right = 1266.0
-margin_bottom = 404.0
+margin_top = 420.0
+margin_right = 280.0
+margin_bottom = 620.0
 myType = 0
 direction = 3
 
 [node name="Panel12" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1270.0
-margin_top = 204.0
-margin_right = 1520.0
-margin_bottom = 404.0
+margin_left = 290.0
+margin_top = 420.0
+margin_right = 570.0
+margin_bottom = 620.0
 myType = 0
 direction = 3
 
 [node name="Panel13" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 408.0
-margin_right = 250.0
-margin_bottom = 608.0
+margin_left = 580.0
+margin_top = 420.0
+margin_right = 860.0
+margin_bottom = 620.0
 myType = 4
 direction = 3
 
 [node name="Panel14" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 254.0
-margin_top = 408.0
-margin_right = 504.0
-margin_bottom = 608.0
+margin_left = 870.0
+margin_top = 420.0
+margin_right = 1150.0
+margin_bottom = 620.0
 myType = 4
 
 [node name="Panel15" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 508.0
-margin_top = 408.0
-margin_right = 758.0
-margin_bottom = 608.0
+margin_left = 1160.0
+margin_top = 420.0
+margin_right = 1440.0
+margin_bottom = 620.0
 myType = 4
 direction = 2
 
 [node name="Panel16" parent="MainVBox/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 762.0
-margin_top = 408.0
-margin_right = 1012.0
-margin_bottom = 608.0
+margin_top = 630.0
+margin_right = 280.0
+margin_bottom = 830.0
 myType = 4
 direction = 1
 
@@ -500,12 +490,6 @@ margin_right = 81.0
 margin_bottom = 821.0
 text = "Outline"
 align = 2
-[connection signal="texture_chosen" from="TexturePanel/VBoxContainer/TopTextureTray" to="." method="_on_TopTextureTray_texture_chosen"]
-[connection signal="pressed" from="TexturePanel/VBoxContainer/TopLoadButton" to="." method="_on_AnyLoadButton_pressed" binds= [ "top" ]]
-[connection signal="texture_chosen" from="TexturePanel/VBoxContainer/LeftTextureTray" to="." method="_on_LeftTextureTray_texture_chosen"]
-[connection signal="pressed" from="TexturePanel/VBoxContainer/LeftLoadButton" to="." method="_on_AnyLoadButton_pressed" binds= [ "left" ]]
-[connection signal="texture_chosen" from="TexturePanel/VBoxContainer/RightTextureTray" to="." method="_on_RightTextureTray_texture_chosen"]
-[connection signal="pressed" from="TexturePanel/VBoxContainer/RightLoadButton" to="." method="_on_AnyLoadButton_pressed" binds= [ "right" ]]
 [connection signal="pressed" from="MainVBox/ControlPanel/HBoxContainer/ExportButton" to="." method="_on_ExportButton_pressed"]
 [connection signal="file_selected" from="MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog" to="." method="_on_ExportDialog_file_selected"]
 [connection signal="file_selected" from="MainVBox/ControlPanel/HBoxContainer/ExportButton/LoadDialog" to="." method="_on_LoadDialog_file_selected"]

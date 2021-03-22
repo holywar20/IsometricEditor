@@ -24,12 +24,13 @@ onready var save_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/Expo
 onready var load_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/LoadDialog
 
 func _ready():
-	color_pickers.top.color = drawing_node.top_tint
-	color_pickers.left.color = drawing_node.left_tint
-	color_pickers.right.color = drawing_node.right_tint
-	texture_trays.top.preview_button.preview_texture = drawing_node.top_texture
-	texture_trays.left.preview_button.preview_texture = drawing_node.left_texture
-	texture_trays.right.preview_button.preview_texture = drawing_node.right_texture
+	pass
+	#color_pickers.top.color = drawing_node.top_tint
+	#color_pickers.left.color = drawing_node.left_tint
+	#color_pickers.right.color = drawing_node.right_tint
+	#texture_trays.top.preview_button.preview_texture = drawing_node.top_texture
+	#texture_trays.left.preview_button.preview_texture = drawing_node.left_texture
+	#texture_trays.right.preview_button.preview_texture = drawing_node.right_texture
 
 
 func updateAll():
