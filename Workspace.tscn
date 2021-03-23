@@ -18,12 +18,12 @@ __meta__ = {
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_right = 400.0
-margin_bottom = 1080.0
+margin_bottom = 1170.0
 rect_min_size = Vector2( 400, 0 )
 
 [node name="Current" type="VBoxContainer" parent="VBox"]
 margin_right = 400.0
-margin_bottom = 312.0
+margin_bottom = 330.0
 
 [node name="Current" type="Label" parent="VBox/Current"]
 margin_right = 400.0
@@ -147,38 +147,46 @@ max_value = 8.0
 value = 1.0
 rounded = true
 
-[node name="Color" type="HBoxContainer" parent="VBox/Current"]
+[node name="Textures" type="HBoxContainer" parent="VBox/Current"]
 margin_top = 140.0
 margin_right = 400.0
 margin_bottom = 312.0
 
-[node name="Top" parent="VBox/Current/Color" instance=ExtResource( 2 )]
+[node name="Top" parent="VBox/Current/Textures" instance=ExtResource( 2 )]
 margin_right = 130.0
 margin_bottom = 172.0
 
-[node name="Left" parent="VBox/Current/Color" instance=ExtResource( 2 )]
+[node name="Left" parent="VBox/Current/Textures" instance=ExtResource( 2 )]
 margin_left = 134.0
 margin_right = 265.0
 margin_bottom = 172.0
 labelName = "Left"
 
-[node name="Right" parent="VBox/Current/Color" instance=ExtResource( 2 )]
+[node name="Right" parent="VBox/Current/Textures" instance=ExtResource( 2 )]
 margin_left = 269.0
 margin_right = 400.0
 margin_bottom = 172.0
 labelName = "Right"
 
-[node name="Control" type="Control" parent="VBox"]
+[node name="Label" type="Label" parent="VBox/Current"]
 margin_top = 316.0
 margin_right = 400.0
-margin_bottom = 710.0
+margin_bottom = 330.0
+text = "Shading"
+align = 1
+valign = 1
+
+[node name="Control" type="Control" parent="VBox"]
+margin_top = 334.0
+margin_right = 400.0
+margin_bottom = 800.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Global" type="VBoxContainer" parent="VBox"]
-margin_top = 714.0
+margin_top = 804.0
 margin_right = 400.0
-margin_bottom = 1080.0
+margin_bottom = 1170.0
 
 [node name="Label" type="Label" parent="VBox/Global"]
 margin_right = 400.0
@@ -358,7 +366,7 @@ rect_min_size = Vector2( 0, 32 )
 [node name="MainVBox" type="VBoxContainer" parent="."]
 margin_left = 404.0
 margin_right = 1920.0
-margin_bottom = 1080.0
+margin_bottom = 1170.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -408,25 +416,25 @@ current_path = "/"
 [node name="HBoxContainer" type="HBoxContainer" parent="MainVBox"]
 margin_top = 38.0
 margin_right = 1516.0
-margin_bottom = 1080.0
+margin_bottom = 1170.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Control" type="Control" parent="MainVBox/HBoxContainer"]
 margin_right = 30.0
-margin_bottom = 1042.0
+margin_bottom = 1132.0
 rect_min_size = Vector2( 30, 0 )
 
 [node name="GridScroll" type="ScrollContainer" parent="MainVBox/HBoxContainer"]
 margin_left = 34.0
 margin_right = 1482.0
-margin_bottom = 1042.0
+margin_bottom = 1132.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="MainVBox/HBoxContainer/GridScroll"]
 margin_right = 1448.0
-margin_bottom = 1042.0
+margin_bottom = 1132.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 10
@@ -595,7 +603,7 @@ __meta__ = {
 [node name="Control2" type="Control" parent="MainVBox/HBoxContainer"]
 margin_left = 1486.0
 margin_right = 1516.0
-margin_bottom = 1042.0
+margin_bottom = 1132.0
 rect_min_size = Vector2( 30, 0 )
 [connection signal="toggled" from="VBox/Current/Size/OutlineCheckBox" to="." method="_on_OutlineCheckBox_toggled"]
 [connection signal="toggled" from="VBox/Global/Size/OutlineCheckBox" to="." method="_on_OutlineCheckBox_toggled"]

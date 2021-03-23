@@ -134,3 +134,7 @@ func _on_OutlineCheckBox_toggled(button_pressed):
 
 
 
+
+
+func _on_Top_texture_chosen(texture):
+	pass # Replace with function body.

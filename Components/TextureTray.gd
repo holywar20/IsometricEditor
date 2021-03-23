@@ -1,6 +1,7 @@
 extends PanelContainer
 
 signal texture_chosen(texture)
+signal tint_chosen(color)
 
 const THUMB_SIZE = 64
 
