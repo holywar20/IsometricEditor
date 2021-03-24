@@ -20,7 +20,9 @@ onready var load_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/Load
 
 func _ready():
 	for key in globalTextureTrays:
-		globalTextureTrays[key].setupScene()
+		# TODO : link these up
+		pass 
+		#globalTextureTrays[key].setupScene()
 	#color_pickers.top.color = drawing_node.top_tint
 	#color_pickers.left.color = drawing_node.left_tint
 	#color_pickers.right.color = drawing_node.right_tint
@@ -134,7 +136,16 @@ func _on_OutlineCheckBox_toggled(button_pressed):
 
 
 
+# Unwired signals
+
+# Global Menus
+func _on_TextureLibButton_button_down():
+	pass # Replace with function body.
 
 
+# Global Texture Trays
 func _on_Top_texture_chosen(texture):
 	pass # Replace with function body.
+
+# Local Texture Trays
+

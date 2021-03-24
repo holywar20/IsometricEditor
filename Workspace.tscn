@@ -16,38 +16,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="."]
-margin_right = 400.0
-margin_bottom = 1170.0
-rect_min_size = Vector2( 400, 0 )
+[node name="Controls" type="VBoxContainer" parent="."]
+margin_right = 300.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 300, 0 )
 
-[node name="Current" type="VBoxContainer" parent="VBox"]
-margin_right = 400.0
-margin_bottom = 330.0
+[node name="Current" type="VBoxContainer" parent="Controls"]
+margin_right = 300.0
+margin_bottom = 390.0
 
-[node name="Current" type="Label" parent="VBox/Current"]
-margin_right = 400.0
+[node name="Current" type="Label" parent="Controls/Current"]
+margin_right = 300.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Current Texture"
 align = 1
 valign = 1
 
-[node name="Size" type="HBoxContainer" parent="VBox/Current"]
+[node name="Size" type="HBoxContainer" parent="Controls/Current"]
 margin_top = 44.0
-margin_right = 400.0
+margin_right = 300.0
 margin_bottom = 68.0
 
-[node name="OutlineCheckBox" type="CheckBox" parent="VBox/Current/Size"]
+[node name="OutlineCheckBox" type="CheckBox" parent="Controls/Current/Size"]
 margin_right = 76.0
 margin_bottom = 24.0
 text = "Outline"
 align = 2
 
-[node name="RadiusLabel2" type="Label" parent="VBox/Current/Size"]
+[node name="RadiusLabel2" type="Label" parent="Controls/Current/Size"]
 margin_left = 80.0
 margin_top = 5.0
-margin_right = 322.0
+margin_right = 222.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "Radius"
@@ -57,9 +57,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RadiusSpin2" type="SpinBox" parent="VBox/Current/Size"]
-margin_left = 326.0
-margin_right = 400.0
+[node name="RadiusSpin2" type="SpinBox" parent="Controls/Current/Size"]
+margin_left = 226.0
+margin_right = 300.0
 margin_bottom = 24.0
 min_value = 8.0
 max_value = 256.0
@@ -68,25 +68,26 @@ value = 72.0
 rounded = true
 align = 1
 
-[node name="Checkboxes" type="HBoxContainer" parent="VBox/Current"]
+[node name="Checkboxes" type="HBoxContainer" parent="Controls/Current"]
+visible = false
 margin_top = 72.0
 margin_right = 400.0
 margin_bottom = 112.0
 
-[node name="BevelLabel" type="Label" parent="VBox/Current/Checkboxes"]
+[node name="BevelLabel" type="Label" parent="Controls/Current/Checkboxes"]
 margin_top = 13.0
 margin_right = 96.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 text = "Edge Bevel"
 
-[node name="BevelCheck" type="CheckButton" parent="VBox/Current/Checkboxes"]
+[node name="BevelCheck" type="CheckButton" parent="Controls/Current/Checkboxes"]
 margin_left = 100.0
 margin_right = 196.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 
-[node name="EdgeLabel" type="Label" parent="VBox/Current/Checkboxes"]
+[node name="EdgeLabel" type="Label" parent="Controls/Current/Checkboxes"]
 margin_left = 200.0
 margin_top = 13.0
 margin_right = 296.0
@@ -94,33 +95,34 @@ margin_bottom = 27.0
 size_flags_horizontal = 3
 text = "Edge Blend"
 
-[node name="EdgeCheck" type="CheckButton" parent="VBox/Current/Checkboxes"]
+[node name="EdgeCheck" type="CheckButton" parent="Controls/Current/Checkboxes"]
 margin_left = 300.0
 margin_right = 396.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBox/Current/Checkboxes"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/Current/Checkboxes"]
 margin_left = 400.0
 margin_right = 400.0
 margin_bottom = 40.0
 
-[node name="Granules" type="HBoxContainer" parent="VBox/Current"]
-margin_top = 116.0
+[node name="Granules" type="HBoxContainer" parent="Controls/Current"]
+visible = false
+margin_top = 72.0
 margin_right = 400.0
-margin_bottom = 136.0
+margin_bottom = 92.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WarpLabel" type="Label" parent="VBox/Current/Granules"]
+[node name="WarpLabel" type="Label" parent="Controls/Current/Granules"]
 margin_right = 40.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 40, 20 )
 text = "Warp"
 align = 1
 
-[node name="WarpSlider" type="HSlider" parent="VBox/Current/Granules"]
+[node name="WarpSlider" type="HSlider" parent="Controls/Current/Granules"]
 margin_left = 44.0
 margin_right = 189.0
 margin_bottom = 16.0
@@ -129,7 +131,7 @@ min_value = -0.8
 max_value = 0.8
 step = 0.05
 
-[node name="GranuleLabel" type="Label" parent="VBox/Current/Granules"]
+[node name="GranuleLabel" type="Label" parent="Controls/Current/Granules"]
 margin_left = 193.0
 margin_right = 250.0
 margin_bottom = 20.0
@@ -137,7 +139,7 @@ rect_min_size = Vector2( 40, 20 )
 text = "Granules"
 align = 1
 
-[node name="GranuleSlider" type="HSlider" parent="VBox/Current/Granules"]
+[node name="GranuleSlider" type="HSlider" parent="Controls/Current/Granules"]
 margin_left = 254.0
 margin_right = 400.0
 margin_bottom = 16.0
@@ -147,62 +149,62 @@ max_value = 8.0
 value = 1.0
 rounded = true
 
-[node name="Textures" type="HBoxContainer" parent="VBox/Current"]
-margin_top = 140.0
-margin_right = 400.0
-margin_bottom = 312.0
+[node name="Textures" type="HBoxContainer" parent="Controls/Current"]
+margin_top = 72.0
+margin_right = 300.0
+margin_bottom = 372.0
 
-[node name="Top" parent="VBox/Current/Textures" instance=ExtResource( 2 )]
-margin_right = 130.0
-margin_bottom = 172.0
+[node name="Top" parent="Controls/Current/Textures" instance=ExtResource( 2 )]
+margin_right = 97.0
+margin_bottom = 300.0
 
-[node name="Left" parent="VBox/Current/Textures" instance=ExtResource( 2 )]
-margin_left = 134.0
-margin_right = 265.0
-margin_bottom = 172.0
+[node name="Left" parent="Controls/Current/Textures" instance=ExtResource( 2 )]
+margin_left = 101.0
+margin_right = 198.0
+margin_bottom = 300.0
 labelName = "Left"
 
-[node name="Right" parent="VBox/Current/Textures" instance=ExtResource( 2 )]
-margin_left = 269.0
-margin_right = 400.0
-margin_bottom = 172.0
+[node name="Right" parent="Controls/Current/Textures" instance=ExtResource( 2 )]
+margin_left = 202.0
+margin_right = 300.0
+margin_bottom = 300.0
 labelName = "Right"
 
-[node name="Label" type="Label" parent="VBox/Current"]
-margin_top = 316.0
-margin_right = 400.0
-margin_bottom = 330.0
-text = "Shading"
+[node name="Label" type="Label" parent="Controls/Current"]
+margin_top = 376.0
+margin_right = 300.0
+margin_bottom = 390.0
+text = "Global Controls"
 align = 1
 valign = 1
 
-[node name="Control" type="Control" parent="VBox"]
-margin_top = 334.0
-margin_right = 400.0
-margin_bottom = 800.0
+[node name="Control" type="Control" parent="Controls"]
+margin_top = 394.0
+margin_right = 300.0
+margin_bottom = 582.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Global" type="VBoxContainer" parent="VBox"]
-margin_top = 804.0
-margin_right = 400.0
-margin_bottom = 1170.0
+[node name="Global" type="VBoxContainer" parent="Controls"]
+margin_top = 586.0
+margin_right = 300.0
+margin_bottom = 1080.0
 
-[node name="Label" type="Label" parent="VBox/Global"]
-margin_right = 400.0
+[node name="Label" type="Label" parent="Controls/Global"]
+margin_right = 300.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Global Controls"
 align = 1
 valign = 1
 
-[node name="Size" type="HBoxContainer" parent="VBox/Global"]
+[node name="Size" type="HBoxContainer" parent="Controls/Global"]
 margin_top = 44.0
-margin_right = 400.0
+margin_right = 300.0
 margin_bottom = 68.0
 
-[node name="RadiusLabel2" type="Label" parent="VBox/Global/Size"]
-margin_right = 130.0
+[node name="RadiusLabel2" type="Label" parent="Controls/Global/Size"]
+margin_right = 97.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -212,9 +214,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RadiusSpin2" type="SpinBox" parent="VBox/Global/Size"]
-margin_left = 134.0
-margin_right = 265.0
+[node name="RadiusSpin2" type="SpinBox" parent="Controls/Global/Size"]
+margin_left = 101.0
+margin_right = 198.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -225,110 +227,110 @@ value = 72.0
 rounded = true
 align = 1
 
-[node name="OutlineCheckBox" type="CheckBox" parent="VBox/Global/Size"]
-margin_left = 269.0
-margin_right = 400.0
+[node name="OutlineCheckBox" type="CheckBox" parent="Controls/Global/Size"]
+margin_left = 202.0
+margin_right = 300.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Outline"
 align = 1
 
-[node name="Checkboxes" type="HBoxContainer" parent="VBox/Global"]
+[node name="Checkboxes" type="HBoxContainer" parent="Controls/Global"]
 margin_top = 72.0
-margin_right = 400.0
+margin_right = 300.0
 margin_bottom = 130.0
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="VBox/Global/Checkboxes"]
-margin_right = 97.0
+[node name="VBoxContainer3" type="VBoxContainer" parent="Controls/Global/Checkboxes"]
+margin_right = 68.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="VBox/Global/Checkboxes"]
-margin_left = 101.0
-margin_right = 198.0
+[node name="VBoxContainer4" type="VBoxContainer" parent="Controls/Global/Checkboxes"]
+margin_left = 72.0
+margin_right = 140.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Global/Checkboxes"]
-margin_left = 202.0
-margin_right = 299.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/Global/Checkboxes"]
+margin_left = 144.0
+margin_right = 220.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="BevelLabel" type="Label" parent="VBox/Global/Checkboxes/VBoxContainer"]
-margin_right = 97.0
+[node name="BevelLabel" type="Label" parent="Controls/Global/Checkboxes/VBoxContainer"]
+margin_right = 76.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Edge Bevel"
 align = 1
 valign = 1
 
-[node name="BevelCheck" type="CheckButton" parent="VBox/Global/Checkboxes/VBoxContainer"]
+[node name="BevelCheck" type="CheckButton" parent="Controls/Global/Checkboxes/VBoxContainer"]
 margin_top = 18.0
-margin_right = 97.0
+margin_right = 76.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBox/Global/Checkboxes"]
-margin_left = 303.0
-margin_right = 400.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/Global/Checkboxes"]
+margin_left = 224.0
+margin_right = 300.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="EdgeLabel" type="Label" parent="VBox/Global/Checkboxes/VBoxContainer2"]
-margin_right = 97.0
+[node name="EdgeLabel" type="Label" parent="Controls/Global/Checkboxes/VBoxContainer2"]
+margin_right = 76.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Edge Blend"
 align = 1
 valign = 1
 
-[node name="EdgeCheck" type="CheckButton" parent="VBox/Global/Checkboxes/VBoxContainer2"]
+[node name="EdgeCheck" type="CheckButton" parent="Controls/Global/Checkboxes/VBoxContainer2"]
 margin_top = 18.0
-margin_right = 97.0
+margin_right = 76.0
 margin_bottom = 58.0
 size_flags_horizontal = 3
 
-[node name="Granules" type="HBoxContainer" parent="VBox/Global"]
+[node name="Granules" type="HBoxContainer" parent="Controls/Global"]
 margin_top = 134.0
-margin_right = 400.0
+margin_right = 300.0
 margin_bottom = 154.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WarpLabel" type="Label" parent="VBox/Global/Granules"]
+[node name="WarpLabel" type="Label" parent="Controls/Global/Granules"]
 margin_right = 40.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 40, 20 )
 text = "Warp"
 align = 1
 
-[node name="WarpSlider" type="HSlider" parent="VBox/Global/Granules"]
+[node name="WarpSlider" type="HSlider" parent="Controls/Global/Granules"]
 margin_left = 44.0
-margin_right = 189.0
+margin_right = 139.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 min_value = -0.8
 max_value = 0.8
 step = 0.05
 
-[node name="GranuleLabel" type="Label" parent="VBox/Global/Granules"]
-margin_left = 193.0
-margin_right = 250.0
+[node name="GranuleLabel" type="Label" parent="Controls/Global/Granules"]
+margin_left = 143.0
+margin_right = 200.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 40, 20 )
 text = "Granules"
 align = 1
 
-[node name="GranuleSlider" type="HSlider" parent="VBox/Global/Granules"]
-margin_left = 254.0
-margin_right = 400.0
+[node name="GranuleSlider" type="HSlider" parent="Controls/Global/Granules"]
+margin_left = 204.0
+margin_right = 300.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 min_value = 1.0
@@ -336,58 +338,77 @@ max_value = 8.0
 value = 1.0
 rounded = true
 
-[node name="GlobalColor" type="HBoxContainer" parent="VBox/Global"]
+[node name="GlobalColor" type="HBoxContainer" parent="Controls/Global"]
 margin_top = 158.0
-margin_right = 400.0
-margin_bottom = 330.0
+margin_right = 300.0
+margin_bottom = 458.0
 
-[node name="Top" parent="VBox/Global/GlobalColor" instance=ExtResource( 2 )]
-margin_right = 130.0
-margin_bottom = 172.0
+[node name="Top" parent="Controls/Global/GlobalColor" instance=ExtResource( 2 )]
+margin_right = 97.0
+margin_bottom = 300.0
 
-[node name="Left" parent="VBox/Global/GlobalColor" instance=ExtResource( 2 )]
-margin_left = 134.0
-margin_right = 265.0
-margin_bottom = 172.0
+[node name="Left" parent="Controls/Global/GlobalColor" instance=ExtResource( 2 )]
+margin_left = 101.0
+margin_right = 198.0
+margin_bottom = 300.0
 labelName = "Left"
 
-[node name="Right" parent="VBox/Global/GlobalColor" instance=ExtResource( 2 )]
-margin_left = 269.0
-margin_right = 400.0
-margin_bottom = 172.0
+[node name="Right" parent="Controls/Global/GlobalColor" instance=ExtResource( 2 )]
+margin_left = 202.0
+margin_right = 300.0
+margin_bottom = 300.0
 labelName = "Right"
 
-[node name="HSeparatorDB" type="HSeparator" parent="VBox/Global"]
-margin_top = 334.0
-margin_right = 400.0
-margin_bottom = 366.0
+[node name="HSeparatorDB" type="HSeparator" parent="Controls/Global"]
+margin_top = 462.0
+margin_right = 300.0
+margin_bottom = 494.0
 rect_min_size = Vector2( 0, 32 )
 
 [node name="MainVBox" type="VBoxContainer" parent="."]
-margin_left = 404.0
+margin_left = 304.0
 margin_right = 1920.0
-margin_bottom = 1170.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ControlPanel" type="PanelContainer" parent="MainVBox"]
-margin_right = 1516.0
+margin_right = 1616.0
 margin_bottom = 34.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainVBox/ControlPanel"]
+[node name="ButtonPanel" type="HBoxContainer" parent="MainVBox/ControlPanel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1509.0
+margin_right = 1609.0
 margin_bottom = 27.0
 alignment = 1
 
-[node name="ExportButton" type="Button" parent="MainVBox/ControlPanel/HBoxContainer"]
-margin_left = 704.0
-margin_right = 797.0
+[node name="TextureLibButton" type="Button" parent="MainVBox/ControlPanel/ButtonPanel"]
+margin_right = 107.0
+margin_bottom = 20.0
+text = "Texture Library"
+
+[node name="Button2" type="Button" parent="MainVBox/ControlPanel/ButtonPanel"]
+margin_left = 111.0
+margin_right = 123.0
+margin_bottom = 20.0
+
+[node name="Control" type="Control" parent="MainVBox/ControlPanel/ButtonPanel"]
+margin_left = 127.0
+margin_right = 1505.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExportButton" type="Button" parent="MainVBox/ControlPanel/ButtonPanel"]
+margin_left = 1509.0
+margin_right = 1602.0
 margin_bottom = 20.0
 text = "EXPORT PNG"
 
-[node name="ExportDialog" type="FileDialog" parent="MainVBox/ControlPanel/HBoxContainer/ExportButton"]
+[node name="ExportDialog" type="FileDialog" parent="MainVBox/ControlPanel/ButtonPanel/ExportButton"]
 margin_left = -232.0
 margin_top = 73.0
 margin_right = 227.0
@@ -399,7 +420,7 @@ filters = PoolStringArray( "*.png ; PNG Images" )
 current_dir = "/"
 current_path = "/"
 
-[node name="LoadDialog" type="FileDialog" parent="MainVBox/ControlPanel/HBoxContainer/ExportButton"]
+[node name="LoadDialog" type="FileDialog" parent="MainVBox/ControlPanel/ButtonPanel/ExportButton"]
 margin_left = -229.0
 margin_top = 423.0
 margin_right = 225.0
@@ -413,28 +434,23 @@ filters = PoolStringArray( "*.png ; PNG Images" )
 current_dir = "/"
 current_path = "/"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainVBox"]
+[node name="MainPanel" type="HBoxContainer" parent="MainVBox"]
 margin_top = 38.0
-margin_right = 1516.0
-margin_bottom = 1170.0
+margin_right = 1616.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="MainVBox/HBoxContainer"]
-margin_right = 30.0
-margin_bottom = 1132.0
-rect_min_size = Vector2( 30, 0 )
-
-[node name="GridScroll" type="ScrollContainer" parent="MainVBox/HBoxContainer"]
-margin_left = 34.0
-margin_right = 1482.0
-margin_bottom = 1132.0
+[node name="GridScroll" type="ScrollContainer" parent="MainVBox/MainPanel"]
+margin_right = 1616.0
+margin_bottom = 1042.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+follow_focus = true
 
-[node name="GridContainer" type="GridContainer" parent="MainVBox/HBoxContainer/GridScroll"]
-margin_right = 1448.0
-margin_bottom = 1132.0
+[node name="GridContainer" type="GridContainer" parent="MainVBox/MainPanel/GridScroll"]
+margin_right = 1616.0
+margin_bottom = 1042.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 10
@@ -444,154 +460,130 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 280.0
-margin_bottom = 200.0
-myType = 1
+margin_right = 300.0
+margin_bottom = 213.0
 
-[node name="Panel2" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel2" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 290.0
-margin_right = 570.0
-margin_bottom = 200.0
+margin_left = 310.0
+margin_right = 610.0
+margin_bottom = 213.0
 
-[node name="Panel3" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel3" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 580.0
-margin_right = 860.0
-margin_bottom = 200.0
-direction = 3
+margin_left = 620.0
+margin_right = 920.0
+margin_bottom = 213.0
 
-[node name="Panel4" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel4" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 870.0
-margin_right = 1150.0
-margin_bottom = 200.0
-direction = 1
+margin_left = 930.0
+margin_right = 1230.0
+margin_bottom = 213.0
 
-[node name="Panel5" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel5" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1160.0
-margin_right = 1440.0
-margin_bottom = 200.0
-direction = 2
+margin_left = 1240.0
+margin_right = 1540.0
+margin_bottom = 213.0
 
-[node name="Panel6" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel6" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 210.0
-margin_right = 280.0
-margin_bottom = 410.0
-myType = 0
-direction = 3
+margin_top = 223.0
+margin_right = 300.0
+margin_bottom = 436.0
 
-[node name="Panel7" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel7" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 290.0
-margin_top = 210.0
-margin_right = 570.0
-margin_bottom = 410.0
-myType = 3
+margin_left = 310.0
+margin_top = 223.0
+margin_right = 610.0
+margin_bottom = 436.0
 
-[node name="Panel8" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel8" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 580.0
-margin_top = 210.0
-margin_right = 860.0
-margin_bottom = 410.0
-myType = 3
-direction = 1
+margin_left = 620.0
+margin_top = 223.0
+margin_right = 920.0
+margin_bottom = 436.0
 
-[node name="Panel9" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel9" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 870.0
-margin_top = 210.0
-margin_right = 1150.0
-margin_bottom = 410.0
-myType = 3
-direction = 2
+margin_left = 930.0
+margin_top = 223.0
+margin_right = 1230.0
+margin_bottom = 436.0
 
-[node name="Panel10" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel10" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1160.0
-margin_top = 210.0
-margin_right = 1440.0
-margin_bottom = 410.0
-myType = 3
-direction = 3
+margin_left = 1240.0
+margin_top = 223.0
+margin_right = 1540.0
+margin_bottom = 436.0
 
-[node name="Panel11" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel11" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 420.0
-margin_right = 280.0
-margin_bottom = 620.0
-myType = 0
-direction = 3
+margin_top = 446.0
+margin_right = 300.0
+margin_bottom = 659.0
 
-[node name="Panel12" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel12" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 290.0
-margin_top = 420.0
-margin_right = 570.0
-margin_bottom = 620.0
-myType = 0
-direction = 3
+margin_left = 310.0
+margin_top = 446.0
+margin_right = 610.0
+margin_bottom = 659.0
 
-[node name="Panel13" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel13" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 580.0
-margin_top = 420.0
-margin_right = 860.0
-margin_bottom = 620.0
-myType = 4
-direction = 3
+margin_left = 620.0
+margin_top = 446.0
+margin_right = 920.0
+margin_bottom = 659.0
 
-[node name="Panel14" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel14" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 870.0
-margin_top = 420.0
-margin_right = 1150.0
-margin_bottom = 620.0
-myType = 4
+margin_left = 930.0
+margin_top = 446.0
+margin_right = 1230.0
+margin_bottom = 659.0
 
-[node name="Panel15" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel15" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1160.0
-margin_top = 420.0
-margin_right = 1440.0
-margin_bottom = 620.0
-myType = 4
-direction = 2
+margin_left = 1240.0
+margin_top = 446.0
+margin_right = 1540.0
+margin_bottom = 659.0
 
-[node name="Panel16" parent="MainVBox/HBoxContainer/GridScroll/GridContainer" instance=ExtResource( 5 )]
+[node name="Panel16" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 630.0
-margin_right = 280.0
-margin_bottom = 830.0
-myType = 4
-direction = 1
+margin_top = 669.0
+margin_right = 300.0
+margin_bottom = 882.0
 
-[node name="TextureButton" type="TextureButton" parent="MainVBox/HBoxContainer/GridScroll/GridContainer"]
-margin_left = 290.0
-margin_top = 630.0
-margin_right = 570.0
-margin_bottom = 830.0
+[node name="TextureButton" type="TextureButton" parent="MainVBox/MainPanel/GridScroll/GridContainer"]
+margin_left = 310.0
+margin_top = 669.0
+margin_right = 610.0
+margin_bottom = 882.0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 7 )
 texture_hover = ExtResource( 4 )
@@ -599,14 +591,9 @@ texture_disabled = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Control2" type="Control" parent="MainVBox/HBoxContainer"]
-margin_left = 1486.0
-margin_right = 1516.0
-margin_bottom = 1132.0
-rect_min_size = Vector2( 30, 0 )
-[connection signal="toggled" from="VBox/Current/Size/OutlineCheckBox" to="." method="_on_OutlineCheckBox_toggled"]
-[connection signal="toggled" from="VBox/Global/Size/OutlineCheckBox" to="." method="_on_OutlineCheckBox_toggled"]
-[connection signal="pressed" from="MainVBox/ControlPanel/HBoxContainer/ExportButton" to="." method="_on_ExportButton_pressed"]
-[connection signal="file_selected" from="MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog" to="." method="_on_ExportDialog_file_selected"]
-[connection signal="file_selected" from="MainVBox/ControlPanel/HBoxContainer/ExportButton/LoadDialog" to="." method="_on_LoadDialog_file_selected"]
+[connection signal="toggled" from="Controls/Current/Size/OutlineCheckBox" to="." method="_on_OutlineCheckBox_toggled"]
+[connection signal="toggled" from="Controls/Global/Size/OutlineCheckBox" to="." method="_on_OutlineCheckBox_toggled"]
+[connection signal="button_down" from="MainVBox/ControlPanel/ButtonPanel/TextureLibButton" to="." method="_on_TextureLibButton_button_down"]
+[connection signal="pressed" from="MainVBox/ControlPanel/ButtonPanel/ExportButton" to="." method="_on_ExportButton_pressed"]
+[connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton/ExportDialog" to="." method="_on_ExportDialog_file_selected"]
+[connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton/LoadDialog" to="." method="_on_LoadDialog_file_selected"]

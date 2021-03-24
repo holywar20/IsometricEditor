@@ -10,8 +10,8 @@
 [ext_resource path="res://Components/PreviewButton.gd" type="Script" id=8]
 
 [node name="TextureTray" type="PanelContainer"]
-margin_right = 140.0
-margin_bottom = 177.0
+margin_right = 109.0
+margin_bottom = 263.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -24,29 +24,84 @@ texture_list = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResour
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 133.0
-margin_bottom = 170.0
+margin_right = 102.0
+margin_bottom = 293.0
 
-[node name="Label" type="Label" parent="VBox"]
-margin_right = 126.0
+[node name="TextureLabel" type="Label" parent="VBox"]
+margin_right = 95.0
 margin_bottom = 14.0
-text = "TOP"
+text = "{SIDE}"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreviewButton" type="Button" parent="VBox"]
+[node name="Texture" type="CenterContainer" parent="VBox"]
 margin_top = 18.0
-margin_right = 126.0
+margin_right = 95.0
 margin_bottom = 82.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="Button" parent="VBox/Texture"]
+margin_left = 15.0
+margin_right = 79.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 script = ExtResource( 8 )
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="VBox"]
+[node name="Button" type="Button" parent="VBox"]
 margin_top = 86.0
-margin_right = 126.0
+margin_right = 95.0
 margin_bottom = 106.0
+text = "LOAD"
+
+[node name="NormalLab" type="Label" parent="VBox"]
+margin_top = 110.0
+margin_right = 95.0
+margin_bottom = 124.0
+text = "Normal"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Normal" type="CenterContainer" parent="VBox"]
+margin_top = 128.0
+margin_right = 95.0
+margin_bottom = 192.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NormalButton" type="Button" parent="VBox/Normal"]
+margin_left = 15.0
+margin_right = 79.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 8 )
+
+[node name="Button2" type="Button" parent="VBox"]
+margin_top = 196.0
+margin_right = 95.0
+margin_bottom = 216.0
+text = "LOAD"
+
+[node name="TintLabel" type="Label" parent="VBox"]
+margin_top = 220.0
+margin_right = 95.0
+margin_bottom = 234.0
+text = "Tint"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBox"]
+margin_top = 238.0
+margin_right = 95.0
+margin_bottom = 258.0
 color = Color( 1, 1, 1, 1 )
 
 [node name="TextureChoosePopup" type="PopupPanel" parent="VBox"]
@@ -62,18 +117,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CheckBox" type="CheckBox" parent="VBox"]
-margin_top = 110.0
-margin_right = 126.0
-margin_bottom = 134.0
+margin_top = 262.0
+margin_right = 95.0
+margin_bottom = 286.0
 text = "Visible"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Button" type="Button" parent="VBox"]
-margin_top = 138.0
-margin_right = 126.0
-margin_bottom = 158.0
-text = "LOAD"
-[connection signal="pressed" from="VBox/PreviewButton" to="." method="_on_PreviewButton_pressed"]
+[connection signal="pressed" from="VBox/Texture/TextureButton" to="." method="_on_PreviewButton_pressed"]
+[connection signal="pressed" from="VBox/Normal/NormalButton" to="." method="_on_PreviewButton_pressed"]
 [connection signal="popup_hide" from="VBox/TextureChoosePopup" to="." method="_on_TextureChoosePopup_popup_hide"]

@@ -1,7 +1,8 @@
 extends PanelContainer
 
-signal texture_chosen(texture)
-signal tint_chosen(color)
+signal textureChosen(texture)
+signal normalChosen(texture)
+signal tintChosen(color)
 
 const THUMB_SIZE = 64
 
@@ -11,9 +12,9 @@ export(String) var labelName = "Top"
 var Previewer = preload("res://Components/PreviewButton.gd")
 var is_expanded = false
 
-onready var trayLabel = $VBox/Label
+onready var trayLabel = $VBox/TextureLabel
 
-onready var preview_button = $VBox/PreviewButton
+onready var textureSelectButton = $VBox/Texture/TextureButton
 onready var chooser_popup = $VBox/TextureChoosePopup
 onready var chooser_hbox = $VBox/TextureChoosePopup/TextureHBox
 
@@ -21,7 +22,7 @@ func setupScene():
 	pass
 
 func _ready():
-	preview_button.preview_texture = texture_list[0]
+	textureSelectButton.preview_texture = texture_list[0]
 	for full_texture in texture_list:
 		add_thumbnail(full_texture)
 
@@ -51,6 +52,6 @@ func _on_TextureChoosePopup_popup_hide():
 
 func _on_choice_made(texture_choice):
 	chooser_popup.hide()
-	preview_button.preview_texture = texture_choice
-	preview_button.update()
-	emit_signal("texture_chosen", texture_choice)
+	textureSelectButton.preview_texture = texture_choice
+	textureSelectButton.update()
+	emit_signal("textureChosen", texture_choice)

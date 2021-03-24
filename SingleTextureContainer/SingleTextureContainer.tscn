@@ -1,77 +1,90 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://SingleTextureContainer/SingleTextureContainer.gd" type="Script" id=1]
-[ext_resource path="res://SingleTextureContainer/Panel.gd" type="Script" id=2]
+[ext_resource path="res://SingleTextureContainer/ResultsPanel.gd" type="Script" id=2]
 [ext_resource path="res://UIAssetts/minus_h.png" type="Texture" id=3]
 [ext_resource path="res://UIAssetts/minus_d.png" type="Texture" id=4]
 [ext_resource path="res://UIAssetts/minus_a.png" type="Texture" id=5]
 [ext_resource path="res://UIAssetts/minus_n.png" type="Texture" id=6]
 
-[node name="Panel" type="Panel" groups=[
+[node name="Panel" type="PanelContainer" groups=[
 "TILE_PANELS",
 ]]
 self_modulate = Color( 0.298039, 0.298039, 0.298039, 1 )
-anchor_right = 0.104
-anchor_bottom = 0.185
-margin_right = 50.32
-margin_bottom = 0.200012
-rect_min_size = Vector2( 280, 200 )
+anchor_right = 0.156
+anchor_bottom = 0.199
+margin_right = 0.47998
+margin_bottom = 0.0799866
+rect_min_size = Vector2( 300, 200 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBox" type="HBoxContainer" parent="."]
-margin_right = 280.0
-margin_bottom = 40.0
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 208.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SizeDisplay" type="Label" parent="HBox"]
-margin_top = 13.0
-margin_right = 35.0
-margin_bottom = 27.0
-text = "72 px"
+[node name="TitleRow" type="HBoxContainer" parent="VBox"]
+margin_right = 286.0
+margin_bottom = 44.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RadiusControl" type="VBoxContainer" parent="VBox/TitleRow"]
+margin_right = 74.0
+margin_bottom = 44.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBox/TitleRow/RadiusControl"]
+margin_right = 74.0
+margin_bottom = 14.0
+text = "Radius"
+align = 1
 valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="VBox/TitleRow/RadiusControl"]
+margin_top = 18.0
+margin_right = 74.0
+margin_bottom = 42.0
+value = 72.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="HBox"]
-margin_left = 39.0
-margin_right = 236.0
-margin_bottom = 40.0
+[node name="Display" type="VBoxContainer" parent="VBox/TitleRow"]
+margin_left = 78.0
+margin_right = 242.0
+margin_bottom = 44.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="TitleDisplay" type="Label" parent="HBox/VBox"]
-margin_top = 4.0
-margin_right = 197.0
-margin_bottom = 18.0
-text = "Even Incline"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MenuButton" type="MenuButton" parent="VBox/TitleRow/Display"]
+margin_right = 164.0
+margin_bottom = 20.0
+text = "Test"
+items = [ "Box", null, 0, false, false, 0, 0, null, "", false, "Even Incline", null, 0, false, false, 1, 0, null, "", false, "Diamond Incline", null, 0, false, false, 2, 0, null, "", false, "Flat Top Corner", null, 0, false, false, 3, 0, null, "", false, "Flat Base Corner", null, 0, false, false, 4, 0, null, "", false ]
 
-[node name="FacingDisplay" type="Label" parent="HBox/VBox"]
-margin_top = 22.0
-margin_right = 197.0
-margin_bottom = 36.0
-text = "Left"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MenuButton2" type="MenuButton" parent="VBox/TitleRow/Display"]
+margin_top = 24.0
+margin_right = 164.0
+margin_bottom = 44.0
+text = "Test"
+items = [ "", null, 0, false, false, 0, 0, null, "", false ]
 
-[node name="DeleteButton" type="TextureButton" parent="HBox"]
-margin_left = 240.0
-margin_right = 280.0
-margin_bottom = 40.0
+[node name="DeleteButton" type="TextureButton" parent="VBox/TitleRow"]
+margin_left = 246.0
+margin_right = 286.0
+margin_bottom = 44.0
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 3 )
@@ -80,18 +93,294 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -200.0
-margin_top = -160.0
-margin_bottom = -1.52588e-05
+[node name="Main" type="HBoxContainer" parent="VBox"]
+margin_top = 48.0
+margin_right = 286.0
+margin_bottom = 201.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="VBoxContainer" parent="VBox/Main"]
+margin_right = 75.0
+margin_bottom = 153.0
+
+[node name="Step" type="VBoxContainer" parent="VBox/Main/Left"]
+margin_right = 75.0
+margin_bottom = 42.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBox/Main/Left/Step"]
+margin_right = 75.0
+margin_bottom = 14.0
+text = "Step"
+align = 1
+valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="VBox/Main/Left/Step"]
+margin_top = 18.0
+margin_right = 75.0
+margin_bottom = 42.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Overrides" type="PanelContainer" parent="VBox/Main/Left"]
+margin_top = 46.0
+margin_right = 75.0
+margin_bottom = 153.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Main/Left/Overrides"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 68.0
+margin_bottom = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBox/Main/Left/Overrides/VBox"]
+margin_right = 61.0
+margin_bottom = 14.0
+text = "Texture"
+align = 1
+valign = 1
+
+[node name="TitleRow" type="HBoxContainer" parent="VBox/Main/Left/Overrides/VBox"]
+margin_top = 18.0
+margin_right = 61.0
+margin_bottom = 36.0
+custom_constants/separation = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Label" parent="VBox/Main/Left/Overrides/VBox/TitleRow"]
+margin_right = 30.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 30, 18 )
+size_flags_horizontal = 3
+
+[node name="Top" type="Label" parent="VBox/Main/Left/Overrides/VBox/TitleRow"]
+margin_left = 33.0
+margin_top = 2.0
+margin_right = 40.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "T"
+align = 1
+valign = 1
+
+[node name="Left" type="Label" parent="VBox/Main/Left/Overrides/VBox/TitleRow"]
+margin_left = 43.0
+margin_top = 2.0
+margin_right = 50.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "L"
+align = 1
+valign = 1
+
+[node name="Right" type="Label" parent="VBox/Main/Left/Overrides/VBox/TitleRow"]
+margin_left = 53.0
+margin_top = 2.0
+margin_right = 61.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "R"
+align = 1
+valign = 1
+
+[node name="ColorRow" type="HBoxContainer" parent="VBox/Main/Left/Overrides/VBox"]
+margin_top = 40.0
+margin_right = 61.0
+margin_bottom = 55.0
+custom_constants/separation = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Label" parent="VBox/Main/Left/Overrides/VBox/ColorRow"]
+margin_right = 30.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 15 )
+size_flags_horizontal = 3
+text = "Co"
+valign = 1
+
+[node name="Color_Top" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/ColorRow"]
+margin_left = 33.0
+margin_right = 40.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Color_Left" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/ColorRow"]
+margin_left = 43.0
+margin_right = 50.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Color_Right" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/ColorRow"]
+margin_left = 53.0
+margin_right = 61.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TxRow" type="HBoxContainer" parent="VBox/Main/Left/Overrides/VBox"]
+margin_top = 59.0
+margin_right = 61.0
+margin_bottom = 74.0
+custom_constants/separation = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Label" parent="VBox/Main/Left/Overrides/VBox/TxRow"]
+margin_right = 30.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 15 )
+size_flags_horizontal = 3
+text = "Tx"
+valign = 1
+
+[node name="Texture_Top" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/TxRow"]
+margin_left = 33.0
+margin_right = 40.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture_Left" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/TxRow"]
+margin_left = 43.0
+margin_right = 50.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture_Right" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/TxRow"]
+margin_left = 53.0
+margin_right = 61.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NmRow" type="HBoxContainer" parent="VBox/Main/Left/Overrides/VBox"]
+margin_top = 78.0
+margin_right = 61.0
+margin_bottom = 93.0
+custom_constants/separation = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Label" parent="VBox/Main/Left/Overrides/VBox/NmRow"]
+margin_right = 30.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 15 )
+size_flags_horizontal = 3
+text = "Nm"
+valign = 1
+
+[node name="Normal_Top" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/NmRow"]
+margin_left = 33.0
+margin_right = 40.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Normal_Left" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/NmRow"]
+margin_left = 43.0
+margin_right = 50.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Normal_Right" type="ColorRect" parent="VBox/Main/Left/Overrides/VBox/NmRow"]
+margin_left = 53.0
+margin_right = 61.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResultDisplay" type="Panel" parent="VBox/Main"]
+margin_left = 79.0
+margin_right = 286.0
+margin_bottom = 153.0
+rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="HBox/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+
+[node name="ZoomPlus" type="Button" parent="VBox/Main/ResultDisplay"]
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 24.0
+margin_bottom = 22.0
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBox/Main/ResultDisplay"]
+margin_left = 29.0
+margin_top = 7.0
+margin_right = 69.0
+margin_bottom = 21.0
+text = "100%"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ZoomMinus" type="Button" parent="VBox/Main/ResultDisplay"]
+margin_left = 69.0
+margin_top = 2.0
+margin_right = 89.0
+margin_bottom = 22.0
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="VBox/TitleRow/RadiusControl/SpinBox" to="." method="_on_SpinBox_value_changed"]
+[connection signal="pressed" from="VBox/TitleRow/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="value_changed" from="VBox/Main/Left/Step/SpinBox" to="." method="_on_SpinBox_value_changed"]
+[connection signal="pressed" from="VBox/Main/ResultDisplay/ZoomPlus" to="VBox/Main/ResultDisplay" method="_on_ZoomPlus_pressed"]
+[connection signal="pressed" from="VBox/Main/ResultDisplay/ZoomMinus" to="VBox/Main/ResultDisplay" method="_on_ZoomMinus_pressed"]

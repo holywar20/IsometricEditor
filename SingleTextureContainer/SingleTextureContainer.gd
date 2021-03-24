@@ -1,15 +1,39 @@
 tool
-extends Panel
+extends PanelContainer
 class_name PolygonPanel
 
-onready var drawPanel = $Panel
-
-onready var titleDisplay : Label = $HBox/VBox/TitleDisplay
-onready var sizeDisplay : Label = $HBox/SizeDisplay
-onready var facingDisplay : Label = $HBox/VBox/FacingDisplay 
+enum DRAWING_FACES{
+	LEFT , RIGHT , TOP
+}
 
 enum TEXTURE_TYPES {
 	NONE , BOX , EVEN_INCLINE , DIAMOND_INCLINE, FLAT_TOP_CORNER, FLAT_BASE_CORNER 
+}
+
+# Title Row
+# onready var titleDisplay : Label = $VBox/TitleRow/Display/TitleDisplay
+# onready var facingDisplay : Label = $VBox/TitleRow/Display/FacingDisplay
+
+# Controls
+onready var sizeSpinner : SpinBox = $VBox/TitleRow/RadiusControl/SpinBox
+onready var stepSpinner : SpinBox = $VBox/Main/Left/Step/SpinBox
+onready var resultsDisplay : Panel = $VBox/Main/ResultDisplay
+
+# Texture / Tint Displays
+onready var textureOverrideDisplays = {
+	DRAWING_FACES.TOP : $VBox/Main/Left/Overrides/VBox/TxRow/Texture_Top,
+	DRAWING_FACES.LEFT : $VBox/Main/Left/Overrides/VBox/TxRow/Texture_Left,
+	DRAWING_FACES.RIGHT : $VBox/Main/Left/Overrides/VBox/TxRow/Texture_Right
+}
+onready var normalOverrideDisplays = {
+	DRAWING_FACES.TOP :  $VBox/Main/Left/Overrides/VBox/NmRow/Normal_Top,
+	DRAWING_FACES.LEFT: $VBox/Main/Left/Overrides/VBox/NmRow/Normal_Left,
+	DRAWING_FACES.RIGHT : $VBox/Main/Left/Overrides/VBox/NmRow/Normal_Right
+}
+onready var tintOverrideDisplays = {
+	DRAWING_FACES.TOP : $VBox/Main/Left/Overrides/VBox/ColorRow/Color_Top,
+	DRAWING_FACES.LEFT : $VBox/Main/Left/Overrides/VBox/ColorRow/Color_Left,
+	DRAWING_FACES.RIGHT : $VBox/Main/Left/Overrides/VBox/ColorRow/Color_Right
 }
 
 const TEXTURE_TYPE_PROPS = {
@@ -123,11 +147,7 @@ export(TEXTURE_TYPES) var myType = TEXTURE_TYPES.EVEN_INCLINE
 export(DIRECTION) var direction = DIRECTION.LEFT 
 
 var tileRadius = 72
-var offset = Vector2(15, 15)
-
-enum DRAWING_FACES{
-	LEFT , RIGHT , TOP
-}
+var offset = Vector2(30, 10)
 
 const DEFAULT_FACING_DATA = {
 	DRAWING_FACES.LEFT : {
@@ -160,15 +180,17 @@ func setupScene( myTileRadius  ):
 	
 	tileRadius = myTileRadius
 	
-	titleDisplay.set_text( TEXTURE_TYPE_PROPS[myType].display )
-	sizeDisplay.set_text( str(tileRadius) + " px" )
+	## titleDisplay.set_text( TEXTURE_TYPE_PROPS[myType].display )
+	sizeSpinner.set_value( tileRadius )
 
 	if( myType == TEXTURE_TYPES.BOX || myType == TEXTURE_TYPES.NONE ):
-		facingDisplay.set_text("")
-		facingDisplay.hide()
-	else:	
-		facingDisplay.set_text( DIR_DISPLAY[direction] )
-		facingDisplay.show()
+		pass
+		#facingDisplay.set_text("")
+		#facingDisplay.hide()
+	else:
+		pass
+		#facingDisplay.set_text( DIR_DISPLAY[direction] )
+		#facingDisplay.show()
 
 	drawTextures()
 
@@ -200,7 +222,7 @@ func drawTextures():
 		TEXTURE_TYPES.FLAT_BASE_CORNER:
 			pass 
 	
-	drawPanel.drawAllPolygons( faceData )
+	resultsDisplay.drawAllPolygons( faceData )
 
 # Generate flat faces
 func generateLeftFace( shrinkAmount ):
@@ -422,8 +444,6 @@ func generateFlatTopRightCornerFace( shrinkAmount, direction ):
 	faceData[DRAWING_FACES.RIGHT].points = rightFace
 	faceData[DRAWING_FACES.RIGHT].uvs = flatTopFaceUVs[direction][DRAWING_FACES.RIGHT]
 
-
-
 func generateFlatTopCornerFace( shrinkAmount, direction ):
 	var topFace = PoolVector2Array()
 
@@ -451,6 +471,8 @@ func generateFlatTopCornerFace( shrinkAmount, direction ):
 	faceData[DRAWING_FACES.TOP].points = topFace
 	faceData[DRAWING_FACES.TOP].uvs = fullFaceUvs
 
-
 func _on_DeleteButton_pressed():
 	queue_free()
+
+func _on_SpinBox_value_changed(value):
+	print("value changed")
