@@ -9,8 +9,8 @@
 [ext_resource path="res://UIAssetts/plus_n.png" type="Texture" id=7]
 
 [node name="Workspace" type="HBoxContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 1926.0
+margin_bottom = 1084.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,7 +18,7 @@ __meta__ = {
 
 [node name="Controls" type="VBoxContainer" parent="."]
 margin_right = 300.0
-margin_bottom = 1080.0
+margin_bottom = 1084.0
 rect_min_size = Vector2( 300, 0 )
 
 [node name="Current" type="VBoxContainer" parent="Controls"]
@@ -181,14 +181,14 @@ valign = 1
 [node name="Control" type="Control" parent="Controls"]
 margin_top = 394.0
 margin_right = 300.0
-margin_bottom = 582.0
+margin_bottom = 586.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Global" type="VBoxContainer" parent="Controls"]
-margin_top = 586.0
+margin_top = 590.0
 margin_right = 300.0
-margin_bottom = 1080.0
+margin_bottom = 1084.0
 
 [node name="Label" type="Label" parent="Controls/Global"]
 margin_right = 300.0
@@ -367,19 +367,19 @@ rect_min_size = Vector2( 0, 32 )
 
 [node name="MainVBox" type="VBoxContainer" parent="."]
 margin_left = 304.0
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 1926.0
+margin_bottom = 1084.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ControlPanel" type="PanelContainer" parent="MainVBox"]
-margin_right = 1616.0
+margin_right = 1622.0
 margin_bottom = 34.0
 
 [node name="ButtonPanel" type="HBoxContainer" parent="MainVBox/ControlPanel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1609.0
+margin_right = 1615.0
 margin_bottom = 27.0
 alignment = 1
 
@@ -395,7 +395,7 @@ margin_bottom = 20.0
 
 [node name="Control" type="Control" parent="MainVBox/ControlPanel/ButtonPanel"]
 margin_left = 127.0
-margin_right = 1505.0
+margin_right = 1511.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -403,8 +403,8 @@ __meta__ = {
 }
 
 [node name="ExportButton" type="Button" parent="MainVBox/ControlPanel/ButtonPanel"]
-margin_left = 1509.0
-margin_right = 1602.0
+margin_left = 1515.0
+margin_right = 1608.0
 margin_bottom = 20.0
 text = "EXPORT PNG"
 
@@ -436,21 +436,21 @@ current_path = "/"
 
 [node name="MainPanel" type="HBoxContainer" parent="MainVBox"]
 margin_top = 38.0
-margin_right = 1616.0
-margin_bottom = 1080.0
+margin_right = 1622.0
+margin_bottom = 1084.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridScroll" type="ScrollContainer" parent="MainVBox/MainPanel"]
-margin_right = 1616.0
-margin_bottom = 1042.0
+margin_right = 1622.0
+margin_bottom = 1046.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 
 [node name="GridContainer" type="GridContainer" parent="MainVBox/MainPanel/GridScroll"]
-margin_right = 1616.0
-margin_bottom = 1042.0
+margin_right = 1610.0
+margin_bottom = 1630.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 10
@@ -464,126 +464,130 @@ __meta__ = {
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 300.0
-margin_bottom = 213.0
+margin_bottom = 400.0
+blockType = 1
 
 [node name="Panel2" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 310.0
 margin_right = 610.0
-margin_bottom = 213.0
+margin_bottom = 400.0
 
 [node name="Panel3" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 620.0
 margin_right = 920.0
-margin_bottom = 213.0
+margin_bottom = 400.0
+direction = 1
 
 [node name="Panel4" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 930.0
 margin_right = 1230.0
-margin_bottom = 213.0
+margin_bottom = 400.0
+direction = 2
 
 [node name="Panel5" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1240.0
 margin_right = 1540.0
-margin_bottom = 213.0
+margin_bottom = 400.0
+direction = 3
 
 [node name="Panel6" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 223.0
+margin_top = 410.0
 margin_right = 300.0
-margin_bottom = 436.0
+margin_bottom = 810.0
 
 [node name="Panel7" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 310.0
-margin_top = 223.0
+margin_top = 410.0
 margin_right = 610.0
-margin_bottom = 436.0
+margin_bottom = 810.0
 
 [node name="Panel8" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 620.0
-margin_top = 223.0
+margin_top = 410.0
 margin_right = 920.0
-margin_bottom = 436.0
+margin_bottom = 810.0
 
 [node name="Panel9" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 930.0
-margin_top = 223.0
+margin_top = 410.0
 margin_right = 1230.0
-margin_bottom = 436.0
+margin_bottom = 810.0
 
 [node name="Panel10" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1240.0
-margin_top = 223.0
+margin_top = 410.0
 margin_right = 1540.0
-margin_bottom = 436.0
+margin_bottom = 810.0
 
 [node name="Panel11" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 446.0
+margin_top = 820.0
 margin_right = 300.0
-margin_bottom = 659.0
+margin_bottom = 1220.0
 
 [node name="Panel12" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 310.0
-margin_top = 446.0
+margin_top = 820.0
 margin_right = 610.0
-margin_bottom = 659.0
+margin_bottom = 1220.0
 
 [node name="Panel13" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 620.0
-margin_top = 446.0
+margin_top = 820.0
 margin_right = 920.0
-margin_bottom = 659.0
+margin_bottom = 1220.0
 
 [node name="Panel14" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 930.0
-margin_top = 446.0
+margin_top = 820.0
 margin_right = 1230.0
-margin_bottom = 659.0
+margin_bottom = 1220.0
 
 [node name="Panel15" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1240.0
-margin_top = 446.0
+margin_top = 820.0
 margin_right = 1540.0
-margin_bottom = 659.0
+margin_bottom = 1220.0
 
 [node name="Panel16" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 669.0
+margin_top = 1230.0
 margin_right = 300.0
-margin_bottom = 882.0
+margin_bottom = 1630.0
 
 [node name="TextureButton" type="TextureButton" parent="MainVBox/MainPanel/GridScroll/GridContainer"]
 margin_left = 310.0
-margin_top = 669.0
+margin_top = 1230.0
 margin_right = 610.0
-margin_bottom = 882.0
+margin_bottom = 1630.0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 7 )
 texture_hover = ExtResource( 4 )
