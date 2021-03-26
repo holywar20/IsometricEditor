@@ -189,8 +189,6 @@ func drawAllPolygons( newFaceData , newZoomLevel = null ):
 	update()
 
 func _draw():
-	print(faceData)
-	
 	if( blockType == IsoPanel.BLOCK_TYPES.NONE ):
 		return
 	
@@ -249,7 +247,7 @@ func updateFacingType( newFacingType : int = IsoPanel.IsoPanel.BLOCK_TYPES.NONE 
 
 func _calculateZoomLevel( zoomChange ):
 	zoomLevel = zoomChange
-	print(zoomLevel)
+	
 	if( zoomLevel != 1.0 ):
 		for facingKey in faceData:
 			zoomedFaceData[facingKey].points = PoolVector2Array()
@@ -509,7 +507,7 @@ func generateFlatTopCornerFace( shrinkAmount, direction ):
 
 # Signals
 func _on_ZoomPlus_pressed():
-	drawAllPolygons( faceData , zoomLevel - 0.1 )
+	drawAllPolygons( faceData , zoomLevel + 0.1 )
 	zoomLabel.set_text( str(zoomLevel * 100.0) + "%" )
 
 func _on_ZoomMinus_pressed():

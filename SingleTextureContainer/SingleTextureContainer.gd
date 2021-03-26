@@ -1,5 +1,5 @@
 tool
-extends PanelContainer
+extends Panel
 class_name IsoPanel
 
 """
@@ -40,6 +40,19 @@ const DIR_DISPLAY = {
 	DIRECTION.LEFT : "Left", DIRECTION.RIGHT : "Right" , DIRECTION.UP : "Up" , DIRECTION.DOWN : "Down"
 }
 
+enum STATE {
+	LAST_FOCUSED , NOT_FOCUSED
+}
+
+signal newSingleTextureSelected( overrides , node )
+
+var state = STATE.NOT_FOCUSED
+
+
+
+# Display
+onready var highlight : TextureRect = $Highlight
+
 # Controls
 onready var resultsDisplay : Panel = $VBox/Main/ResultDisplay
 
@@ -52,8 +65,10 @@ var facingPopup : Popup
 onready var nameEditor : LineEdit = $VBox/Display/TitleRow/NameEdit
 onready var tileDisplay : Label = $VBox/Main/ResultDisplay/TileSize
 
+export(bool) var isFirst = false
 export(BLOCK_TYPES) var blockType = BLOCK_TYPES.NONE 
 export(DIRECTION) var direction = DIRECTION.LEFT 
+
 var tileRadius = 72
 var textureName = "Undefined Texture"
 
@@ -62,11 +77,20 @@ func _ready():
 	var _bConnect = blockPopup.connect("id_pressed", self, "_on_block_pressed")
 
 	facingPopup = facingSelector.get_popup()
-	var _fConnect = facingPopup.connect("id_pressed" , self , "_on_facing_pressed") 
-
-	setupScene( 72 )
+	var _fConnect = facingPopup.connect("id_pressed" , self , "_on_facing_pressed")
+	
+	redrawBlock( blockType, direction )
 	
 func setupScene( myTileRadius  ):
+	updateUI( myTileRadius )
+
+	if( isFirst ):
+		_on_IsoPanel_focus_entered()
+	else:
+		_on_Panel_focus_exited()
+
+
+func updateUI( myTileRadius ):
 	tileRadius = myTileRadius
 	tileDisplay.set_text( str( tileRadius ) )
 	
@@ -77,32 +101,70 @@ func setupScene( myTileRadius  ):
 	else:
 		facingSelector.show()
 
-	# Fire off any events manually
-	_on_block_pressed( blockType )
-	_on_facing_pressed( direction )
+	_on_block_pressed( blockType , false )
+	_on_facing_pressed( direction , false )
 
 	resultsDisplay.setupScene( tileRadius , blockType , direction )
+
+func setState( newState ):
+	state = newState
+
+	match state:
+		STATE.LAST_FOCUSED:
+			highlight.show()
+		STATE.NOT_FOCUSED:
+			highlight.hide()
 
 func _on_DeleteButton_pressed():
 	queue_free()
 
-func _on_block_pressed(id):
-	blockSelector.set_text(TEXTURE_TYPE_PROPS[id].display)
-	
+func redrawBlock( blockId , facingId ):
+	blockSelector.set_text(TEXTURE_TYPE_PROPS[blockId].display)
+	facingSelector.set_text(DIR_DISPLAY[facingId])
+
 	if( blockType == BLOCK_TYPES.BOX || blockType == BLOCK_TYPES.NONE ):
 		facingSelector.hide()
 	else:
 		facingSelector.show()
 	
-	resultsDisplay.blockType = id
+	resultsDisplay.blockType = blockId
+	resultsDisplay.direction = facingId
 	resultsDisplay.drawTextures()
 
-func _on_facing_pressed(id):
-	facingSelector.set_text(DIR_DISPLAY[id])
+func _on_block_pressed(id , grabFocus = true ):
+	redrawBlock( id , resultsDisplay.direction )
 
-	resultsDisplay.direction = id
-	resultsDisplay.drawTextures()
+	# Sometimes we don't want to grab focus on redraw, such as if we are doing a global update
+	if( grabFocus ):
+		_on_IsoPanel_focus_entered()
 
 
-func _on_NameEdit_text_entered(new_text):
-	print("New Text")
+func _on_facing_pressed(id, grabFocus = false ):
+	redrawBlock( resultsDisplay.direction, id )
+
+	# Sometimes we don't want to grab focus on redraw, such as if we are doing a global update
+	if( grabFocus ):
+		_on_IsoPanel_focus_entered()
+
+func _on_NameEdit_text_entered( new_text ):
+	# TODO - do some shit with the name?
+	
+	_on_IsoPanel_focus_entered()
+
+func _on_NameEdit_focus_entered():
+	emit_signal( "newSingleTextureSelected" , localOverrides , self )
+
+func _on_IsoPanel_focus_entered():
+	emit_signal( "newSingleTextureSelected" , localOverrides , self )
+
+func _on_BlockSelector_pressed():
+	emit_signal( "newSingleTextureSelected" , localOverrides , self )
+
+func _on_DirectionSelector_pressed():
+	emit_signal( "newSingleTextureSelected" , localOverrides , self )
+
+func _on_Panel_focus_exited():
+	setState( STATE.NOT_FOCUSED )
+
+
+

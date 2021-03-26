@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+const TILE_PANELS = "TILE_PANELS"
+
 var load_key = ""
 var remembered_load_directory = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 var remembered_save_directory = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
@@ -10,9 +12,15 @@ onready var scrollbox = $MainVBox/ScrollContainer
 onready var gridContainer = $MainVBox/GridScroll/GridContainer
 
 onready var globalTextureTrays = {
-	"top" : $VBox/Global/GlobalColor/Top, 
-	"left" : $VBox/Global/GlobalColor/Right, 
-	"right" : $VBox/Global/GlobalColor/Right
+	"top" : $VBox/Global/Trays/Top, 
+	"left" : $VBox/Global/Trays/Right, 
+	"right" : $VBox/Global/Trays/Left
+}
+
+onready var localTextureTrays = {
+	"top" : $VBox/Current/Trays/Top, 
+	"left" : $VBox/Current/Trays/Right, 
+	"right" : $VBox/Current/Trays/Right
 }
 
 onready var save_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog
@@ -30,9 +38,31 @@ func _ready():
 	#texture_trays.left.preview_button.preview_texture = drawing_node.left_texture
 	#texture_trays.right.preview_button.preview_texture = drawing_node.right_texture
 
+var currentFocusNode : IsoPanel
 
 func updateAll():
 	pass
+
+
+# Local Texture Trays
+func _on_newSingleTextureSelected(overrides , node ):
+
+	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
+		child.setState( child.STATE.NOT_FOCUSED )
+
+	node.setState( node.STATE.LAST_FOCUSED )
+	currentFocusNode = node
+
+
+
+# Unwired signals
+
+# Global Menus
+func _on_TextureLibButton_button_down():
+	pass # Replace with function body.
+
+func _on_Top_texture_chosen(texture):
+	pass # Replace with function body.
 
 # UI Signals
 func _on_ExportButton_pressed():
@@ -49,16 +79,13 @@ func _on_TopColorPicker_color_changed(color):
 	drawing_node.top_tint = color
 	drawing_node.update()
 
-
 func _on_LeftColorPicker_color_changed(color):
 	drawing_node.left_tint = color
 	drawing_node.update()
 
-
 func _on_RightColorPicker_color_changed(color):
 	drawing_node.right_tint = color
 	drawing_node.update()
-
 
 func _on_RadiusSpin_value_changed(value):
 	drawing_node.tile_radius = value
@@ -66,26 +93,21 @@ func _on_RadiusSpin_value_changed(value):
 	atlas.rect_min_size = Vector2(value * drawing_node.SHEET_COLUMNS * 2, value * drawing_node.SHEET_ROWS * 2)
 	atlas.update()
 
-
 func _on_EdgeCheck_toggled(button_pressed):
 	drawing_node.drop_top = button_pressed
 	drawing_node.update()
-
 
 func _on_TopTextureTray_texture_chosen(texture):
 	drawing_node.top_texture = texture
 	drawing_node.update()
 
-
 func _on_LeftTextureTray_texture_chosen(texture):
 	drawing_node.left_texture = texture
 	drawing_node.update()
 
-
 func _on_RightTextureTray_texture_chosen(texture):
 	drawing_node.right_texture = texture
 	drawing_node.update()
-
 
 func _on_AnyLoadButton_pressed(which):
 	load_dialog.current_dir = remembered_load_directory
@@ -133,19 +155,4 @@ func _on_OutlineCheckBox_toggled(button_pressed):
 	drawing_node.outline_shadow = button_pressed
 	drawing_node.update()
 
-
-
-
-# Unwired signals
-
-# Global Menus
-func _on_TextureLibButton_button_down():
-	pass # Replace with function body.
-
-
-# Global Texture Trays
-func _on_Top_texture_chosen(texture):
-	pass # Replace with function body.
-
-# Local Texture Trays
 

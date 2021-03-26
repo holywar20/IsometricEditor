@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name TextureTray
 
 signal textureChosen(texture)
 signal normalChosen(texture)
@@ -17,6 +18,35 @@ onready var trayLabel = $VBox/TextureLabel
 onready var textureSelectButton = $VBox/Texture/TextureButton
 onready var chooser_popup = $VBox/TextureChoosePopup
 onready var chooser_hbox = $VBox/TextureChoosePopup/TextureHBox
+
+class TrayData:
+	var texture
+	var normal
+	var color
+	var visible
+
+	func _init( data : Dictionary ):
+		_mergeNewData( data )
+
+	# This accepts global tray
+	func _mergeNewData( data : Dictionary ):
+		if( data.has("texture")  ):
+			texture = data.texture
+
+		if( data.has("normal") ):
+			normal = data.texture
+
+		if( data.has("color") ):
+			color = data.color
+
+		if( data.has("visible" ) ):
+			visible = data.visible
+		
+func is_class( testName ):
+	return testName == "TextureTray"
+
+func get_class():
+	return "TextureTray"
 
 func setupScene():
 	pass

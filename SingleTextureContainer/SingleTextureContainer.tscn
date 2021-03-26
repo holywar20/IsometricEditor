@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://SingleTextureContainer/SingleTextureContainer.gd" type="Script" id=1]
 [ext_resource path="res://SingleTextureContainer/ResultsPanel.gd" type="Script" id=2]
@@ -9,8 +9,9 @@
 [ext_resource path="res://UIAssetts/clockwise-rotation.png" type="Texture" id=7]
 [ext_resource path="res://UIAssetts/plain-arrow.png" type="Texture" id=8]
 [ext_resource path="res://UIAssetts/SmallHeaders.tres" type="DynamicFont" id=9]
+[ext_resource path="res://UIAssetts/Highlight.png" type="Texture" id=10]
 
-[node name="Panel" type="PanelContainer" groups=[
+[node name="Panel" type="Panel" groups=[
 "TILE_PANELS",
 ]]
 self_modulate = Color( 0.298039, 0.298039, 0.298039, 1 )
@@ -19,46 +20,67 @@ anchor_bottom = 0.37
 margin_right = 0.47998
 margin_bottom = 0.399994
 rect_min_size = Vector2( 300, 400 )
+focus_mode = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-blockType = 2
+
+[node name="Highlight" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 300, 400 )
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 293.0
-margin_bottom = 393.0
+margin_right = 295.0
+margin_bottom = 395.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Display" type="VBoxContainer" parent="VBox"]
-margin_right = 286.0
+margin_right = 288.0
 margin_bottom = 125.0
 rect_min_size = Vector2( 0, 125 )
+size_flags_horizontal = 3
+custom_constants/separation = -5
 
 [node name="TitleRow" type="HBoxContainer" parent="VBox/Display"]
-margin_right = 286.0
-margin_bottom = 40.0
+margin_right = 288.0
+margin_bottom = 54.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NameEdit" type="LineEdit" parent="VBox/Display/TitleRow"]
-margin_right = 242.0
-margin_bottom = 40.0
+margin_right = 230.0
+margin_bottom = 54.0
 size_flags_horizontal = 3
+text = "textureName"
 align = 1
+caret_blink = true
+caret_blink_speed = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeleteButton" type="TextureButton" parent="VBox/Display/TitleRow"]
-margin_left = 246.0
-margin_right = 286.0
-margin_bottom = 40.0
+[node name="Panel" type="PanelContainer" parent="VBox/Display/TitleRow"]
+margin_left = 234.0
+margin_right = 288.0
+margin_bottom = 54.0
+
+[node name="DeleteButton" type="TextureButton" parent="VBox/Display/TitleRow/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 47.0
+margin_bottom = 47.0
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 3 )
@@ -68,30 +90,45 @@ __meta__ = {
 }
 
 [node name="Type" type="MenuButton" parent="VBox/Display"]
-margin_top = 44.0
-margin_right = 286.0
-margin_bottom = 82.0
+margin_top = 49.0
+margin_right = 288.0
+margin_bottom = 87.0
+focus_mode = 2
 custom_fonts/font = ExtResource( 9 )
-text = "Select a Block"
+enabled_focus_mode = 2
+text = "Select a Block "
 icon = ExtResource( 8 )
 items = [ "None", null, 0, true, false, 0, 0, null, "", false, "Item 1", null, 0, false, false, 99, 0, null, "", true, "Box", null, 0, false, false, 1, 0, null, "", false, "Even Incline", null, 0, false, false, 2, 0, null, "", false, "Diamond Incline", null, 0, false, false, 3, 0, null, "", false, "Flat Top Corner", null, 0, false, false, 4, 0, null, "", false, "Flat Base Corner", null, 0, false, false, 5, 0, null, "", false ]
 
 [node name="Facing" type="MenuButton" parent="VBox/Display"]
 visible = false
-margin_top = 86.0
-margin_right = 286.0
-margin_bottom = 124.0
+margin_top = 82.0
+margin_right = 288.0
+margin_bottom = 120.0
+focus_mode = 2
 custom_fonts/font = ExtResource( 9 )
+enabled_focus_mode = 2
+text = "Left"
 icon = ExtResource( 8 )
 items = [ "Left", null, 0, false, false, 0, 0, null, "", false, "Down", null, 0, false, false, 1, 0, null, "", false, "Right", null, 0, false, false, 2, 0, null, "", false, "Up", null, 0, false, false, 3, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Control" type="Control" parent="VBox/Display"]
+margin_top = 82.0
+margin_right = 288.0
+margin_bottom = 125.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Main" type="HBoxContainer" parent="VBox"]
 margin_top = 129.0
-margin_right = 286.0
-margin_bottom = 386.0
+margin_right = 288.0
+margin_bottom = 388.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -99,9 +136,10 @@ __meta__ = {
 }
 
 [node name="ResultDisplay" type="Panel" parent="VBox/Main"]
-margin_right = 286.0
-margin_bottom = 257.0
+margin_right = 288.0
+margin_bottom = 259.0
 rect_clip_content = true
+focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 2 )
@@ -119,6 +157,7 @@ margin_top = -23.0
 margin_right = 17.0
 margin_bottom = 11.0
 rect_scale = Vector2( 0.5, 0.5 )
+focus_mode = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 disabled = true
@@ -133,6 +172,7 @@ margin_left = 4.0
 margin_top = 2.0
 margin_right = 24.0
 margin_bottom = 22.0
+focus_mode = 0
 text = "+"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -159,7 +199,7 @@ margin_left = -53.0
 margin_top = 4.0
 margin_right = -3.0
 margin_bottom = 24.0
-text = "72 px"
+text = "72"
 align = 1
 valign = 1
 __meta__ = {
@@ -171,13 +211,18 @@ margin_left = 83.0
 margin_top = 2.0
 margin_right = 100.0
 margin_bottom = 22.0
+focus_mode = 0
 text = "-"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="focus_entered" from="." to="." method="_on_Panel_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_Panel_focus_exited"]
+[connection signal="focus_entered" from="VBox/Display/TitleRow/NameEdit" to="." method="_on_NameEdit_focus_entered"]
 [connection signal="text_entered" from="VBox/Display/TitleRow/NameEdit" to="." method="_on_NameEdit_text_entered"]
-[connection signal="pressed" from="VBox/Display/TitleRow/DeleteButton" to="." method="_on_DeleteButton_pressed"]
-[connection signal="pressed" from="VBox/Display/Type" to="VBox/Main/ResultDisplay" method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="VBox/Display/TitleRow/Panel/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="pressed" from="VBox/Display/Type" to="." method="_on_BlockSelector_pressed"]
+[connection signal="pressed" from="VBox/Display/Facing" to="." method="_on_DirectionSelector_pressed"]
 [connection signal="pressed" from="VBox/Main/ResultDisplay/ResetButton" to="VBox/Main/ResultDisplay" method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="VBox/Main/ResultDisplay/ZoomPlus" to="VBox/Main/ResultDisplay" method="_on_ZoomPlus_pressed"]
 [connection signal="pressed" from="VBox/Main/ResultDisplay/ZoomMinus" to="VBox/Main/ResultDisplay" method="_on_ZoomMinus_pressed"]

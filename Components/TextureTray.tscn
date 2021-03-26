@@ -49,12 +49,14 @@ margin_left = 15.0
 margin_right = 79.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
 script = ExtResource( 8 )
 
 [node name="Button" type="Button" parent="VBox"]
 margin_top = 86.0
 margin_right = 95.0
 margin_bottom = 106.0
+focus_mode = 0
 text = "LOAD"
 
 [node name="NormalLab" type="Label" parent="VBox"]
@@ -80,12 +82,14 @@ margin_left = 15.0
 margin_right = 79.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
+focus_mode = 0
 script = ExtResource( 8 )
 
 [node name="Button2" type="Button" parent="VBox"]
 margin_top = 196.0
 margin_right = 95.0
 margin_bottom = 216.0
+focus_mode = 0
 text = "LOAD"
 
 [node name="TintLabel" type="Label" parent="VBox"]
@@ -102,6 +106,7 @@ __meta__ = {
 margin_top = 238.0
 margin_right = 95.0
 margin_bottom = 258.0
+focus_mode = 0
 color = Color( 1, 1, 1, 1 )
 
 [node name="TextureChoosePopup" type="PopupPanel" parent="VBox"]
@@ -120,6 +125,7 @@ size_flags_vertical = 3
 margin_top = 262.0
 margin_right = 95.0
 margin_bottom = 286.0
+focus_mode = 0
 text = "Visible"
 __meta__ = {
 "_edit_use_anchors_": false
