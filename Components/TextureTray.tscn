@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Components/TextureTray.gd" type="Script" id=1]
 [ext_resource path="res://Textures/blank.png" type="Texture" id=2]
@@ -7,11 +7,10 @@
 [ext_resource path="res://Textures/pixelgrass.png" type="Texture" id=5]
 [ext_resource path="res://Textures/stripes.png" type="Texture" id=6]
 [ext_resource path="res://Textures/speckle.png" type="Texture" id=7]
-[ext_resource path="res://Components/PreviewButton.gd" type="Script" id=8]
 
 [node name="TextureTray" type="PanelContainer"]
-margin_right = 109.0
-margin_bottom = 263.0
+margin_right = 114.0
+margin_bottom = 300.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -21,14 +20,49 @@ __meta__ = {
 }
 texture_list = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
 
+[node name="Popups" type="Control" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 107.0
+margin_bottom = 293.0
+
+[node name="FileDialog" type="FileDialog" parent="Popups"]
+margin_left = 113.924
+margin_top = 21.0454
+margin_right = 484.924
+margin_bottom = 291.045
+rect_min_size = Vector2( 300, 105 )
+dialog_text = "Load A file"
+dialog_hide_on_ok = true
+mode_overrides_title = false
+mode = 0
+access = 2
+current_dir = "/"
+current_path = "/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureChoosePopup" type="PopupPanel" parent="Popups"]
+margin_left = 109.317
+margin_top = -8.20807
+margin_right = 433.317
+margin_bottom = 148.792
+
+[node name="Textures" type="HBoxContainer" parent="Popups/TextureChoosePopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 102.0
+margin_right = 107.0
 margin_bottom = 293.0
 
 [node name="TextureLabel" type="Label" parent="VBox"]
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 14.0
 text = "{SIDE}"
 align = 1
@@ -38,30 +72,31 @@ __meta__ = {
 
 [node name="Texture" type="CenterContainer" parent="VBox"]
 margin_top = 18.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 82.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="Button" parent="VBox/Texture"]
-margin_left = 15.0
-margin_right = 79.0
+[node name="TextureButton" type="TextureButton" parent="VBox/Texture"]
+margin_left = 18.0
+margin_right = 82.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 focus_mode = 0
-script = ExtResource( 8 )
+texture_normal = ExtResource( 3 )
+expand = true
 
-[node name="Button" type="Button" parent="VBox"]
+[node name="LoadTextureButton" type="Button" parent="VBox"]
 margin_top = 86.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 106.0
 focus_mode = 0
 text = "LOAD"
 
 [node name="NormalLab" type="Label" parent="VBox"]
 margin_top = 110.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 124.0
 text = "Normal"
 align = 1
@@ -71,30 +106,32 @@ __meta__ = {
 
 [node name="Normal" type="CenterContainer" parent="VBox"]
 margin_top = 128.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 192.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NormalButton" type="Button" parent="VBox/Normal"]
-margin_left = 15.0
-margin_right = 79.0
+[node name="NormalButton" type="TextureButton" parent="VBox/Normal"]
+margin_left = 18.0
+margin_right = 82.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 focus_mode = 0
-script = ExtResource( 8 )
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 4
 
-[node name="Button2" type="Button" parent="VBox"]
+[node name="LoadNormalButton" type="Button" parent="VBox"]
 margin_top = 196.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 216.0
 focus_mode = 0
 text = "LOAD"
 
 [node name="TintLabel" type="Label" parent="VBox"]
 margin_top = 220.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 234.0
 text = "Tint"
 align = 1
@@ -104,32 +141,25 @@ __meta__ = {
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="VBox"]
 margin_top = 238.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 258.0
 focus_mode = 0
 color = Color( 1, 1, 1, 1 )
 
-[node name="TextureChoosePopup" type="PopupPanel" parent="VBox"]
-margin_right = 64.0
-margin_bottom = 64.0
-
-[node name="TextureHBox" type="HBoxContainer" parent="VBox/TextureChoosePopup"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 60.0
-margin_bottom = 60.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
 [node name="CheckBox" type="CheckBox" parent="VBox"]
 margin_top = 262.0
-margin_right = 95.0
+margin_right = 100.0
 margin_bottom = 286.0
 focus_mode = 0
 text = "Visible"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="VBox/Texture/TextureButton" to="." method="_on_PreviewButton_pressed"]
-[connection signal="pressed" from="VBox/Normal/NormalButton" to="." method="_on_PreviewButton_pressed"]
-[connection signal="popup_hide" from="VBox/TextureChoosePopup" to="." method="_on_TextureChoosePopup_popup_hide"]
+[connection signal="file_selected" from="Popups/FileDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="popup_hide" from="Popups/TextureChoosePopup" to="." method="_on_TextureChoosePopup_popup_hide"]
+[connection signal="pressed" from="VBox/Texture/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="VBox/LoadTextureButton" to="." method="_on_LoadTextureButton_pressed"]
+[connection signal="pressed" from="VBox/Normal/NormalButton" to="." method="_on_NormalButton_pressed"]
+[connection signal="pressed" from="VBox/LoadNormalButton" to="." method="_on_LoadNormalButton_pressed"]
+[connection signal="color_changed" from="VBox/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]

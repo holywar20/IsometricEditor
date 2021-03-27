@@ -1,34 +1,57 @@
 extends PanelContainer
 class_name TextureTray
 
-signal textureChosen(texture)
-signal normalChosen(texture)
-signal tintChosen(color)
+# Needs to be identical to Results Panel. This is the interface between the two
+enum DRAWING_FACES{
+	LEFT , RIGHT , TOP
+}
 
-const THUMB_SIZE = 64
+enum TEXTURE_TYPE {
+	BASIC, NORMAL
+}
+
+var test = preload("res://Components/Preview.tscn")
 
 export(Array, Texture) var texture_list
 export(String) var labelName = "Top"
+export(DRAWING_FACES) var facingId = DRAWING_FACES.TOP
 
-var Previewer = preload("res://Components/PreviewButton.gd")
+# State
 var is_expanded = false
+var myTextureTarget = null
 
+# Display
 onready var trayLabel = $VBox/TextureLabel
 
+# Controls
 onready var textureSelectButton = $VBox/Texture/TextureButton
-onready var chooser_popup = $VBox/TextureChoosePopup
-onready var chooser_hbox = $VBox/TextureChoosePopup/TextureHBox
+onready var normalSelectButton = $VBox/Normal/NormalButton
+onready var colorSelectButton = $VBox/ColorPickerButton
+onready var visibleButton = $VBox/CheckBox
+
+# Popups
+onready var chooserPopup = $VBox/TextureChoosePopup
+onready var chooserBase = $VBox/Popups/Textures
+onready var fileDialog = $VBox/Popups/FileDialog
+
+signal trayChanged( tray )
 
 class TrayData:
-	var texture
-	var normal
-	var color
-	var visible
+	var trayFacingId
 
-	func _init( data : Dictionary ):
-		_mergeNewData( data )
+	var texture = null
+	var normal = null
+	var color = null
+	var visible = null
 
-	# This accepts global tray
+	func _init( facingId, data = null ):
+		trayFacingId = facingId
+
+		if( data ):
+			_mergeNewData( data )
+
+	# This accepts local tray data, if a global texture tray created it.
+	# Essentially we are merging the texture trays.
 	func _mergeNewData( data : Dictionary ):
 		if( data.has("texture")  ):
 			texture = data.texture
@@ -52,36 +75,76 @@ func setupScene():
 	pass
 
 func _ready():
-	textureSelectButton.preview_texture = texture_list[0]
+	textureSelectButton.set_normal_texture( texture_list[0] ) 
+	normalSelectButton.set_normal_texture( texture_list[0] ) 
+	
 	for full_texture in texture_list:
-		add_thumbnail(full_texture)
+		_add_thumbnail( full_texture )
 
 	trayLabel.set_text( labelName )
 
-func add_thumbnail(tex):
-	if chooser_hbox.get_child_count() >= texture_list.size():
+func _add_thumbnail( texture ):
+	if chooserBase.get_child_count() >= texture_list.size():
 		return
-	var option = Previewer.new()
-	option.rect_min_size = Vector2(THUMB_SIZE, THUMB_SIZE)
-	option.preview_texture = tex
-	chooser_hbox.add_child(option)
-	option.connect("choice_made", self, "_on_choice_made")
+	
+	var previewInstance = test.instance()
+	chooserBase.add_child( previewInstance )
+	previewInstance.setupScene( texture )
 
-func _on_PreviewButton_pressed():
-	is_expanded = true
-	chooser_popup.popup(get_bar_rect(texture_list.size()))
+	previewInstance.connect("textureSelected", self, "_on_Chooser_textureSelected")
+
+func _makeTray():
+	var trayData = {
+		"texture" : textureSelectButton.get_normal_texture(),
+		"normal" : normalSelectButton.get_normal_texture(),
+		"color" : colorSelectButton.get_pick_color(),
+		"visible" : visibleButton.is_pressed()
+	}
+
+	var newTray = TrayData.new( facingId,  trayData )
+	return newTray
 
 func get_bar_rect(list_size : int):
 	var origin = Vector2(rect_position.x + rect_size.x, rect_position.y)
 	origin += Vector2(12, 8)
-	var popsize = Vector2(THUMB_SIZE * list_size, THUMB_SIZE)
+	var popsize = Vector2(TexturePreview.THUMB_SIZE) * list_size
+	
 	return Rect2(origin, popsize)
 
+
+# Texture Picker
 func _on_TextureChoosePopup_popup_hide():
 	is_expanded = false
 
-func _on_choice_made(texture_choice):
-	chooser_popup.hide()
-	textureSelectButton.preview_texture = texture_choice
-	textureSelectButton.update()
-	emit_signal("textureChosen", texture_choice)
+func _on_Chooser_textureSelected( chosenTexture):
+	chooserPopup.hide()
+
+	myTextureTarget.set_normal_texture( chosenTexture )
+	myTextureTarget = null
+
+	emit_signal("trayChanged", _makeTray() )
+
+func _on_TextureButton_pressed():
+	is_expanded = true
+
+	myTextureTarget = textureSelectButton
+
+	chooserPopup.popup(get_bar_rect(texture_list.size()))
+
+func _on_NormalButton_pressed():
+	is_expanded = true
+
+	myTextureTarget = normalSelectButton
+
+	chooserPopup.popup(get_bar_rect(texture_list.size()))
+
+# File loading
+func _on_LoadTextureButton_pressed():
+	myTextureTarget = textureSelectButton
+
+
+func _on_LoadNormalButton_pressed():
+	pass # Replace with function body.
+
+func _on_FileDialog_file_selected(path):
+	pass # Replace with function body.

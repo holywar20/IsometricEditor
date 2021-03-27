@@ -1,4 +1,5 @@
 extends Panel
+class_name ResultsPanel
 
 enum DRAWING_FACES{
 	LEFT , RIGHT , TOP
@@ -143,7 +144,7 @@ func setupScene( newTileRadius, newBlockType , newDirection ):
 	blockType = newBlockType
 	direction = newDirection
 
-func drawTextures():
+func generateUVs():
 	faceData = DEFAULT_FACING_DATA.duplicate( true ) 
 
 	match blockType:
@@ -237,13 +238,12 @@ func _draw():
 func exportFinishedTexture():
 	pass
 
-func updateBlockType( newBlockType : int = IsoPanel.IsoPanel.BLOCK_TYPES.NONE ):
+# Mostly called by IsoPanel when there are changes specific to this block and we need new UVs.
+func updateBlockType( newBlockType : int , newDirection : int ):
 	blockType = newBlockType
-	drawAllPolygons( faceData , zoomLevel )
+	direction = newDirection
 	
-func updateFacingType( newFacingType : int = IsoPanel.IsoPanel.BLOCK_TYPES.NONE ):
-	direction = newFacingType
-	drawAllPolygons( faceData , zoomLevel )
+	generateUVs()
 
 func _calculateZoomLevel( zoomChange ):
 	zoomLevel = zoomChange

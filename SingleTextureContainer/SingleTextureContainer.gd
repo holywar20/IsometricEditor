@@ -47,7 +47,11 @@ enum STATE {
 signal newSingleTextureSelected( overrides , node )
 
 var state = STATE.NOT_FOCUSED
-
+var localState = {
+	0 : TextureTray.TrayData.new( 0 ),
+	1 : TextureTray.TrayData.new( 1 ),
+	2 : TextureTray.TrayData.new( 2 )
+}
 
 
 # Display
@@ -78,9 +82,7 @@ func _ready():
 
 	facingPopup = facingSelector.get_popup()
 	var _fConnect = facingPopup.connect("id_pressed" , self , "_on_facing_pressed")
-	
-	redrawBlock( blockType, direction )
-	
+
 func setupScene( myTileRadius  ):
 	updateUI( myTileRadius )
 
@@ -106,6 +108,9 @@ func updateUI( myTileRadius ):
 
 	resultsDisplay.setupScene( tileRadius , blockType , direction )
 
+func updateTray( drawingFace : int  , tray : TextureTray.TrayData ):
+	pass
+
 func setState( newState ):
 	state = newState
 
@@ -119,6 +124,10 @@ func _on_DeleteButton_pressed():
 	queue_free()
 
 func redrawBlock( blockId , facingId ):
+	# First set any local params
+	blockType = blockId
+	direction = facingId
+
 	blockSelector.set_text(TEXTURE_TYPE_PROPS[blockId].display)
 	facingSelector.set_text(DIR_DISPLAY[facingId])
 
@@ -127,9 +136,8 @@ func redrawBlock( blockId , facingId ):
 	else:
 		facingSelector.show()
 	
-	resultsDisplay.blockType = blockId
-	resultsDisplay.direction = facingId
-	resultsDisplay.drawTextures()
+	# Now tell children to actually update
+	resultsDisplay.updateBlockType( blockId, facingId )
 
 func _on_block_pressed(id , grabFocus = true ):
 	redrawBlock( id , resultsDisplay.direction )
@@ -152,16 +160,16 @@ func _on_NameEdit_text_entered( new_text ):
 	_on_IsoPanel_focus_entered()
 
 func _on_NameEdit_focus_entered():
-	emit_signal( "newSingleTextureSelected" , localOverrides , self )
+	emit_signal( "newSingleTextureSelected" , localState , self )
 
 func _on_IsoPanel_focus_entered():
-	emit_signal( "newSingleTextureSelected" , localOverrides , self )
+	emit_signal( "newSingleTextureSelected" , localState , self )
 
 func _on_BlockSelector_pressed():
-	emit_signal( "newSingleTextureSelected" , localOverrides , self )
+	emit_signal( "newSingleTextureSelected" , localState , self )
 
 func _on_DirectionSelector_pressed():
-	emit_signal( "newSingleTextureSelected" , localOverrides , self )
+	emit_signal( "newSingleTextureSelected" , localState , self )
 
 func _on_Panel_focus_exited():
 	setState( STATE.NOT_FOCUSED )

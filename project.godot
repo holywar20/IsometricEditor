@@ -13,9 +13,27 @@ _global_script_classes=[ {
 "class": "IsoPanel",
 "language": "GDScript",
 "path": "res://SingleTextureContainer/SingleTextureContainer.gd"
+}, {
+"base": "Panel",
+"class": "ResultsPanel",
+"language": "GDScript",
+"path": "res://SingleTextureContainer/ResultsPanel.gd"
+}, {
+"base": "TextureButton",
+"class": "TexturePreview",
+"language": "GDScript",
+"path": "res://Components/Preview.gd"
+}, {
+"base": "PanelContainer",
+"class": "TextureTray",
+"language": "GDScript",
+"path": "res://Components/TextureTray.gd"
 } ]
 _global_script_class_icons={
-"IsoPanel": ""
+"IsoPanel": "",
+"ResultsPanel": "",
+"TexturePreview": "",
+"TextureTray": ""
 }
 
 [application]
