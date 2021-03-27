@@ -20,6 +20,13 @@ onready var localTextureTrays = {
 	"right" : $Controls/Current/Trays/Right
 }
 
+onready var popups = {
+	"settings" : $Popups/Settings
+}
+var globalSettings = Settings.SettingsData.new()
+
+
+
 # onready var save_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog
 # onready var load_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/LoadDialog
 
@@ -39,20 +46,49 @@ func _ready():
 
 var currentFocusNode : IsoPanel
 
+func ready():
+	for key in globalTextureTrays:
+		globalTextureTrays[key].setSettings( globalSettings )
+
+	for key in localTextureTrays:
+		localTextureTrays[key].setSettings( globalSettings )
+
 func updateAll():
 	pass
+
+# Settings Panel
+func _on_Settings_pressed():
+	# Populate with duplicate data so if user changes but cancels, data doesn't change globally
+	popups.settings.popup()
+	popups.settings.populateSettings( globalSettings )
+
+	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
+		child.setSettings( globalSettings )
+
+	for key in globalTextureTrays:
+		globalTextureTrays[key].setSettings( globalSettings )
+
+	for key in localTextureTrays:
+		localTextureTrays[key].setSettings( globalSettings )
+	
+func _on_Settings_saved( newGlobalSettings ):
+	globalSettings = newGlobalSettings
+	popups.hide()
 
 
 # Local Texture Trays
 func _on_newSingleTextureSelected( trayData , node ):
-
 	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
 		child.setState( child.STATE.NOT_FOCUSED )
 
 	node.setState( node.STATE.LAST_FOCUSED )
 	currentFocusNode = node
 
-
+# Settings Menu
+func _on_Settings_settingsSaved(settingsData):
+	globalSettings = settingsData
+	
+	print( settingsData.defaultTexturePath )
 
 # Unwired signals
 

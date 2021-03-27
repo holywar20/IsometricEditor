@@ -46,14 +46,6 @@ enum STATE {
 
 signal newSingleTextureSelected( overrides , node )
 
-var state = STATE.NOT_FOCUSED
-var localState = {
-	0 : TextureTray.TrayData.new( 0 ),
-	1 : TextureTray.TrayData.new( 1 ),
-	2 : TextureTray.TrayData.new( 2 )
-}
-
-
 # Display
 onready var highlight : TextureRect = $Highlight
 
@@ -73,8 +65,17 @@ export(bool) var isFirst = false
 export(BLOCK_TYPES) var blockType = BLOCK_TYPES.NONE 
 export(DIRECTION) var direction = DIRECTION.LEFT 
 
-var tileRadius = 72
+var settings : Settings.SettingsData
+
+# Local Settings & State
 var textureName = "Undefined Texture"
+
+var state = STATE.NOT_FOCUSED
+var localState = {
+	0 : TextureTray.TrayData.new( 0 ),
+	1 : TextureTray.TrayData.new( 1 ),
+	2 : TextureTray.TrayData.new( 2 )
+}
 
 func _ready():
 	blockPopup = blockSelector.get_popup()
@@ -83,8 +84,14 @@ func _ready():
 	facingPopup = facingSelector.get_popup()
 	var _fConnect = facingPopup.connect("id_pressed" , self , "_on_facing_pressed")
 
-func setupScene( myTileRadius  ):
-	updateUI( myTileRadius )
+	redrawBlock( blockType , direction)
+
+func setSettings( settingsData : Settings.SettingsData ):
+	settings = settingsData
+	updateUI()
+
+func setupScene( settingsData : Settings.SettingsData  ):
+	settings = settingsData
 
 	if( isFirst ):
 		_on_IsoPanel_focus_entered()
@@ -92,9 +99,8 @@ func setupScene( myTileRadius  ):
 		_on_Panel_focus_exited()
 
 
-func updateUI( myTileRadius ):
-	tileRadius = myTileRadius
-	tileDisplay.set_text( str( tileRadius ) )
+func updateUI():
+	tileDisplay.set_text( str( settings.tileSize ) )
 	
 	nameEditor.set_text("textureName")
 
@@ -106,7 +112,7 @@ func updateUI( myTileRadius ):
 	_on_block_pressed( blockType , false )
 	_on_facing_pressed( direction , false )
 
-	resultsDisplay.setupScene( tileRadius , blockType , direction )
+	resultsDisplay.setupScene( settings.tileSize , blockType , direction )
 
 func updateTray( drawingFace : int  , tray : TextureTray.TrayData ):
 	pass

@@ -17,7 +17,6 @@ export(String) var labelName = "Top"
 export(DRAWING_FACES) var facingId = DRAWING_FACES.TOP
 
 # State
-var is_expanded = false
 var myTextureTarget = null
 
 # Display
@@ -30,9 +29,13 @@ onready var colorSelectButton = $VBox/ColorPickerButton
 onready var visibleButton = $VBox/CheckBox
 
 # Popups
-onready var chooserPopup = $VBox/TextureChoosePopup
-onready var chooserBase = $VBox/Popups/Textures
-onready var fileDialog = $VBox/Popups/FileDialog
+onready var chooserPopup = $Popups/TextureChoosePopup
+onready var chooserBase = $Popups/TextureChoosePopup/Textures
+onready var fileDialog = $Popups/FileDialog
+
+# TODO - make into a settings resource
+var settings : Settings.SettingsData
+
 
 signal trayChanged( tray )
 
@@ -70,6 +73,9 @@ func is_class( testName ):
 
 func get_class():
 	return "TextureTray"
+
+func setSettings( newSettings ):
+	settings = newSettings
 
 func setupScene():
 	pass
@@ -114,7 +120,7 @@ func get_bar_rect(list_size : int):
 
 # Texture Picker
 func _on_TextureChoosePopup_popup_hide():
-	is_expanded = false
+	pass
 
 func _on_Chooser_textureSelected( chosenTexture):
 	chooserPopup.hide()
@@ -125,15 +131,11 @@ func _on_Chooser_textureSelected( chosenTexture):
 	emit_signal("trayChanged", _makeTray() )
 
 func _on_TextureButton_pressed():
-	is_expanded = true
-
 	myTextureTarget = textureSelectButton
 
 	chooserPopup.popup(get_bar_rect(texture_list.size()))
 
 func _on_NormalButton_pressed():
-	is_expanded = true
-
 	myTextureTarget = normalSelectButton
 
 	chooserPopup.popup(get_bar_rect(texture_list.size()))
@@ -142,9 +144,14 @@ func _on_NormalButton_pressed():
 func _on_LoadTextureButton_pressed():
 	myTextureTarget = textureSelectButton
 
+	fileDialog.rect_position = get_global_mouse_position()
+	fileDialog.popup()
 
 func _on_LoadNormalButton_pressed():
-	pass # Replace with function body.
+	myTextureTarget = normalSelectButton
+
+	fileDialog.rect_position = get_global_mouse_position()
+	fileDialog.popup()
 
 func _on_FileDialog_file_selected(path):
 	pass # Replace with function body.

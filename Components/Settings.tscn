@@ -1,0 +1,240 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Components/Settings.gd" type="Script" id=1]
+[ext_resource path="res://UIAssetts/SmallHeaders.tres" type="DynamicFont" id=2]
+
+[node name="Settings" type="WindowDialog"]
+visible = true
+margin_top = 21.0
+margin_right = 1028.0
+margin_bottom = 521.0
+popup_exclusive = true
+window_title = "Global Settings"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainVB" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopSpacer" type="Control" parent="MainVB"]
+margin_right = 1028.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Data" type="HBoxContainer" parent="MainVB"]
+margin_top = 24.0
+margin_right = 1028.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 0, 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftSpacer" type="Control" parent="MainVB/Data"]
+margin_right = 20.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 20, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="VBoxContainer" parent="MainVB/Data"]
+margin_left = 24.0
+margin_right = 496.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DefaultTexturePath" type="HBoxContainer" parent="MainVB/Data/Left"]
+margin_right = 472.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="MainVB/Data/Left/DefaultTexturePath"]
+margin_right = 234.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Default Texture Path"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="MainVB/Data/Left/DefaultTexturePath"]
+margin_left = 238.0
+margin_right = 472.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "C:/"
+
+[node name="NormalTexturePath" type="HBoxContainer" parent="MainVB/Data/Left"]
+margin_top = 28.0
+margin_right = 472.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="MainVB/Data/Left/NormalTexturePath"]
+margin_right = 234.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Normal Texture Path"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="MainVB/Data/Left/NormalTexturePath"]
+margin_left = 238.0
+margin_right = 472.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "C:/"
+
+[node name="LeftSpacer2" type="Control" parent="MainVB/Data"]
+margin_left = 500.0
+margin_right = 520.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 20, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator" type="VSeparator" parent="MainVB/Data"]
+margin_left = 524.0
+margin_right = 528.0
+margin_bottom = 52.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="VBoxContainer" parent="MainVB/Data"]
+margin_left = 532.0
+margin_right = 1004.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileColumns" type="HBoxContainer" parent="MainVB/Data/Right"]
+margin_right = 472.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileSizeLabel" type="Label" parent="MainVB/Data/Right/TileColumns"]
+margin_top = 5.0
+margin_right = 156.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Tile Size"
+
+[node name="TileSizeValue" type="SpinBox" parent="MainVB/Data/Right/TileColumns"]
+margin_left = 160.0
+margin_right = 234.0
+margin_bottom = 24.0
+min_value = 1.0
+max_value = 72.0
+value = 1.0
+exp_edit = true
+rounded = true
+allow_greater = true
+suffix = "px"
+
+[node name="TileColumnsLabel" type="Label" parent="MainVB/Data/Right/TileColumns"]
+margin_left = 238.0
+margin_top = 5.0
+margin_right = 394.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "# of Tile Columns"
+
+[node name="TileColumnsValue" type="SpinBox" parent="MainVB/Data/Right/TileColumns"]
+margin_left = 398.0
+margin_right = 472.0
+margin_bottom = 24.0
+min_value = 6.0
+max_value = 20.0
+value = 6.0
+
+[node name="TileSize" type="HBoxContainer" parent="MainVB/Data/Right"]
+margin_top = 28.0
+margin_right = 472.0
+margin_bottom = 28.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopSpacer2" type="Control" parent="MainVB/Data"]
+margin_left = 1008.0
+margin_right = 1028.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 20, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiddleSpacer" type="Control" parent="MainVB"]
+margin_top = 80.0
+margin_right = 1028.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="MainVB"]
+margin_top = 436.0
+margin_right = 1028.0
+margin_bottom = 476.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftSpacer" type="Control" parent="MainVB/Buttons"]
+margin_right = 20.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 3
+
+[node name="SaveButton" type="Button" parent="MainVB/Buttons"]
+margin_left = 24.0
+margin_right = 124.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = ExtResource( 2 )
+text = "Save"
+
+[node name="CenterSpacer" type="Control" parent="MainVB/Buttons"]
+margin_left = 128.0
+margin_right = 900.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CancelButton" type="Button" parent="MainVB/Buttons"]
+margin_left = 904.0
+margin_right = 1004.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = ExtResource( 2 )
+text = "Cancel"
+
+[node name="RightSpacer" type="Control" parent="MainVB/Buttons"]
+margin_left = 1008.0
+margin_right = 1028.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_vertical = 3
+
+[node name="BottomSpacer" type="Control" parent="MainVB"]
+margin_top = 480.0
+margin_right = 1028.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 0, 20 )
+[connection signal="pressed" from="MainVB/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="MainVB/Buttons/CancelButton" to="." method="_on_Cancel_pressed"]

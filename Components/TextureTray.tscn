@@ -27,11 +27,13 @@ margin_right = 107.0
 margin_bottom = 293.0
 
 [node name="FileDialog" type="FileDialog" parent="Popups"]
-margin_left = 113.924
-margin_top = 21.0454
-margin_right = 484.924
-margin_bottom = 291.045
+margin_left = 116.0
+margin_top = 29.0
+margin_right = 977.0
+margin_bottom = 675.0
 rect_min_size = Vector2( 300, 105 )
+window_title = "Load Texture"
+resizable = true
 dialog_text = "Load A file"
 dialog_hide_on_ok = true
 mode_overrides_title = false
@@ -52,6 +54,10 @@ margin_bottom = 148.792
 [node name="Textures" type="HBoxContainer" parent="Popups/TextureChoosePopup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
