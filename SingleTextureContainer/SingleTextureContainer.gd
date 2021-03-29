@@ -86,6 +86,10 @@ func _ready():
 
 	redrawBlock( blockType , direction)
 
+func _gui_input(event):
+	if( event.is_class( "InputEventMouseButton" ) && state == STATE.NOT_FOCUSED ):
+		emit_signal( "newSingleTextureSelected" , self )
+
 func setSettings( settingsData : Settings.SettingsData ):
 	settings = settingsData
 	updateUI()
@@ -171,8 +175,14 @@ func _on_BlockSelector_pressed():
 func _on_DirectionSelector_pressed():
 	emit_signal( "newSingleTextureSelected" , self )
 
+func _on_ResultDisplay_displayAreaClicked():
+	emit_signal( "newSingleTextureSelected" , self )
+
 func _on_Panel_focus_exited():
 	setState( STATE.NOT_FOCUSED )
+
+
+
 
 
 

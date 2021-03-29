@@ -26,7 +26,7 @@ onready var localTextureTrays = {
 onready var popups = {
 	"settings" : $Popups/Settings
 }
-var globalSettings = Settings.SettingsData.new()
+var globalSettings : Settings.SettingsData
 
 # onready var save_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog
 # onready var load_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/LoadDialog
@@ -34,6 +34,8 @@ var globalSettings = Settings.SettingsData.new()
 var currentFocusNode : IsoPanel
 
 func _ready():
+	globalSettings = popups.settings.mySettings
+	
 	for key in globalTextureTrays:
 		globalTextureTrays[key].setSettings( globalSettings )
 
@@ -50,7 +52,6 @@ func _ready():
 func _on_Settings_pressed():
 	# Populate with duplicate data so if user changes but cancels, data doesn't change globally
 	popups.settings.popup()
-	popups.settings.populateSettings( globalSettings )
 
 	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
 		child.setSettings( globalSettings )

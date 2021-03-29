@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name TextureTray
 
-# Needs to be identical to Results Panel. This is the interface between the two
+# Needs to be identical to Results Panel.
 enum DRAWING_FACES{
 	LEFT , RIGHT , TOP
 }

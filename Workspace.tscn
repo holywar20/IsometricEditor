@@ -24,55 +24,9 @@ margin_right = 300.0
 margin_bottom = 1083.0
 rect_min_size = Vector2( 300, 0 )
 
-[node name="Current" type="VBoxContainer" parent="Controls"]
-visible = false
-margin_right = 300.0
-margin_bottom = 362.0
-
-[node name="Current" type="Label" parent="Controls/Current"]
-margin_right = 300.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-text = "Current Texture"
-align = 1
-valign = 1
-
-[node name="Trays" type="HBoxContainer" parent="Controls/Current"]
-margin_top = 44.0
-margin_right = 300.0
-margin_bottom = 344.0
-
-[node name="Top" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
-margin_right = 97.0
-
-[node name="Left" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
-margin_left = 101.0
-margin_right = 198.0
-labelName = "Left"
-
-[node name="Right" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
-margin_left = 202.0
-margin_right = 300.0
-labelName = "Right"
-
-[node name="Label" type="Label" parent="Controls/Current"]
-margin_top = 348.0
-margin_right = 300.0
-margin_bottom = 362.0
-text = "????????"
-align = 1
-valign = 1
-
-[node name="Control" type="Control" parent="Controls"]
-margin_right = 300.0
-margin_bottom = 695.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
 [node name="Global" type="VBoxContainer" parent="Controls"]
-margin_top = 699.0
 margin_right = 300.0
-margin_bottom = 1083.0
+margin_bottom = 384.0
 
 [node name="Label" type="Label" parent="Controls/Global"]
 margin_right = 300.0
@@ -113,6 +67,52 @@ margin_top = 352.0
 margin_right = 300.0
 margin_bottom = 384.0
 rect_min_size = Vector2( 0, 32 )
+
+[node name="Control" type="Control" parent="Controls"]
+margin_top = 388.0
+margin_right = 300.0
+margin_bottom = 1083.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Current" type="VBoxContainer" parent="Controls"]
+visible = false
+margin_right = 300.0
+margin_bottom = 362.0
+
+[node name="Current" type="Label" parent="Controls/Current"]
+margin_right = 300.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+text = "Current Texture"
+align = 1
+valign = 1
+
+[node name="Trays" type="HBoxContainer" parent="Controls/Current"]
+margin_top = 44.0
+margin_right = 300.0
+margin_bottom = 344.0
+
+[node name="Top" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
+margin_right = 97.0
+
+[node name="Left" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
+margin_left = 101.0
+margin_right = 198.0
+labelName = "Left"
+
+[node name="Right" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
+margin_left = 202.0
+margin_right = 300.0
+labelName = "Right"
+
+[node name="Label" type="Label" parent="Controls/Current"]
+margin_top = 348.0
+margin_right = 300.0
+margin_bottom = 362.0
+text = "????????"
+align = 1
+valign = 1
 
 [node name="MainVBox" type="VBoxContainer" parent="."]
 margin_left = 304.0
@@ -300,17 +300,16 @@ margin_bottom = 995.0
 [node name="Popups" type="Node" parent="."]
 
 [node name="Settings" parent="Popups" instance=ExtResource( 9 )]
-visible = false
 margin_left = 435.072
 margin_top = 316.289
 margin_right = 1463.07
 margin_bottom = 816.289
-[connection signal="trayChanged" from="Controls/Current/Trays/Top" to="." method="_on_Current_trayChanged"]
-[connection signal="trayChanged" from="Controls/Current/Trays/Left" to="." method="_on_Current_trayChanged"]
-[connection signal="trayChanged" from="Controls/Current/Trays/Right" to="." method="_on_Current_trayChanged"]
 [connection signal="trayChanged" from="Controls/Global/Trays/Top" to="." method="_on_Global_trayChanged"]
 [connection signal="trayChanged" from="Controls/Global/Trays/Left" to="." method="_on_Global_trayChanged"]
 [connection signal="trayChanged" from="Controls/Global/Trays/Right" to="." method="_on_Global_trayChanged"]
+[connection signal="trayChanged" from="Controls/Current/Trays/Top" to="." method="_on_Current_trayChanged"]
+[connection signal="trayChanged" from="Controls/Current/Trays/Left" to="." method="_on_Current_trayChanged"]
+[connection signal="trayChanged" from="Controls/Current/Trays/Right" to="." method="_on_Current_trayChanged"]
 [connection signal="pressed" from="MainVBox/ControlPanel/ButtonPanel/ExportButton" to="." method="_on_ExportButton_pressed"]
 [connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton/ExportDialog" to="." method="_on_ExportDialog_file_selected"]
 [connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton/LoadDialog" to="." method="_on_LoadDialog_file_selected"]

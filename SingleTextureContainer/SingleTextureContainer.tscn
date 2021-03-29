@@ -223,6 +223,7 @@ __meta__ = {
 [connection signal="pressed" from="VBox/Display/TitleRow/Panel/DeleteButton" to="." method="_on_DeleteButton_pressed"]
 [connection signal="pressed" from="VBox/Display/Type" to="." method="_on_BlockSelector_pressed"]
 [connection signal="pressed" from="VBox/Display/Facing" to="." method="_on_DirectionSelector_pressed"]
+[connection signal="displayAreaClicked" from="VBox/Main/ResultDisplay" to="." method="_on_ResultDisplay_displayAreaClicked"]
 [connection signal="pressed" from="VBox/Main/ResultDisplay/ResetButton" to="VBox/Main/ResultDisplay" method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="VBox/Main/ResultDisplay/ZoomPlus" to="VBox/Main/ResultDisplay" method="_on_ZoomPlus_pressed"]
 [connection signal="pressed" from="VBox/Main/ResultDisplay/ZoomMinus" to="VBox/Main/ResultDisplay" method="_on_ZoomMinus_pressed"]

@@ -139,6 +139,14 @@ var zoomedFaceData = {
 var zoomLevel = 1.0
 var offset = Vector2( rect_size.x * 0.5 - float(tileRadius) , rect_size.y * 0.5 - float(tileRadius) )
 
+signal displayAreaClicked
+
+func _gui_input(event):
+	print(event)
+	if( event.is_class( "InputEventMouseButton" ) ):
+		emit_signal( "displayAreaClicked" )
+		
+
 func setupScene( newTileRadius, newBlockType , newDirection ):
 	tileRadius = newTileRadius
 	blockType = newBlockType
