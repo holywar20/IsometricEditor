@@ -1,14 +1,13 @@
 extends TextureButton
 class_name TexturePreview
 
-const THUMB_SIZE = Vector2(64 , 64)
+const THUMB_SIZE = Vector2(5 , 5)
 
 var previewTexture : Texture
 
 signal textureSelected( chosenTexture )
 
 func _ready():
-	set_custom_minimum_size( THUMB_SIZE )
 	var _x = connect("pressed", self, "_on_choice")
 
 func setupScene(  texture ):

@@ -1,14 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Workspace.gd" type="Script" id=1]
 [ext_resource path="res://Components/TextureTray.tscn" type="PackedScene" id=2]
-[ext_resource path="res://UIAssetts/plus_a.png" type="Texture" id=3]
-[ext_resource path="res://UIAssetts/plus_h.png" type="Texture" id=4]
+[ext_resource path="res://Components/TextureButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://SingleTextureContainer/SingleTextureContainer.tscn" type="PackedScene" id=5]
-[ext_resource path="res://UIAssetts/plus_d.png" type="Texture" id=6]
-[ext_resource path="res://UIAssetts/plus_n.png" type="Texture" id=7]
 [ext_resource path="res://UIAssetts/Settings.png" type="Texture" id=8]
 [ext_resource path="res://Components/Settings.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UIAssetts/ExportIcon.png" type="Texture" id=10]
+[ext_resource path="res://UIAssetts/Textures.png" type="Texture" id=11]
 
 [node name="Workspace" type="HBoxContainer"]
 anchor_right = 1.003
@@ -24,16 +23,11 @@ __meta__ = {
 margin_right = 300.0
 margin_bottom = 1083.0
 rect_min_size = Vector2( 300, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Current" type="VBoxContainer" parent="Controls"]
+visible = false
 margin_right = 300.0
 margin_bottom = 362.0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Current" type="Label" parent="Controls/Current"]
 margin_right = 300.0
@@ -42,90 +36,6 @@ rect_min_size = Vector2( 0, 40 )
 text = "Current Texture"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Checkboxes" type="HBoxContainer" parent="Controls/Current"]
-visible = false
-margin_top = 72.0
-margin_right = 400.0
-margin_bottom = 112.0
-
-[node name="BevelLabel" type="Label" parent="Controls/Current/Checkboxes"]
-margin_top = 13.0
-margin_right = 96.0
-margin_bottom = 27.0
-size_flags_horizontal = 3
-text = "Edge Bevel"
-
-[node name="BevelCheck" type="CheckButton" parent="Controls/Current/Checkboxes"]
-margin_left = 100.0
-margin_right = 196.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
-
-[node name="EdgeLabel" type="Label" parent="Controls/Current/Checkboxes"]
-margin_left = 200.0
-margin_top = 13.0
-margin_right = 296.0
-margin_bottom = 27.0
-size_flags_horizontal = 3
-text = "Edge Blend"
-
-[node name="EdgeCheck" type="CheckButton" parent="Controls/Current/Checkboxes"]
-margin_left = 300.0
-margin_right = 396.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls/Current/Checkboxes"]
-margin_left = 400.0
-margin_right = 400.0
-margin_bottom = 40.0
-
-[node name="Granules" type="HBoxContainer" parent="Controls/Current"]
-visible = false
-margin_top = 72.0
-margin_right = 400.0
-margin_bottom = 92.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="WarpLabel" type="Label" parent="Controls/Current/Granules"]
-margin_right = 40.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 20 )
-text = "Warp"
-align = 1
-
-[node name="WarpSlider" type="HSlider" parent="Controls/Current/Granules"]
-margin_left = 44.0
-margin_right = 189.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-min_value = -0.8
-max_value = 0.8
-step = 0.05
-
-[node name="GranuleLabel" type="Label" parent="Controls/Current/Granules"]
-margin_left = 193.0
-margin_right = 250.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 20 )
-text = "Granules"
-align = 1
-
-[node name="GranuleSlider" type="HSlider" parent="Controls/Current/Granules"]
-margin_left = 254.0
-margin_right = 400.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-min_value = 1.0
-max_value = 8.0
-value = 1.0
-rounded = true
 
 [node name="Trays" type="HBoxContainer" parent="Controls/Current"]
 margin_top = 44.0
@@ -154,22 +64,15 @@ align = 1
 valign = 1
 
 [node name="Control" type="Control" parent="Controls"]
-margin_top = 366.0
 margin_right = 300.0
 margin_bottom = 695.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Global" type="VBoxContainer" parent="Controls"]
 margin_top = 699.0
 margin_right = 300.0
 margin_bottom = 1083.0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Label" type="Label" parent="Controls/Global"]
 margin_right = 300.0
@@ -191,16 +94,19 @@ margin_bottom = 348.0
 
 [node name="Top" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_right = 97.0
+isGlobal = true
 
 [node name="Left" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_left = 101.0
 margin_right = 198.0
 labelName = "Left"
+isGlobal = true
 
 [node name="Right" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_left = 202.0
 margin_right = 300.0
 labelName = "Right"
+isGlobal = true
 
 [node name="HSeparatorDB" type="HSeparator" parent="Controls/Global"]
 margin_top = 352.0
@@ -220,39 +126,20 @@ __meta__ = {
 
 [node name="ControlPanel" type="PanelContainer" parent="MainVBox"]
 margin_right = 1622.0
-margin_bottom = 78.0
+margin_bottom = 84.0
 
 [node name="ButtonPanel" type="HBoxContainer" parent="MainVBox/ControlPanel"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1615.0
-margin_bottom = 71.0
+margin_bottom = 77.0
 alignment = 1
 
-[node name="TextureLibButton" type="Button" parent="MainVBox/ControlPanel/ButtonPanel"]
-margin_right = 107.0
-margin_bottom = 64.0
-text = "Texture Library"
-
-[node name="Button2" type="Button" parent="MainVBox/ControlPanel/ButtonPanel"]
-margin_left = 111.0
-margin_right = 123.0
-margin_bottom = 64.0
-
-[node name="Control" type="Control" parent="MainVBox/ControlPanel/ButtonPanel"]
-margin_left = 127.0
-margin_right = 1443.0
-margin_bottom = 64.0
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ExportButton" type="Button" parent="MainVBox/ControlPanel/ButtonPanel"]
-margin_left = 1447.0
-margin_right = 1540.0
-margin_bottom = 64.0
-text = "EXPORT PNG"
+margin_right = 173.0
+margin_bottom = 70.0
+text = "Texture Library"
+icon = ExtResource( 11 )
 
 [node name="ExportDialog" type="FileDialog" parent="MainVBox/ControlPanel/ButtonPanel/ExportButton"]
 margin_left = -232.0
@@ -280,14 +167,56 @@ filters = PoolStringArray( "*.png ; PNG Images" )
 current_dir = "/"
 current_path = "/"
 
+[node name="Control" type="Control" parent="MainVBox/ControlPanel/ButtonPanel"]
+margin_left = 177.0
+margin_right = 1337.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExportButton2" type="Button" parent="MainVBox/ControlPanel/ButtonPanel"]
+margin_left = 1341.0
+margin_right = 1540.0
+margin_bottom = 70.0
+text = "Export Sprite Sheet"
+icon = ExtResource( 10 )
+
+[node name="ExportDialog" type="FileDialog" parent="MainVBox/ControlPanel/ButtonPanel/ExportButton2"]
+margin_left = -232.0
+margin_top = 73.0
+margin_right = 227.0
+margin_bottom = 371.0
+rect_min_size = Vector2( 300, 105 )
+resizable = true
+access = 2
+filters = PoolStringArray( "*.png ; PNG Images" )
+current_dir = "/"
+current_path = "/"
+
+[node name="LoadDialog" type="FileDialog" parent="MainVBox/ControlPanel/ButtonPanel/ExportButton2"]
+margin_left = -229.0
+margin_top = 423.0
+margin_right = 225.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 300, 105 )
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png ; PNG Images" )
+current_dir = "/"
+current_path = "/"
+
 [node name="TextureButton" type="TextureButton" parent="MainVBox/ControlPanel/ButtonPanel"]
 margin_left = 1544.0
 margin_right = 1608.0
-margin_bottom = 64.0
+margin_bottom = 70.0
 texture_normal = ExtResource( 8 )
 
 [node name="MainPanel" type="HBoxContainer" parent="MainVBox"]
-margin_top = 82.0
+margin_top = 88.0
 margin_right = 1622.0
 margin_bottom = 1083.0
 size_flags_horizontal = 3
@@ -295,20 +224,20 @@ size_flags_vertical = 3
 
 [node name="Control" type="Control" parent="MainVBox/MainPanel"]
 margin_right = 20.0
-margin_bottom = 1001.0
+margin_bottom = 995.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="GridScroll" type="ScrollContainer" parent="MainVBox/MainPanel"]
 margin_left = 24.0
 margin_right = 1618.0
-margin_bottom = 1001.0
+margin_bottom = 995.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 
 [node name="GridContainer" type="GridContainer" parent="MainVBox/MainPanel/GridScroll"]
 margin_right = 1594.0
-margin_bottom = 1001.0
+margin_bottom = 995.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 10
@@ -361,22 +290,12 @@ margin_bottom = 400.0
 blockType = 2
 direction = 3
 
-[node name="TextureButton" type="TextureButton" parent="MainVBox/MainPanel/GridScroll/GridContainer"]
-margin_top = 410.0
-margin_right = 300.0
-margin_bottom = 450.0
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 7 )
-texture_hover = ExtResource( 4 )
-texture_disabled = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="NewTextureButton" parent="MainVBox/MainPanel/GridScroll/GridContainer" instance=ExtResource( 3 )]
 
 [node name="Control2" type="Control" parent="MainVBox/MainPanel"]
 margin_left = 1622.0
 margin_right = 1622.0
-margin_bottom = 1001.0
+margin_bottom = 995.0
 
 [node name="Popups" type="Node" parent="."]
 
@@ -386,14 +305,23 @@ margin_left = 435.072
 margin_top = 316.289
 margin_right = 1463.07
 margin_bottom = 816.289
-[connection signal="button_down" from="MainVBox/ControlPanel/ButtonPanel/TextureLibButton" to="." method="_on_TextureLibButton_button_down"]
+[connection signal="trayChanged" from="Controls/Current/Trays/Top" to="." method="_on_Current_trayChanged"]
+[connection signal="trayChanged" from="Controls/Current/Trays/Left" to="." method="_on_Current_trayChanged"]
+[connection signal="trayChanged" from="Controls/Current/Trays/Right" to="." method="_on_Current_trayChanged"]
+[connection signal="trayChanged" from="Controls/Global/Trays/Top" to="." method="_on_Global_trayChanged"]
+[connection signal="trayChanged" from="Controls/Global/Trays/Left" to="." method="_on_Global_trayChanged"]
+[connection signal="trayChanged" from="Controls/Global/Trays/Right" to="." method="_on_Global_trayChanged"]
 [connection signal="pressed" from="MainVBox/ControlPanel/ButtonPanel/ExportButton" to="." method="_on_ExportButton_pressed"]
 [connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton/ExportDialog" to="." method="_on_ExportDialog_file_selected"]
 [connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton/LoadDialog" to="." method="_on_LoadDialog_file_selected"]
+[connection signal="pressed" from="MainVBox/ControlPanel/ButtonPanel/ExportButton2" to="." method="_on_ExportButton_pressed"]
+[connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton2/ExportDialog" to="." method="_on_ExportDialog_file_selected"]
+[connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton2/LoadDialog" to="." method="_on_LoadDialog_file_selected"]
 [connection signal="pressed" from="MainVBox/ControlPanel/ButtonPanel/TextureButton" to="." method="_on_Settings_pressed"]
 [connection signal="newSingleTextureSelected" from="MainVBox/MainPanel/GridScroll/GridContainer/Panel" to="." method="_on_newSingleTextureSelected"]
 [connection signal="newSingleTextureSelected" from="MainVBox/MainPanel/GridScroll/GridContainer/Panel2" to="." method="_on_newSingleTextureSelected"]
 [connection signal="newSingleTextureSelected" from="MainVBox/MainPanel/GridScroll/GridContainer/Panel3" to="." method="_on_newSingleTextureSelected"]
 [connection signal="newSingleTextureSelected" from="MainVBox/MainPanel/GridScroll/GridContainer/Panel4" to="." method="_on_newSingleTextureSelected"]
 [connection signal="newSingleTextureSelected" from="MainVBox/MainPanel/GridScroll/GridContainer/Panel5" to="." method="_on_newSingleTextureSelected"]
+[connection signal="pressed" from="MainVBox/MainPanel/GridScroll/GridContainer/NewTextureButton" to="." method="_on_NewTextureButton_pressed"]
 [connection signal="settingsSaved" from="Popups/Settings" to="." method="_on_Settings_settingsSaved"]

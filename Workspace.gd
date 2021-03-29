@@ -6,18 +6,21 @@ var load_key = ""
 var remembered_load_directory = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 var remembered_save_directory = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
+onready var singleTextureScene = preload("res://SingleTextureContainer/SingleTextureContainer.tscn")
+onready var newTextureButton = preload("res://Components/TextureButton.tscn")
+
 onready var isoPlanelBase : GridContainer =  $MainVBox/MainPanel/GridScroll/GridContainer
 
 onready var globalTextureTrays = {
-	"top" : $Controls/Global/Trays/Top, 
-	"left" : $Controls/Global/Trays/Right, 
-	"right" : $Controls/Global/Trays/Left
+	TextureTray.DRAWING_FACES.TOP : $Controls/Global/Trays/Top, 
+	TextureTray.DRAWING_FACES.LEFT: $Controls/Global/Trays/Right, 
+	TextureTray.DRAWING_FACES.RIGHT: $Controls/Global/Trays/Left
 }
 
 onready var localTextureTrays = {
-	"top" : $Controls/Current/Trays/Top, 
-	"left" : $Controls/Current/Trays/Right, 
-	"right" : $Controls/Current/Trays/Right
+	TextureTray.DRAWING_FACES.TOP : $Controls/Current/Trays/Top, 
+	TextureTray.DRAWING_FACES.LEFT: $Controls/Current/Trays/Left, 
+	TextureTray.DRAWING_FACES.RIGHT : $Controls/Current/Trays/Right
 }
 
 onready var popups = {
@@ -25,38 +28,25 @@ onready var popups = {
 }
 var globalSettings = Settings.SettingsData.new()
 
-
-
 # onready var save_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog
 # onready var load_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/LoadDialog
 
-func _ready():
-	for key in globalTextureTrays:
-		# TODO : link these up
-		pass 
-		#globalTextureTrays[key].setupScene()
-	#color_pickers.top.color = drawing_node.top_tint
-	#color_pickers.left.color = drawing_node.left_tint
-	#color_pickers.right.color = drawing_node.right_tint
-	#texture_trays.top.preview_button.preview_texture = drawing_node.top_texture
-	#texture_trays.left.preview_button.preview_texture = drawing_node.left_texture
-	#texture_trays.right.preview_button.preview_texture = drawing_node.right_texture
-
-
-
 var currentFocusNode : IsoPanel
 
-func ready():
+func _ready():
 	for key in globalTextureTrays:
 		globalTextureTrays[key].setSettings( globalSettings )
 
 	for key in localTextureTrays:
 		localTextureTrays[key].setSettings( globalSettings )
 
-func updateAll():
-	pass
-
-# Settings Panel
+	# Set up initial selection
+	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
+		child.setSettings( globalSettings )
+		if( child.isFirst ):
+			_on_newSingleTextureSelected( child )
+			
+# Settings Panel Menu actions
 func _on_Settings_pressed():
 	# Populate with duplicate data so if user changes but cancels, data doesn't change globally
 	popups.settings.popup()
@@ -75,22 +65,50 @@ func _on_Settings_saved( newGlobalSettings ):
 	globalSettings = newGlobalSettings
 	popups.hide()
 
+func _on_Settings_settingsSaved(settingsData):
+	globalSettings = settingsData
+	
+	print( settingsData.defaultTexturePath )
 
-# Local Texture Trays
-func _on_newSingleTextureSelected( trayData , node ):
+#  Texture actions
+func _on_NewTextureButton_pressed():
+	var oldTextureButton = isoPlanelBase.get_child( isoPlanelBase.get_child_count() - 1 )
+	oldTextureButton.queue_free()
+	
+	var singleTextureInstance = singleTextureScene.instance()
+
+	isoPlanelBase.add_child( singleTextureInstance )
+	singleTextureInstance.setupScene( globalSettings )
+
+	var newTextureButtonInstance = newTextureButton.instance()
+	isoPlanelBase.add_child( newTextureButtonInstance )
+	newTextureButtonInstance.connect("pressed" , self , "_on_NewTextureButton_pressed" )
+
+# Selecting a single texture 
+func _on_newSingleTextureSelected( node ):
+	print(node)
+	
 	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
 		child.setState( child.STATE.NOT_FOCUSED )
 
 	node.setState( node.STATE.LAST_FOCUSED )
 	currentFocusNode = node
 
-# Settings Menu
-func _on_Settings_settingsSaved(settingsData):
-	globalSettings = settingsData
-	
-	print( settingsData.defaultTexturePath )
+	# Now update my current texture settings
+	for facingKey in node.localState:
+		pass
 
-# Unwired signals
+# Tray changes
+func _on_Current_trayChanged( tray : TextureTray.TrayData ):
+	for child in isoPlanelBase.get_children():
+		print( child , currentFocusNode )
+		if( child == currentFocusNode ):
+			currentFocusNode.updateTray( tray )
+			break
+
+func _on_Global_trayChanged( tray : TextureTray.TrayData  ):
+	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
+		child.updateTray( tray  )
 
 # Global Menus
 func _on_TextureLibButton_button_down():

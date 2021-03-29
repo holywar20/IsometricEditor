@@ -10,11 +10,13 @@ enum TEXTURE_TYPE {
 	BASIC, NORMAL
 }
 
-var test = preload("res://Components/Preview.tscn")
+var previewButton = preload("res://Components/Preview.tscn")
 
 export(Array, Texture) var texture_list
 export(String) var labelName = "Top"
 export(DRAWING_FACES) var facingId = DRAWING_FACES.TOP
+
+export(bool) var isGlobal = false
 
 # State
 var myTextureTarget = null
@@ -47,7 +49,7 @@ class TrayData:
 	var color = null
 	var visible = null
 
-	func _init( facingId, data = null ):
+	func _init( facingId , data = null ):
 		trayFacingId = facingId
 
 		if( data ):
@@ -93,7 +95,7 @@ func _add_thumbnail( texture ):
 	if chooserBase.get_child_count() >= texture_list.size():
 		return
 	
-	var previewInstance = test.instance()
+	var previewInstance = previewButton.instance()
 	chooserBase.add_child( previewInstance )
 	previewInstance.setupScene( texture )
 

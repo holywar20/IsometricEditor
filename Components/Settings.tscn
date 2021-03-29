@@ -30,7 +30,7 @@ rect_min_size = Vector2( 0, 20 )
 [node name="Data" type="HBoxContainer" parent="MainVB"]
 margin_top = 24.0
 margin_right = 1028.0
-margin_bottom = 76.0
+margin_bottom = 132.0
 rect_min_size = Vector2( 0, 30 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -38,7 +38,7 @@ __meta__ = {
 
 [node name="LeftSpacer" type="Control" parent="MainVB/Data"]
 margin_right = 20.0
-margin_bottom = 52.0
+margin_bottom = 108.0
 rect_min_size = Vector2( 20, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -47,7 +47,7 @@ __meta__ = {
 [node name="Left" type="VBoxContainer" parent="MainVB/Data"]
 margin_left = 24.0
 margin_right = 496.0
-margin_bottom = 52.0
+margin_bottom = 108.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -94,10 +94,52 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "C:/"
 
+[node name="ExportTexturePath" type="HBoxContainer" parent="MainVB/Data/Left"]
+margin_top = 56.0
+margin_right = 472.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="MainVB/Data/Left/ExportTexturePath"]
+margin_right = 234.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Export Texture Path"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="MainVB/Data/Left/ExportTexturePath"]
+margin_left = 238.0
+margin_right = 472.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "C:/"
+
+[node name="ExporeTileSet" type="HBoxContainer" parent="MainVB/Data/Left"]
+margin_top = 84.0
+margin_right = 472.0
+margin_bottom = 108.0
+
+[node name="Label" type="Label" parent="MainVB/Data/Left/ExporeTileSet"]
+margin_right = 234.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Export Prebuild Tileset Path"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="MainVB/Data/Left/ExporeTileSet"]
+margin_left = 238.0
+margin_right = 472.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "C:/"
+
 [node name="LeftSpacer2" type="Control" parent="MainVB/Data"]
 margin_left = 500.0
 margin_right = 520.0
-margin_bottom = 52.0
+margin_bottom = 108.0
 rect_min_size = Vector2( 20, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -106,7 +148,7 @@ __meta__ = {
 [node name="VSeparator" type="VSeparator" parent="MainVB/Data"]
 margin_left = 524.0
 margin_right = 528.0
-margin_bottom = 52.0
+margin_bottom = 108.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -115,7 +157,7 @@ __meta__ = {
 [node name="Right" type="VBoxContainer" parent="MainVB/Data"]
 margin_left = 532.0
 margin_right = 1004.0
-margin_bottom = 52.0
+margin_bottom = 108.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -174,14 +216,14 @@ __meta__ = {
 [node name="TopSpacer2" type="Control" parent="MainVB/Data"]
 margin_left = 1008.0
 margin_right = 1028.0
-margin_bottom = 52.0
+margin_bottom = 108.0
 rect_min_size = Vector2( 20, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MiddleSpacer" type="Control" parent="MainVB"]
-margin_top = 80.0
+margin_top = 136.0
 margin_right = 1028.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 20 )

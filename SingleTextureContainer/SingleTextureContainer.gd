@@ -72,9 +72,9 @@ var textureName = "Undefined Texture"
 
 var state = STATE.NOT_FOCUSED
 var localState = {
-	0 : TextureTray.TrayData.new( 0 ),
-	1 : TextureTray.TrayData.new( 1 ),
-	2 : TextureTray.TrayData.new( 2 )
+	TextureTray.DRAWING_FACES.TOP  : TextureTray.TrayData.new( TextureTray.DRAWING_FACES.TOP ),
+	TextureTray.DRAWING_FACES.LEFT : TextureTray.TrayData.new( TextureTray.DRAWING_FACES.LEFT ),
+	TextureTray.DRAWING_FACES.RIGHT : TextureTray.TrayData.new( TextureTray.DRAWING_FACES.RIGHT )
 }
 
 func _ready():
@@ -93,12 +93,6 @@ func setSettings( settingsData : Settings.SettingsData ):
 func setupScene( settingsData : Settings.SettingsData  ):
 	settings = settingsData
 
-	if( isFirst ):
-		_on_IsoPanel_focus_entered()
-	else:
-		_on_Panel_focus_exited()
-
-
 func updateUI():
 	tileDisplay.set_text( str( settings.tileSize ) )
 	
@@ -114,8 +108,8 @@ func updateUI():
 
 	resultsDisplay.setupScene( settings.tileSize , blockType , direction )
 
-func updateTray( drawingFace : int  , tray : TextureTray.TrayData ):
-	pass
+func updateTray( tray : TextureTray.TrayData ):
+	print( tray )
 
 func setState( newState ):
 	state = newState
@@ -154,7 +148,7 @@ func _on_block_pressed(id , grabFocus = true ):
 
 
 func _on_facing_pressed(id, grabFocus = false ):
-	redrawBlock( resultsDisplay.direction, id )
+	redrawBlock( resultsDisplay.blockType , id )
 
 	# Sometimes we don't want to grab focus on redraw, such as if we are doing a global update
 	if( grabFocus ):
@@ -166,16 +160,16 @@ func _on_NameEdit_text_entered( new_text ):
 	_on_IsoPanel_focus_entered()
 
 func _on_NameEdit_focus_entered():
-	emit_signal( "newSingleTextureSelected" , localState , self )
+	emit_signal( "newSingleTextureSelected" , self )
 
 func _on_IsoPanel_focus_entered():
-	emit_signal( "newSingleTextureSelected" , localState , self )
+	emit_signal( "newSingleTextureSelected" , self )
 
 func _on_BlockSelector_pressed():
-	emit_signal( "newSingleTextureSelected" , localState , self )
+	emit_signal( "newSingleTextureSelected" , self )
 
 func _on_DirectionSelector_pressed():
-	emit_signal( "newSingleTextureSelected" , localState , self )
+	emit_signal( "newSingleTextureSelected" , self )
 
 func _on_Panel_focus_exited():
 	setState( STATE.NOT_FOCUSED )

@@ -46,10 +46,13 @@ __meta__ = {
 }
 
 [node name="TextureChoosePopup" type="PopupPanel" parent="Popups"]
-margin_left = 109.317
-margin_top = -8.20807
-margin_right = 433.317
-margin_bottom = 148.792
+anchor_left = 1.09
+anchor_top = -0.028
+anchor_right = 1.09
+anchor_bottom = -0.028
+margin_top = 0.00800037
+margin_right = 317.0
+margin_bottom = 107.008
 
 [node name="Textures" type="HBoxContainer" parent="Popups/TextureChoosePopup"]
 anchor_right = 1.0
@@ -60,6 +63,9 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 7.0
