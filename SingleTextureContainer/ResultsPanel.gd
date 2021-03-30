@@ -190,7 +190,7 @@ func drawAllPolygons( newFaceData , newZoomLevel = null ):
 	# Should also prevent people from setting a zoom of zero
 	if( newZoomLevel ):
 		zoomLevel = newZoomLevel
-
+	
 	# Make sure I got zoom data
 	_calculateZoomLevel( zoomLevel )
 
@@ -211,7 +211,7 @@ func _draw():
 		resetButton.set_self_modulate( Color( 1, 1 , 1 , 1) )
 
 	# Fudge the numbers by the zoom factor
-	
+
 	# Draw Left Polygon
 	# TODO - Build polygons here
 	draw_colored_polygon ( 
@@ -254,16 +254,19 @@ func updateBlockType( newBlockType : int , newDirection : int ):
 
 func _calculateZoomLevel( zoomChange ):
 	zoomLevel = zoomChange
-	
+
 	if( zoomLevel != 1.0 ):
 		for facingKey in faceData:
-			zoomedFaceData[facingKey].points = PoolVector2Array()
+			var tempArray = []
 			
 			for idx in range( 0 , faceData[facingKey].points.size() ):
-				zoomedFaceData[facingKey].points.append(faceData[facingKey].points[idx] * zoomLevel)
+				tempArray.append( faceData[facingKey].points[idx] * zoomLevel )
+
+			zoomedFaceData[facingKey].points = tempArray
 	else:
 		for facingKey in faceData:
 			zoomedFaceData[facingKey].points = faceData[facingKey].points
+
 
 # Default UVs
 func generateLeftFace( shrinkAmount ):
@@ -515,6 +518,7 @@ func generateFlatTopCornerFace( shrinkAmount, direction ):
 # Signals
 func _on_ZoomPlus_pressed():
 	drawAllPolygons( faceData , zoomLevel + 0.1 )
+	print( zoomLevel )
 	zoomLabel.set_text( str(zoomLevel * 100.0) + "%" )
 
 func _on_ZoomMinus_pressed():

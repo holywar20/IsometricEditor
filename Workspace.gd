@@ -96,7 +96,6 @@ func _on_newSingleTextureSelected( node ):
 # Tray changes
 func _on_Current_trayChanged( tray : TextureTray.TrayData ):
 	for child in isoPlanelBase.get_children():
-		print( child , currentFocusNode )
 		if( child == currentFocusNode ):
 			currentFocusNode.updateTray( tray )
 			break

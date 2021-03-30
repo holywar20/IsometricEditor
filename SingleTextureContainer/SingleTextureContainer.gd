@@ -161,7 +161,6 @@ func _on_NameEdit_text_entered( _new_text ):
 	_on_IsoPanel_focus_entered()
 
 func _on_NameEdit_focus_entered():
-	print("signal selected")
 	emit_signal( "newSingleTextureSelected" , self )
 
 func _on_IsoPanel_focus_entered():
