@@ -12,11 +12,15 @@ enum TEXTURE_TYPE {
 
 var previewButton = preload("res://Components/Preview.tscn")
 
+
+
 export(Array, Texture) var texture_list
 export(String) var labelName = "Top"
 export(DRAWING_FACES) var facingId = DRAWING_FACES.TOP
 
 export(bool) var isGlobal = false
+
+var loadedTextureList : Array = [] 
 
 # State
 var myTextureTarget = null
@@ -86,10 +90,28 @@ func _ready():
 	textureSelectButton.set_normal_texture( texture_list[0] ) 
 	normalSelectButton.set_normal_texture( texture_list[0] ) 
 	
+
+	trayLabel.set_text( labelName )
+
+func buildTextureList( path ):
+	for child in chooserBase.get_children():
+		queue_free()
+
+	# First we add basic textures
 	for full_texture in texture_list:
 		_add_thumbnail( full_texture )
 
-	trayLabel.set_text( labelName )
+	for texture in loadedTextureList:
+		_add_thumbnail( texture )
+
+	var texturesInPath = _findTexturesInPath( path )
+	
+	var textureList = texuresInPath
+	for texture in 
+
+func _findTexturesInPath():
+	# Get a list of all textures.
+	# Filter for PNG Files
 
 func _add_thumbnail( texture ):
 	if chooserBase.get_child_count() >= texture_list.size():
@@ -100,6 +122,9 @@ func _add_thumbnail( texture ):
 	previewInstance.setupScene( texture )
 
 	previewInstance.connect("textureSelected", self, "_on_Chooser_textureSelected")
+
+func _add_filePath_thumbNail( texture , path ):
+
 
 func _makeTray():
 	var trayData = {
@@ -147,13 +172,17 @@ func _on_LoadTextureButton_pressed():
 	myTextureTarget = textureSelectButton
 
 	fileDialog.rect_position = get_global_mouse_position()
+	fileDialog.set_current_dir( settings.defaultTexturePath )
 	fileDialog.popup()
 
 func _on_LoadNormalButton_pressed():
 	myTextureTarget = normalSelectButton
 
 	fileDialog.rect_position = get_global_mouse_position()
+	fileDialog.set_current_dir( settings.defaultNormalPath )
 	fileDialog.popup()
 
 func _on_FileDialog_file_selected(path):
+	print( path )
+	# Add Texture loadedTextures for use in this session.
 	pass # Replace with function body.

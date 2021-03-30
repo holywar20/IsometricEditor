@@ -150,7 +150,6 @@ func _on_block_pressed(id , grabFocus = true ):
 	if( grabFocus ):
 		_on_IsoPanel_focus_entered()
 
-
 func _on_facing_pressed(id, grabFocus = false ):
 	redrawBlock( resultsDisplay.blockType , id )
 
@@ -158,9 +157,7 @@ func _on_facing_pressed(id, grabFocus = false ):
 	if( grabFocus ):
 		_on_IsoPanel_focus_entered()
 
-func _on_NameEdit_text_entered( new_text ):
-	# TODO - do some shit with the name?
-	
+func _on_NameEdit_text_entered( _new_text ):	
 	_on_IsoPanel_focus_entered()
 
 func _on_NameEdit_focus_entered():
