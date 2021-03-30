@@ -142,4 +142,3 @@ func _on_FileDialog_dir_selected(dir):
 			dataDisplay.exportTexturePath.set_text( dir )
 		DIALOG_STATE.EXPORT_TILESETS:
 			dataDisplay.exportTexturePath.set_text( dir )
-	

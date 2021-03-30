@@ -311,6 +311,7 @@ margin_bottom = 995.0
 [node name="Popups" type="Node" parent="."]
 
 [node name="Settings" parent="Popups" instance=ExtResource( 9 )]
+visible = false
 margin_left = 435.072
 margin_top = 316.289
 margin_right = 1463.07

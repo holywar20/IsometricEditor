@@ -46,6 +46,7 @@ func _ready():
 	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
 		child.setSettings( globalSettings )
 		if( child.isFirst ):
+			# Fire signal method manually to set apps initial state.
 			_on_newSingleTextureSelected( child )
 			
 # Settings Panel Menu actions
@@ -68,8 +69,6 @@ func _on_Settings_saved( newGlobalSettings ):
 
 func _on_Settings_settingsSaved(settingsData):
 	globalSettings = settingsData
-	
-	print( settingsData.defaultTexturePath )
 
 #  Texture actions
 func _on_NewTextureButton_pressed():
@@ -91,6 +90,8 @@ func _on_newSingleTextureSelected( node ):
 
 	node.setState( node.STATE.LAST_FOCUSED )
 	currentFocusNode = node
+
+	
 
 # Tray changes
 func _on_Current_trayChanged( tray : TextureTray.TrayData ):
