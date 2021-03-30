@@ -12,12 +12,10 @@ enum TEXTURE_TYPE {
 
 var previewButton = preload("res://Components/Preview.tscn")
 
-
-
 export(Array, Texture) var texture_list
 export(String) var labelName = "Top"
 export(DRAWING_FACES) var facingId = DRAWING_FACES.TOP
-
+export(TEXTURE_TYPE) var texType = TEXTURE_TYPE.BASIC
 export(bool) var isGlobal = false
 
 var loadedTextureList : Array = [] 
@@ -42,8 +40,8 @@ onready var fileDialog = $Popups/FileDialog
 # TODO - make into a settings resource
 var settings : Settings.SettingsData
 
-
 signal trayChanged( tray )
+signal newTextureAdded( filePath )
 
 class TrayData:
 	var trayFacingId
@@ -90,7 +88,6 @@ func _ready():
 	textureSelectButton.set_normal_texture( texture_list[0] ) 
 	normalSelectButton.set_normal_texture( texture_list[0] ) 
 	
-
 	trayLabel.set_text( labelName )
 
 func buildTextureList( path ):
@@ -106,11 +103,15 @@ func buildTextureList( path ):
 
 	var texturesInPath = _findTexturesInPath( path )
 	
-	var textureList = texuresInPath
-	for texture in 
+	# var textureList = texturesInPath
+	# for texture in 
 
-func _findTexturesInPath():
-	# Get a list of all textures.
+func _findTexturesInPath( path ):
+	var myPath = null
+
+	#if( isGlobal ):
+
+
 	# Filter for PNG Files
 
 func _add_thumbnail( texture ):
@@ -123,8 +124,9 @@ func _add_thumbnail( texture ):
 
 	previewInstance.connect("textureSelected", self, "_on_Chooser_textureSelected")
 
-func _add_filePath_thumbNail( texture , path ):
-
+func _add_filePath_thumbnail( texture , path ):
+	pass
+	#
 
 func _makeTray():
 	var trayData = {
@@ -149,7 +151,7 @@ func get_bar_rect(list_size : int):
 func _on_TextureChoosePopup_popup_hide():
 	pass
 
-func _on_Chooser_textureSelected( chosenTexture):
+func _on_Chooser_textureSelected( chosenTexture ):
 	chooserPopup.hide()
 
 	myTextureTarget.set_normal_texture( chosenTexture )
@@ -173,6 +175,7 @@ func _on_LoadTextureButton_pressed():
 
 	fileDialog.rect_position = get_global_mouse_position()
 	fileDialog.set_current_dir( settings.defaultTexturePath )
+	fileDialog.set_filters(PoolStringArray(["*.png ; PNG Images"]))
 	fileDialog.popup()
 
 func _on_LoadNormalButton_pressed():
@@ -180,9 +183,11 @@ func _on_LoadNormalButton_pressed():
 
 	fileDialog.rect_position = get_global_mouse_position()
 	fileDialog.set_current_dir( settings.defaultNormalPath )
+	fileDialog.set_filters(PoolStringArray(["*.png ; PNG Images"]))
 	fileDialog.popup()
 
-func _on_FileDialog_file_selected(path):
-	print( path )
-	# Add Texture loadedTextures for use in this session.
-	pass # Replace with function body.
+func _on_FileDialog_file_selected( filePath ):
+	if( filePath ):
+		emit_signal("newTextureAdded" , filePath )
+		emit_signal("trayChanged", _makeTray() )
+		

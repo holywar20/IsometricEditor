@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Components/Settings.gd" type="Script" id=1]
 [ext_resource path="res://UIAssetts/SmallHeaders.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UIAssetts/Icons/folder-filled-icon.svg" type="Texture" id=3]
 
 [node name="Settings" type="WindowDialog"]
 visible = true
@@ -30,7 +31,7 @@ rect_min_size = Vector2( 0, 20 )
 [node name="Data" type="HBoxContainer" parent="MainVB"]
 margin_top = 24.0
 margin_right = 1028.0
-margin_bottom = 132.0
+margin_bottom = 124.0
 rect_min_size = Vector2( 0, 30 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -38,7 +39,7 @@ __meta__ = {
 
 [node name="LeftSpacer" type="Control" parent="MainVB/Data"]
 margin_right = 20.0
-margin_bottom = 108.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 20, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -46,140 +47,204 @@ __meta__ = {
 
 [node name="Left" type="VBoxContainer" parent="MainVB/Data"]
 margin_left = 24.0
-margin_right = 496.0
-margin_bottom = 108.0
+margin_right = 653.0
+margin_bottom = 100.0
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DefaultTexturePath" type="HBoxContainer" parent="MainVB/Data/Left"]
-margin_right = 472.0
-margin_bottom = 24.0
+margin_right = 629.0
+margin_bottom = 22.0
 
 [node name="Label" type="Label" parent="MainVB/Data/Left/DefaultTexturePath"]
-margin_right = 234.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
+margin_right = 200.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 200, 0 )
 size_flags_vertical = 3
 text = "Default Texture Path"
 valign = 1
 
-[node name="LineEdit" type="LineEdit" parent="MainVB/Data/Left/DefaultTexturePath"]
-margin_left = 238.0
-margin_right = 472.0
-margin_bottom = 24.0
+[node name="LineEdit" type="Label" parent="MainVB/Data/Left/DefaultTexturePath"]
+margin_left = 204.0
+margin_right = 597.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "C:/"
+valign = 1
+
+[node name="Button" type="Button" parent="MainVB/Data/Left/DefaultTexturePath"]
+margin_left = 601.0
+margin_right = 629.0
+margin_bottom = 22.0
+icon = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NormalTexturePath" type="HBoxContainer" parent="MainVB/Data/Left"]
-margin_top = 28.0
-margin_right = 472.0
-margin_bottom = 52.0
+margin_top = 26.0
+margin_right = 629.0
+margin_bottom = 48.0
 
 [node name="Label" type="Label" parent="MainVB/Data/Left/NormalTexturePath"]
-margin_right = 234.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
+margin_right = 200.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 200, 0 )
 size_flags_vertical = 3
 text = "Normal Texture Path"
 valign = 1
 
-[node name="LineEdit" type="LineEdit" parent="MainVB/Data/Left/NormalTexturePath"]
-margin_left = 238.0
-margin_right = 472.0
-margin_bottom = 24.0
+[node name="LineEdit" type="Label" parent="MainVB/Data/Left/NormalTexturePath"]
+margin_left = 204.0
+margin_right = 597.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "C:/"
+valign = 1
+
+[node name="Button" type="Button" parent="MainVB/Data/Left/NormalTexturePath"]
+margin_left = 601.0
+margin_right = 629.0
+margin_bottom = 22.0
+icon = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ExportTexturePath" type="HBoxContainer" parent="MainVB/Data/Left"]
-margin_top = 56.0
-margin_right = 472.0
-margin_bottom = 80.0
+margin_top = 52.0
+margin_right = 629.0
+margin_bottom = 74.0
 
 [node name="Label" type="Label" parent="MainVB/Data/Left/ExportTexturePath"]
-margin_right = 234.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
+margin_right = 200.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 200, 0 )
 size_flags_vertical = 3
 text = "Export Texture Path"
 valign = 1
 
-[node name="LineEdit" type="LineEdit" parent="MainVB/Data/Left/ExportTexturePath"]
-margin_left = 238.0
-margin_right = 472.0
-margin_bottom = 24.0
+[node name="LineEdit" type="Label" parent="MainVB/Data/Left/ExportTexturePath"]
+margin_left = 204.0
+margin_right = 597.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "C:/"
+valign = 1
 
-[node name="ExporeTileSet" type="HBoxContainer" parent="MainVB/Data/Left"]
-margin_top = 84.0
-margin_right = 472.0
-margin_bottom = 108.0
+[node name="Button" type="Button" parent="MainVB/Data/Left/ExportTexturePath"]
+margin_left = 601.0
+margin_right = 629.0
+margin_bottom = 22.0
+icon = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="MainVB/Data/Left/ExporeTileSet"]
-margin_right = 234.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
+[node name="ExportTileSet" type="HBoxContainer" parent="MainVB/Data/Left"]
+margin_top = 78.0
+margin_right = 629.0
+margin_bottom = 100.0
+
+[node name="Label" type="Label" parent="MainVB/Data/Left/ExportTileSet"]
+margin_right = 200.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 200, 0 )
 size_flags_vertical = 3
 text = "Export Godot Tileset Path"
 valign = 1
 
-[node name="LineEdit" type="LineEdit" parent="MainVB/Data/Left/ExporeTileSet"]
-margin_left = 238.0
-margin_right = 472.0
-margin_bottom = 24.0
+[node name="LineEdit" type="Label" parent="MainVB/Data/Left/ExportTileSet"]
+margin_left = 204.0
+margin_right = 597.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "C:/"
+valign = 1
+
+[node name="Button" type="Button" parent="MainVB/Data/Left/ExportTileSet"]
+margin_left = 601.0
+margin_right = 629.0
+margin_bottom = 22.0
+icon = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LeftSpacer2" type="Control" parent="MainVB/Data"]
-margin_left = 500.0
-margin_right = 520.0
-margin_bottom = 108.0
+margin_left = 657.0
+margin_right = 677.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 20, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VSeparator" type="VSeparator" parent="MainVB/Data"]
-margin_left = 524.0
-margin_right = 528.0
-margin_bottom = 108.0
+margin_left = 681.0
+margin_right = 685.0
+margin_bottom = 100.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Right" type="VBoxContainer" parent="MainVB/Data"]
-margin_left = 532.0
-margin_right = 1004.0
-margin_bottom = 108.0
+margin_left = 689.0
+margin_right = 1003.0
+margin_bottom = 100.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TileColumns" type="HBoxContainer" parent="MainVB/Data/Right"]
-margin_right = 472.0
+margin_right = 314.0
 margin_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TileSizeLabel" type="Label" parent="MainVB/Data/Right/TileColumns"]
+[node name="TileColumnsLabel" type="Label" parent="MainVB/Data/Right/TileColumns"]
 margin_top = 5.0
-margin_right = 156.0
+margin_right = 236.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "# of Tile Columns"
+
+[node name="TileColumnsValue" type="SpinBox" parent="MainVB/Data/Right/TileColumns"]
+margin_left = 240.0
+margin_right = 314.0
+margin_bottom = 24.0
+min_value = 6.0
+max_value = 20.0
+value = 6.0
+
+[node name="TileSize" type="HBoxContainer" parent="MainVB/Data/Right"]
+margin_top = 28.0
+margin_right = 314.0
+margin_bottom = 52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileSizeLabel" type="Label" parent="MainVB/Data/Right/TileSize"]
+margin_top = 5.0
+margin_right = 236.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "Tile Size"
 
-[node name="TileSizeValue" type="SpinBox" parent="MainVB/Data/Right/TileColumns"]
-margin_left = 160.0
-margin_right = 234.0
+[node name="TileSizeValue" type="SpinBox" parent="MainVB/Data/Right/TileSize"]
+margin_left = 240.0
+margin_right = 314.0
 margin_bottom = 24.0
 min_value = 1.0
 max_value = 72.0
@@ -189,41 +254,17 @@ rounded = true
 allow_greater = true
 suffix = "px"
 
-[node name="TileColumnsLabel" type="Label" parent="MainVB/Data/Right/TileColumns"]
-margin_left = 238.0
-margin_top = 5.0
-margin_right = 394.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-text = "# of Tile Columns"
-
-[node name="TileColumnsValue" type="SpinBox" parent="MainVB/Data/Right/TileColumns"]
-margin_left = 398.0
-margin_right = 472.0
-margin_bottom = 24.0
-min_value = 6.0
-max_value = 20.0
-value = 6.0
-
-[node name="TileSize" type="HBoxContainer" parent="MainVB/Data/Right"]
-margin_top = 28.0
-margin_right = 472.0
-margin_bottom = 28.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TopSpacer2" type="Control" parent="MainVB/Data"]
-margin_left = 1008.0
-margin_right = 1028.0
-margin_bottom = 108.0
+margin_left = 1007.0
+margin_right = 1027.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 20, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MiddleSpacer" type="Control" parent="MainVB"]
-margin_top = 136.0
+margin_top = 128.0
 margin_right = 1028.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 20 )
@@ -278,5 +319,25 @@ margin_top = 480.0
 margin_right = 1028.0
 margin_bottom = 500.0
 rect_min_size = Vector2( 0, 20 )
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 192.434
+margin_top = 59.2054
+margin_right = 850.434
+margin_bottom = 450.205
+rect_min_size = Vector2( 300, 105 )
+popup_exclusive = true
+dialog_text = "Set Path"
+access = 2
+current_dir = "/code/Isometric Tile Generator"
+current_path = "/code/Isometric Tile Generator/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="MainVB/Data/Left/DefaultTexturePath/Button" to="." method="_on_DefaultTexturePath_Button_pressed"]
+[connection signal="pressed" from="MainVB/Data/Left/NormalTexturePath/Button" to="." method="_on_NormalTexturePath_Button_pressed"]
+[connection signal="pressed" from="MainVB/Data/Left/ExportTexturePath/Button" to="." method="_on_ExportTexturePath_Button_pressed"]
+[connection signal="pressed" from="MainVB/Data/Left/ExportTileSet/Button" to="." method="_on_ExportTileSet_Button_pressed"]
 [connection signal="pressed" from="MainVB/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="MainVB/Buttons/CancelButton" to="." method="_on_Cancel_pressed"]
+[connection signal="dir_selected" from="FileDialog" to="." method="_on_FileDialog_dir_selected"]

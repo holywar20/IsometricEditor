@@ -85,19 +85,12 @@ func _on_NewTextureButton_pressed():
 	isoPlanelBase.add_child( newTextureButtonInstance )
 	newTextureButtonInstance.connect("pressed" , self , "_on_NewTextureButton_pressed" )
 
-# Selecting a single texture 
-func _on_newSingleTextureSelected( node ):
-	print(node)
-	
+func _on_newSingleTextureSelected( node ):	
 	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
 		child.setState( child.STATE.NOT_FOCUSED )
 
 	node.setState( node.STATE.LAST_FOCUSED )
 	currentFocusNode = node
-
-	# Now update my current texture settings
-	for facingKey in node.localState:
-		pass
 
 # Tray changes
 func _on_Current_trayChanged( tray : TextureTray.TrayData ):
@@ -112,11 +105,6 @@ func _on_Global_trayChanged( tray : TextureTray.TrayData  ):
 		child.updateTray( tray  )
 
 # Global Menus
-func _on_TextureLibButton_button_down():
-	pass # Replace with function body.
-
-func _on_Top_texture_chosen(texture):
-	pass # Replace with function body.
 
 # UI Signals
 func _on_ExportButton_pressed():
@@ -131,46 +119,9 @@ func _on_ExportDialog_file_selected(path):
 	# remembered_save_directory = path.get_base_dir()
 
 
-func _on_TopColorPicker_color_changed(color):
-	pass
-	# drawing_node.top_tint = color
-	# drawing_node.update()
-
-func _on_LeftColorPicker_color_changed(color):
-	pass
-	# drawing_node.left_tint = color
-	# drawing_node.update()
-
-func _on_RightColorPicker_color_changed(color):
-	pass
-	# drawing_node.right_tint = color
-	# drawing_node.update()
-
-func _on_RadiusSpin_value_changed(value):
-	pass
-	# drawing_node.tile_radius = value
-	# drawing_node.update()
-	# atlas.rect_min_size = Vector2(value * drawing_node.SHEET_COLUMNS * 2, value * drawing_node.SHEET_ROWS * 2)
-	# atlas.update()
-
 func _on_EdgeCheck_toggled(button_pressed):
 	pass
 	# drawing_node.drop_top = button_pressed
-	# drawing_node.update()
-
-func _on_TopTextureTray_texture_chosen(texture):
-	pass
-	# drawing_node.top_texture = texture
-	# drawing_node.update()
-
-func _on_LeftTextureTray_texture_chosen(texture):
-	pass
-	# drawing_node.left_texture = texture
-	# drawing_node.update()
-
-func _on_RightTextureTray_texture_chosen(texture):
-	pass
-	# drawing_node.right_texture = texture
 	# drawing_node.update()
 
 func _on_AnyLoadButton_pressed(which):

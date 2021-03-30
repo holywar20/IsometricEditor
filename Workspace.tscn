@@ -48,18 +48,22 @@ margin_bottom = 348.0
 
 [node name="Top" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_right = 97.0
+labelName = "Top"
+facingId = 2
 isGlobal = true
 
 [node name="Left" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_left = 101.0
 margin_right = 198.0
 labelName = "Left"
+facingId = 2
 isGlobal = true
 
 [node name="Right" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_left = 202.0
 margin_right = 300.0
 labelName = "Right"
+facingId = 2
 isGlobal = true
 
 [node name="HSeparatorDB" type="HSeparator" parent="Controls/Global"]
@@ -95,16 +99,23 @@ margin_bottom = 344.0
 
 [node name="Top" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
 margin_right = 97.0
+labelName = "Top"
+facingId = 2
+isGlobal = false
 
 [node name="Left" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
 margin_left = 101.0
 margin_right = 198.0
 labelName = "Left"
+facingId = 2
+isGlobal = false
 
 [node name="Right" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
 margin_left = 202.0
 margin_right = 300.0
 labelName = "Right"
+facingId = 2
+isGlobal = false
 
 [node name="Label" type="Label" parent="Controls/Current"]
 margin_top = 348.0
@@ -300,7 +311,6 @@ margin_bottom = 995.0
 [node name="Popups" type="Node" parent="."]
 
 [node name="Settings" parent="Popups" instance=ExtResource( 9 )]
-visible = false
 margin_left = 435.072
 margin_top = 316.289
 margin_right = 1463.07

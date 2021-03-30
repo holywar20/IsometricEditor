@@ -44,7 +44,7 @@ enum STATE {
 	LAST_FOCUSED , NOT_FOCUSED
 }
 
-signal newSingleTextureSelected( overrides , node )
+signal newSingleTextureSelected( node )
 
 # Display
 onready var highlight : TextureRect = $Highlight
@@ -161,6 +161,7 @@ func _on_NameEdit_text_entered( _new_text ):
 	_on_IsoPanel_focus_entered()
 
 func _on_NameEdit_focus_entered():
+	print("signal selected")
 	emit_signal( "newSingleTextureSelected" , self )
 
 func _on_IsoPanel_focus_entered():
