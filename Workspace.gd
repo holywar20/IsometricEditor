@@ -28,7 +28,6 @@ onready var popups = {
 	"chooser" : $Popups/TextureChoosePopup
 }
 
-var recentTextures = []
 var globalSettings : Settings.SettingsData
 
 # onready var save_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog
@@ -37,7 +36,20 @@ var globalSettings : Settings.SettingsData
 var currentFocusNode : IsoPanel
 
 func _ready():
-	globalSettings = popups.settings.mySettings
+	# Push global settings everywhere we car for them to exist.
+	globalSettings = popups.settings.getSettings()
+	
+	_updateGlobalSettings( globalSettings )
+
+	# Set up initial selection
+	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
+		if( child.isFirst ):
+			_on_newSingleTextureSelected( child ) # Fire signal method manually to set apps initial state.
+
+	popups.chooser.setupScene( globalSettings )
+
+func _updateGlobalSettings( settings ):
+	globalSettings = settings
 	
 	for key in globalTextureTrays:
 		globalTextureTrays[key].setSettings( globalSettings )
@@ -48,27 +60,14 @@ func _ready():
 	# Set up initial selection
 	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
 		child.setSettings( globalSettings )
-		if( child.isFirst ):
-			# Fire signal method manually to set apps initial state.
-			_on_newSingleTextureSelected( child )
-			
+
 # Settings Panel Menu actions
 func _on_Settings_pressed():
-	# Populate with duplicate data so if user changes but cancels, data doesn't change globally
 	popups.settings.popup()
-
-	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
-		child.setSettings( globalSettings )
-
-	for key in globalTextureTrays:
-		globalTextureTrays[key].setSettings( globalSettings )
-
-	for key in localTextureTrays:
-		localTextureTrays[key].setSettings( globalSettings )
 	
 func _on_Settings_saved( newGlobalSettings ):
-	globalSettings = newGlobalSettings
-	popups.hide()
+	_updateGlobalSettings( newGlobalSettings )
+	popups.settings.hide()
 
 func _on_Settings_settingsSaved(settingsData):
 	globalSettings = settingsData
@@ -112,11 +111,9 @@ func _on_textureSelected( type, trayNode):
 		TextureTray.TEXTURE_TYPE.BASIC:
 			path = globalSettings.defaultTexturePath
 		TextureTray.TEXTURE_TYPE.NORMAL:
-			path = globalSettings.normalTexturePath
+			path = globalSettings.defaultTexturePath
 
-	# TODO : Add recent to root textures
-
-	popups.chooser.updateUI( path, recentTextures ,trayNode )	
+	popups.chooser.updateUI( trayNode )	
 	popups.chooser.popup()
 
 func _on_textureSelectionComplete():

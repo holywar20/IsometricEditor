@@ -5,7 +5,9 @@ const SETTINGS_FILE_PATH = "res://Data/settings.json"
 
 class SettingsData:
 	var defaultTexturePath = null
+	
 	var defaultTextureCache = []
+	var recentTextures = []
 
 	var exportTexturePath = null
 	var exportTilesetPath = null
@@ -47,7 +49,7 @@ onready var dataDisplay = {
 onready var fileDialog : FileDialog = $FileDialog
 
 enum DIALOG_STATE {
-	DEFAULT , NORMAL , EXPORT_TEXTURES , EXPORT_TILESETS
+	DEFAULT , EXPORT_TEXTURES , EXPORT_TILESETS
 }
 
 var dialogState = DIALOG_STATE.DEFAULT
@@ -60,11 +62,13 @@ func _ready():
 	settingsFile.open( SETTINGS_FILE_PATH , File.READ )
 
 	var settingsDictionary = parse_json( settingsFile.get_as_text() )
-	
 	populateSettings( settingsDictionary )
 
 	# Set up default file dialog beheavior.
 	fileDialog.set_mode( FileDialog.MODE_OPEN_DIR )
+
+func getSettings():
+	return mySettings
 
 func _saveSettings():
 	var settingsFile = File.new()
@@ -74,14 +78,14 @@ func _saveSettings():
 	settingsFile.store_string( JSON.print(dataDictionary) )
 	settingsFile.close()
 
-
 func populateSettings( settingsDictionary : Dictionary ):
 	mySettings = SettingsData.new( settingsDictionary )
 	
-	dataDisplay.defaultTexturePath.set_text( mySettings.defaultTexturePath )
-	dataDisplay.normalTexturePath.set_text( mySettings.normalTexturePath )	
+	dataDisplay.defaultTexturePath.set_text( mySettings.defaultTexturePath )	
+
 	dataDisplay.exportTexturePath.set_text( mySettings.exportTexturePath )
 	dataDisplay.exportTilesetPath.set_text( mySettings.exportTilesetPath ) 
+
 	dataDisplay.tileColumns.set_value( mySettings.tileColumns )
 	dataDisplay.tileSize.set_value( mySettings.tileSize )
 
@@ -92,7 +96,7 @@ func _on_SaveButton_pressed():
 	mySettings = SettingsData.new()
 
 	mySettings.defaultTexturePath = dataDisplay.defaultTexturePath.get_text()
-	mySettings.normalTexturePath = dataDisplay.normalTexturePath.get_text()
+
 	mySettings.exportTexturePath = dataDisplay.exportTexturePath.get_text()
 	mySettings.exportTilesetPath = dataDisplay.exportTilesetPath.get_text()
 
@@ -100,6 +104,17 @@ func _on_SaveButton_pressed():
 	mySettings.tileSize = dataDisplay.tileSize.get_value()
 
 	_saveSettings()
+
+	# Now cache any textures so they pop up quickly
+	var files = listFilesInDirectory( mySettings.defaultTexturePath )
+
+	for fileName in files:
+		var image = Image.new()
+		var err = image.load( fileName  )
+		if err == OK:
+			var texture = ImageTexture.new()
+			mySettings.defaultTextureCache.append( texture )
+
 
 	emit_signal("settingsSaved", mySettings )
 
@@ -110,12 +125,6 @@ func _on_DefaultTexturePath_Button_pressed():
 	fileDialog.set_current_dir( dataDisplay.defaultTexturePath.get_text() )
 	fileDialog.window_title = "Set Texture Path."
 	dialogState = DIALOG_STATE.DEFAULT
-	fileDialog.popup()
-
-func _on_NormalTexturePath_Button_pressed():
-	fileDialog.set_current_dir( dataDisplay.normalTexturePath.get_text() )
-	fileDialog.window_title = "Set Normal Path."
-	dialogState = DIALOG_STATE.NORMAL
 	fileDialog.popup()
 
 func _on_ExportTexturePath_Button_pressed():
@@ -135,8 +144,6 @@ func _on_FileDialog_dir_selected(dir):
 	match dialogState:
 		DIALOG_STATE.DEFAULT:
 			dataDisplay.defaultTexturePath.set_text( dir )
-		DIALOG_STATE.NORMAL:
-			dataDisplay.normalTexturePath.set_text( dir )
 		DIALOG_STATE.EXPORT_TEXTURES:
 			dataDisplay.exportTexturePath.set_text( dir )
 		DIALOG_STATE.EXPORT_TILESETS:
@@ -153,7 +160,7 @@ func listFilesInDirectory(path):
 		if file == "":
 			break # TODO - do some regular expression matching with this, this works for now.
 		elif not file.begins_with(".") && ( file.ends_with(".png") || file.ends_with(".jpg" ) ):
-			files.append(file)
+			files.append( mySettings.defaultTexturePath + "/" + file)
 
 	dir.list_dir_end()
 
