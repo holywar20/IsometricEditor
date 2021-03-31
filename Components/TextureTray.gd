@@ -41,7 +41,7 @@ onready var fileDialog = $Popups/FileDialog
 var settings : Settings.SettingsData
 
 signal trayChanged( tray )
-signal newTextureAdded( filePath )
+signal textureSelected( type , trayFacingId , texture , globalState )
 
 class TrayData:
 	var trayFacingId
@@ -90,30 +90,6 @@ func _ready():
 	
 	trayLabel.set_text( labelName )
 
-func buildTextureList( path ):
-	for child in chooserBase.get_children():
-		queue_free()
-
-	# First we add basic textures
-	for full_texture in texture_list:
-		_add_thumbnail( full_texture )
-
-	for texture in loadedTextureList:
-		_add_thumbnail( texture )
-
-	var texturesInPath = _findTexturesInPath( path )
-	
-	# var textureList = texturesInPath
-	# for texture in 
-
-func _findTexturesInPath( path ):
-	var myPath = null
-
-	#if( isGlobal ):
-
-
-	# Filter for PNG Files
-
 func _add_thumbnail( texture ):
 	if chooserBase.get_child_count() >= texture_list.size():
 		return
@@ -123,10 +99,6 @@ func _add_thumbnail( texture ):
 	previewInstance.setupScene( texture )
 
 	previewInstance.connect("textureSelected", self, "_on_Chooser_textureSelected")
-
-func _add_filePath_thumbnail( texture , path ):
-	pass
-	#
 
 func _makeTray():
 	var trayData = {
@@ -146,7 +118,6 @@ func get_bar_rect(list_size : int):
 	
 	return Rect2(origin, popsize)
 
-
 # Texture Picker
 func _on_TextureChoosePopup_popup_hide():
 	pass
@@ -160,14 +131,10 @@ func _on_Chooser_textureSelected( chosenTexture ):
 	emit_signal("trayChanged", _makeTray() )
 
 func _on_TextureButton_pressed():
-	myTextureTarget = textureSelectButton
-
-	chooserPopup.popup(get_bar_rect(texture_list.size()))
+	emit_signal( "textureSelected" , TEXTURE_TYPE.BASIC , self )
 
 func _on_NormalButton_pressed():
-	myTextureTarget = normalSelectButton
-
-	chooserPopup.popup(get_bar_rect(texture_list.size()))
+	emit_signal( "textureSelected" , TEXTURE_TYPE.NORMAL , self )
 
 # File loading
 func _on_LoadTextureButton_pressed():
@@ -190,4 +157,5 @@ func _on_FileDialog_file_selected( filePath ):
 	if( filePath ):
 		emit_signal("newTextureAdded" , filePath )
 		emit_signal("trayChanged", _makeTray() )
-		
+
+	

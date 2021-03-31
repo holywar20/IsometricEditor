@@ -24,8 +24,11 @@ onready var localTextureTrays = {
 }
 
 onready var popups = {
-	"settings" : $Popups/Settings
+	"settings" : $Popups/Settings,
+	"chooser" : $Popups/TextureChoosePopup
 }
+
+var recentTextures = []
 var globalSettings : Settings.SettingsData
 
 # onready var save_dialog = $MainVBox/ControlPanel/HBoxContainer/ExportButton/ExportDialog
@@ -91,7 +94,6 @@ func _on_newSingleTextureSelected( node ):
 	node.setState( node.STATE.LAST_FOCUSED )
 	currentFocusNode = node
 
-	
 
 # Tray changes
 func _on_Current_trayChanged( tray : TextureTray.TrayData ):
@@ -104,73 +106,18 @@ func _on_Global_trayChanged( tray : TextureTray.TrayData  ):
 	for child in get_tree().get_nodes_in_group( TILE_PANELS ):
 		child.updateTray( tray  )
 
-# Global Menus
+func _on_textureSelected( type, trayNode):
+	var path = null
+	match type:
+		TextureTray.TEXTURE_TYPE.BASIC:
+			path = globalSettings.defaultTexturePath
+		TextureTray.TEXTURE_TYPE.NORMAL:
+			path = globalSettings.normalTexturePath
 
-# UI Signals
-func _on_ExportButton_pressed():
+	# TODO : Add recent to root textures
+
+	popups.chooser.updateUI( path, recentTextures ,trayNode )	
+	popups.chooser.popup()
+
+func _on_textureSelectionComplete():
 	pass
-	# save_dialog.current_dir = remembered_save_directory
-	# save_dialog.popup_centered()
-
-func _on_ExportDialog_file_selected(path):
-	pass
-	# var img = atlas.texture.get_data()
-	# img.save_png(path)
-	# remembered_save_directory = path.get_base_dir()
-
-
-func _on_EdgeCheck_toggled(button_pressed):
-	pass
-	# drawing_node.drop_top = button_pressed
-	# drawing_node.update()
-
-func _on_AnyLoadButton_pressed(which):
-	pass
-	# load_dialog.current_dir = remembered_load_directory
-	# load_key = which
-	# load_dialog.popup_centered()
-
-func _on_LoadDialog_file_selected(path):
-	"""
-	var file = File.new()
-	file.open(path, File.READ)
-	var bytebin = file.get_buffer(file.get_len())
-	file.close()
-	if load_key:
-		var img = Image.new()
-		var error = img.load_png_from_buffer(bytebin)
-		if error:
-			print(error)
-			return
-		if img.get_size().x > 256 and img.get_size().y > 256:
-			img.resize(256, 256, Image.INTERPOLATE_CUBIC)
-		var new_texture = ImageTexture.new()
-		new_texture.create_from_image(img)
-		[load_key].texture_list.append(new_texture)
-		for tray in texture_trays.values():
-			tray.add_thumbnail(new_texture)
-		texture_trays[load_key]._on_choice_made(new_texture)
-	load_key = ""
-	remembered_load_directory = path.get_base_dir()
-	"""
-
-
-func _on_BevelCheck_toggled(button_pressed):
-	pass
-	# drawing_node.bevel_top = button_pressed
-	# drawing_node.update()
-
-func _on_GranuleSlider_value_changed(value):
-	pass
-	# drawing_node.granules = value
-	# drawing_node.update()
-
-func _on_WarpSlider_value_changed(value):
-	pass
-	# drawing_node.warp = value
-	# drawing_node.update()
-
-func _on_OutlineCheckBox_toggled(button_pressed):
-	pass
-	# drawing_node.outline_shadow = button_pressed
-	# drawing_node.update()

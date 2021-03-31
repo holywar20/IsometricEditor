@@ -5,7 +5,8 @@ const SETTINGS_FILE_PATH = "res://Data/settings.json"
 
 class SettingsData:
 	var defaultTexturePath = null
-	var normalTexturePath = null
+	var defaultTextureCache = []
+
 	var exportTexturePath = null
 	var exportTilesetPath = null
 
@@ -15,7 +16,6 @@ class SettingsData:
 	func _init( data = null ):
 		if( data ):
 			defaultTexturePath = data.defaultTexturePath
-			normalTexturePath = data.normalTexturePath
 			exportTexturePath = data.exportTexturePath
 			exportTilesetPath = data.exportTilesetPath
 			tileColumns = data.tileColumns
@@ -24,7 +24,7 @@ class SettingsData:
 	func getDataAsDict():
 		return {
 			"defaultTexturePath" : defaultTexturePath, 
-			"normalTexturePath" : normalTexturePath,
+			"defaultTextureCache" : defaultTextureCache,
 			"exportTexturePath" : exportTexturePath, 
 			"exportTilesetPath" : exportTilesetPath,
 			"tileColumns" : tileColumns,
@@ -37,7 +37,6 @@ var mySettings : SettingsData
 # Controls
 onready var dataDisplay = {
 	"defaultTexturePath" : $MainVB/Data/Left/DefaultTexturePath/LineEdit,
-	"normalTexturePath" : $MainVB/Data/Left/NormalTexturePath/LineEdit,
 	"exportTexturePath" : $MainVB/Data/Left/ExportTexturePath/LineEdit,
 	"exportTilesetPath" : $MainVB/Data/Left/ExportTileSet/LineEdit,
 
@@ -142,3 +141,21 @@ func _on_FileDialog_dir_selected(dir):
 			dataDisplay.exportTexturePath.set_text( dir )
 		DIALOG_STATE.EXPORT_TILESETS:
 			dataDisplay.exportTexturePath.set_text( dir )
+
+func listFilesInDirectory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break # TODO - do some regular expression matching with this, this works for now.
+		elif not file.begins_with(".") && ( file.ends_with(".png") || file.ends_with(".jpg" ) ):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files
+			

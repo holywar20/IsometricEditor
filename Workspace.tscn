@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Workspace.gd" type="Script" id=1]
 [ext_resource path="res://Components/TextureTray.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Components/TextureButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Components/TextureSelect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SingleTextureContainer/SingleTextureContainer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UIAssetts/Settings.png" type="Texture" id=8]
 [ext_resource path="res://Components/Settings.tscn" type="PackedScene" id=9]
@@ -26,7 +27,7 @@ rect_min_size = Vector2( 300, 0 )
 
 [node name="Global" type="VBoxContainer" parent="Controls"]
 margin_right = 300.0
-margin_bottom = 384.0
+margin_bottom = 332.0
 
 [node name="Label" type="Label" parent="Controls/Global"]
 margin_right = 300.0
@@ -36,53 +37,46 @@ text = "Global Controls"
 align = 1
 valign = 1
 
-[node name="Size" type="HBoxContainer" parent="Controls/Global"]
+[node name="Trays" type="HBoxContainer" parent="Controls/Global"]
 margin_top = 44.0
 margin_right = 300.0
-margin_bottom = 44.0
-
-[node name="Trays" type="HBoxContainer" parent="Controls/Global"]
-margin_top = 48.0
-margin_right = 300.0
-margin_bottom = 348.0
+margin_bottom = 296.0
 
 [node name="Top" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_right = 97.0
-labelName = "Top"
-facingId = 2
 isGlobal = true
 
 [node name="Left" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_left = 101.0
 margin_right = 198.0
 labelName = "Left"
-facingId = 2
+facingId = 0
 isGlobal = true
 
 [node name="Right" parent="Controls/Global/Trays" instance=ExtResource( 2 )]
 margin_left = 202.0
 margin_right = 300.0
 labelName = "Right"
-facingId = 2
+facingId = 1
 isGlobal = true
 
 [node name="HSeparatorDB" type="HSeparator" parent="Controls/Global"]
-margin_top = 352.0
+margin_top = 300.0
 margin_right = 300.0
-margin_bottom = 384.0
+margin_bottom = 332.0
 rect_min_size = Vector2( 0, 32 )
 
 [node name="Control" type="Control" parent="Controls"]
-margin_top = 388.0
+margin_top = 336.0
 margin_right = 300.0
-margin_bottom = 1083.0
+margin_bottom = 765.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Current" type="VBoxContainer" parent="Controls"]
-visible = false
+margin_top = 769.0
 margin_right = 300.0
-margin_bottom = 362.0
+margin_bottom = 1083.0
 
 [node name="Current" type="Label" parent="Controls/Current"]
 margin_right = 300.0
@@ -95,32 +89,27 @@ valign = 1
 [node name="Trays" type="HBoxContainer" parent="Controls/Current"]
 margin_top = 44.0
 margin_right = 300.0
-margin_bottom = 344.0
+margin_bottom = 296.0
 
 [node name="Top" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
 margin_right = 97.0
-labelName = "Top"
-facingId = 2
-isGlobal = false
 
 [node name="Left" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
 margin_left = 101.0
 margin_right = 198.0
 labelName = "Left"
-facingId = 2
-isGlobal = false
+facingId = 0
 
 [node name="Right" parent="Controls/Current/Trays" instance=ExtResource( 2 )]
 margin_left = 202.0
 margin_right = 300.0
 labelName = "Right"
-facingId = 2
-isGlobal = false
+facingId = 1
 
 [node name="Label" type="Label" parent="Controls/Current"]
-margin_top = 348.0
+margin_top = 300.0
 margin_right = 300.0
-margin_bottom = 362.0
+margin_bottom = 314.0
 text = "????????"
 align = 1
 valign = 1
@@ -310,17 +299,29 @@ margin_bottom = 995.0
 
 [node name="Popups" type="Node" parent="."]
 
+[node name="TextureChoosePopup" parent="Popups" instance=ExtResource( 4 )]
+margin_left = -1786.97
+margin_top = 46.2116
+margin_right = -1207.97
+margin_bottom = 351.212
+
 [node name="Settings" parent="Popups" instance=ExtResource( 9 )]
 visible = false
-margin_left = 435.072
-margin_top = 316.289
-margin_right = 1463.07
-margin_bottom = 816.289
+margin_left = 600.0
+margin_top = 300.0
+margin_right = 1600.0
+margin_bottom = 800.0
+[connection signal="textureSelected" from="Controls/Global/Trays/Top" to="." method="_on_textureSelected"]
 [connection signal="trayChanged" from="Controls/Global/Trays/Top" to="." method="_on_Global_trayChanged"]
+[connection signal="textureSelected" from="Controls/Global/Trays/Left" to="." method="_on_textureSelected"]
 [connection signal="trayChanged" from="Controls/Global/Trays/Left" to="." method="_on_Global_trayChanged"]
+[connection signal="textureSelected" from="Controls/Global/Trays/Right" to="." method="_on_textureSelected"]
 [connection signal="trayChanged" from="Controls/Global/Trays/Right" to="." method="_on_Global_trayChanged"]
+[connection signal="textureSelected" from="Controls/Current/Trays/Top" to="." method="_on_textureSelected"]
 [connection signal="trayChanged" from="Controls/Current/Trays/Top" to="." method="_on_Current_trayChanged"]
+[connection signal="textureSelected" from="Controls/Current/Trays/Left" to="." method="_on_textureSelected"]
 [connection signal="trayChanged" from="Controls/Current/Trays/Left" to="." method="_on_Current_trayChanged"]
+[connection signal="textureSelected" from="Controls/Current/Trays/Right" to="." method="_on_textureSelected"]
 [connection signal="trayChanged" from="Controls/Current/Trays/Right" to="." method="_on_Current_trayChanged"]
 [connection signal="pressed" from="MainVBox/ControlPanel/ButtonPanel/ExportButton" to="." method="_on_ExportButton_pressed"]
 [connection signal="file_selected" from="MainVBox/ControlPanel/ButtonPanel/ExportButton/ExportDialog" to="." method="_on_ExportDialog_file_selected"]
